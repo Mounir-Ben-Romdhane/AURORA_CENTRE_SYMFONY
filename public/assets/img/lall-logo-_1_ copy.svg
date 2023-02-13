@@ -1,0 +1,26 @@
+<svg  width="300"
+  height="50" viewBox="10 10 300 50" xmlns="http://www.w3.org/2000/svg">
+  
+  <style>
+    .small {
+      font: italic 13px sans-serif;
+      fill: red;
+    }
+    .heavy {
+      font: bold 30px sans-serif;
+      fill: yellow;
+    }
+
+    /* Note that the color of the text is set with the    *
+     * fill property, the color property is for HTML only */
+    .Rrrrr {
+      font: italic 40px serif;
+      fill: yellow;
+    }
+  </style>
+
+ <!-- <text x="20" y="35" class="small">My</text>-->
+ <!-- <text x="40" y="35" class="heavy">cat</text>-->
+  <!--<text x="55" y="55" class="small">is</text>-->
+  <text x="65" y="55" class="Rrrrr">AURORA</text>
+</svg>
