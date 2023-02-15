@@ -1,0 +1,14 @@
+<h1>ajout participations</h1>
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table>
+<tr>
+<td>{{form_label(form.descriptionPn,'descriptionPn')}}</td>
+<td>{{form_widget(form.descriptionPn)}}</td>
+<td>{{form_errors(form.descriptionPn)}}</td>
+</tr>
+
+</table>
+{{form_widget(form.save)}}
+
+{{form_end(form)}}
