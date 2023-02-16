@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EvenementType extends AbstractType
 {
@@ -38,10 +39,16 @@ class EvenementType extends AbstractType
     
             ->add('dateev', DateTimeType::class)
 
-            ->add('typeev', TextType::class, [
-                "attr" => [
-                    "placeholder" => "typeev"
-                ] 
+            
+
+            ->add('typeev', ChoiceType::class, [
+                'choices' => [
+                    "" => "",
+                    "sport"  => "sport",
+                    "musique"  => "musique",
+                    "meditation"  => "meditation",
+                    "sante"  => "sante",
+                ]
             ])
     
             

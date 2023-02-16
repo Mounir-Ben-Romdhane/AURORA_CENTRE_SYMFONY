@@ -31,7 +31,9 @@ class EvenementController extends AbstractController
      
 
         //return $this->render('evenement/index.html.twig',array ('tableauEvenement'=> $evenement));
-        return $this->render('baseback2.html.twig',array ('tableauEvenement'=> $evenement));
+        return $this->render('evenement/index.html.twig',array ('tableauEvenement'=> $evenement));
+
+        $this->addFlash('Success','Evenement ajoute avec succes!');
     }
 
     #[Route('/evenementAdd', name: 'app_addevenement')]
@@ -47,7 +49,9 @@ class EvenementController extends AbstractController
             $em->persist($evenement);
             $em->flush();
             return $this->redirectToRoute('app_evenementAffichage');
-        }
+
+            $this->addFlash('Success','Evenement ajoute avec succes!');
+              }
 
        return $this->render('evenement/add.html.twig',[
         "form" => $form->createView()
