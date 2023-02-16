@@ -1,0 +1,62 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}List Client!{% endblock %}
+
+
+
+{% block body %}
+<body>
+
+  <main id="main" class="main">
+
+      <div class="pagetitle">
+          <h1>List Clients</h1>
+        </div><!-- End Page Title -->
+
+    {% for message in app.flashes('Success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Tel</th>>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+          <tr>
+                  <td scope="row">{{client.id}}</td>
+                  <td>{{client.username}}</td>
+                  <td>{{client.email}}</td>
+                  <td>{{client.numTel}}</td>
+                  <td>
+                      <a href="{{ path('app_show_client',{id : client.id}) }}" class="btn btn-sm btn-primary">
+                          <i class="fa fa-eye"></i>
+                      </a>
+                      <a href="{{ path('app_edit_client',{id : client.id}) }}" class="btn btn-sm btn-warning">
+                          <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ path('app_delete_client',{id : client.id}) }}" class="btn btn-sm btn-danger">
+                          <i class="fa fa-trash"></i>
+                      </a>
+                  </td>
+                  
+          </tr>
+      {% endfor %}    
+    </tbody>
+  </table>
+
+  </main>
+
+  
+
+</body>
+
+
+{% endblock %}

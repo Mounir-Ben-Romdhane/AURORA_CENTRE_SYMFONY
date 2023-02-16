@@ -1,0 +1,82 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+
+<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/lall-logo-_1_ copy.svg" alt="..." /></a>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        
+        <header class="masthead">
+                <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+
+                   
+
+                        <div class="pt-4 pb-2">
+                            <h5 class="card-title text-center pb-0 fs-4" style="color:yellow;"> Create an Account</h5>
+                            <p class="text-center small">Enter your personal details to create account</p>
+                        </div>
+
+                        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                            <div class="col-12">
+                            <label for="yourName" class="form-label">Your Name</label>
+                            {{ form_widget(form.username,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(form.username,{'attr':{'class':'text-danger'}}) }}
+
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Your Email</label>
+                            {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(form.email,{'attr':{'class':'text-danger'}}) }}
+
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Your Phone Number</label>
+                            {{ form_widget(form.numTel,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(form.numTel,{'attr':{'class':'text-danger'}}) }}
+
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Password</label>
+                            {{ form_widget(form.password.first,{'attr':{'class':'form-control'}}) }}
+                            <div class="invalid-feedback">Please enter your password!</div>
+                            </div>
+                            {{ form_errors(form.password,{'attr':{'class':'text-danger'}}) }}
+
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Confirme Password</label>
+                            {{ form_widget(form.password.second,{'attr':{'class':'form-control'}}) }}
+                            <div class="invalid-feedback">Please confirme your password!</div>
+                            </div>
+
+                            <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required="">
+                                <label class="form-check-label" for="acceptTerms" >I agree and accept the <a href="#">terms and conditions</a></label>
+                                <div class="invalid-feedback">You must agree before submitting.</div>
+                            </div>
+                            </div>
+                            <div class="col-12">
+                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                            </div>
+                            <div class="col-12">
+                            <p class="small mb-0">Already have an account? <a href="{{path('app_login')}}">Log in</a></p>
+                            </div>
+                        {{ form_end(form) }}
+
+
+
+            </div>
+        </header>
+        </body>
+
+{% endblock %}
