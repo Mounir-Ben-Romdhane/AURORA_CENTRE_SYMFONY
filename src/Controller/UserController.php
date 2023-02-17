@@ -36,6 +36,12 @@ class UserController extends AbstractController
     {
         return $this->render('baseFront.html.twig');
     }
+
+    #[Route('/front', name: 'app_front_front')]
+    public function front(): Response
+    {
+        return $this->render('front.html.twig');
+    }
     
 
     #[Route('/backEnd', name: 'app_back')]
