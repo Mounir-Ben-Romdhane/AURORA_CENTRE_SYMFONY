@@ -1,0 +1,38 @@
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+       
+        
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+    
+    
+      <div class="row">
+    <div class="col-md-12">
+        <h1> envoyer reclamation </h1>
+        {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+        <fieldset>
+         {{form_label(form.type,'type de reclamation')}}
+         {{form_widget(form.type)}}
+         {{form_errors(form.type)}}
+        
+         {{form_label(form.email,'email')}}
+         {{form_widget(form.email)}}
+         {{form_errors(form.email)}}
+       
+         {{form_label(form.description,'description')}}
+         {{form_widget(form.description)}}
+         {{form_errors(form.description)}}
+         
+         {{form_end(form)}}
+        
+          
+        </fieldset>
+        <fieldset>  
+        
+          
+        </div>
+      </div>
+      
+    </body>
+</html>

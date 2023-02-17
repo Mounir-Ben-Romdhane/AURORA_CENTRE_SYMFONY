@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+
+
+
+        {% if responses is not empty %}
+            <table border="1">
+                
+                <tr>
+                    <th>id reponse</th>
+                    <th>id reclamation</th>
+                    <th>reponse</th>
+                    <th>status</th>
+                    <th>date reponse</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+                {% for response in responses %}
+                    <tr>
+                        <td>{{response.id }}</td>
+                        <td>{{response.reclamation.id}}</td>
+                        <td>{{response.reponse}}</td>
+                        <td>{{response.status}}</td>
+                        <td>{{response.datereponse.format('Y-m-d H:i:s')}}</td>
+                        <td><a href="{{path('update_reponse',{'id':response.id})}}"><button type="button">update</button></a></td>
+                        <td><a href="{{path('delete_reponse',{'id':response.id})}}"><button type="button">delete</button></a></td>
+
+
+                        
+                    </tr>
+                {% endfor %}
+               
+            </table>
+        {% else %}
+            <p>No article found.</p>
+        {% endif %}
+    </div>
+    {% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
+</body>
+</html>

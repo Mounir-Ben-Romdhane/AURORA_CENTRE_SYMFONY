@@ -1,0 +1,27 @@
+<h1>mise a jour d'une reponse</h1>
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table>
+<tr>
+<td>{{form_label(form.status,'reponse')}}</td>
+<td>{{form_widget(form.status)}}</td>
+<td>{{form_errors(form.status)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.reponse,'reponse')}}</td>
+<td>{{form_widget(form.reponse)}}</td>
+<td>{{form_errors(form.reponse)}}</td>
+</tr>
+<tr>
+<td>{{form_widget(form.save)}}</td>
+</tr>
+{{form_end(form)}}
+<tr>
+<td>{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}</td>
+</tr>

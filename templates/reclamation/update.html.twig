@@ -1,0 +1,29 @@
+<h1>envoyer une reclamation</h1>
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table>
+<tr>
+<td>{{form_label(form.type,'type de reclamation')}}</td>
+<td>{{form_widget(form.type)}}</td>
+<td>{{form_errors(form.type)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.email,'email')}}</td>
+<td>{{form_widget(form.email)}}</td>
+<td>{{form_errors(form.email)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.description,'description')}}</td>
+<td>{{form_widget(form.description)}}</td>
+<td>{{form_errors(form.description)}}</td>
+<table>
+</tr>
+{{form_widget(form.save)}}
+{{form_end(form)}}
+{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
