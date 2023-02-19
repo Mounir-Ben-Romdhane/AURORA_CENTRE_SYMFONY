@@ -13,24 +13,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Favicons -->
-  <link href="assets/assets/img/favicon.png" rel="icon">
-  <link href="assets/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset('/assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/assets/css/style.css" rel="stylesheet">
+  <link href="{{asset('/css/styleBack.css')}}" rel="stylesheet">
 {% endblock %}
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
@@ -40,27 +40,28 @@
   ======================================================== -->
   {% block javascripts %}
   <!-- Vendor JS Files -->
-  <script src="assets/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/assets/vendor/php-email-form/validate.js"></script>
+  <script src="{{asset('/vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{asset('/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('/vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{asset('/vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{asset('/vendor/quill/quill.min.js')}}"></script>
+  <script src="{{asset('/vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{asset('/vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{asset('/vendor/php-email-form/validate.js')}}"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/assets/js/main.js"></script>
+  <script src="{{asset('/js/mainBack.js')}}"></script>
 {% endblock %}
 {% block header %}
 <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <header id="header" class="header fixed-top d-flex align-items-center ">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="" >
+      <a href="#" class="logo d-flex align-items-center">
+        <img src="{{asset('/assets/img/logo.png')}}" alt="" >
         <span class="d-none d-lg-block">admin AURORA</span>
       </a>
+      
     </div><!-- End Logo -->
 
     <div class="search-bar">
@@ -172,7 +173,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <img src="/assets/img/messages-1.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -186,7 +187,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="{{asset('assets/img/messages-2.jpg')}}" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -200,7 +201,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <img src="{{asset('assets/img/messages-3.jpg')}}" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -223,7 +224,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{asset('/assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ app.user.username }}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -267,7 +268,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -378,6 +379,44 @@
 {% endblock %}
 </head>
 {% block body %}
+<body>
 
+  <main id="main" class="main">
+    {% if app.user and app.user.isVerified == false %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" 
+                aria-label="close"></button>
+                <div class="alert-message">
+                    <strong>Votre compte n'est pas activé </strong>, 
+                    <a href="{{ path('resend_verif') }}">renvoyer le lien d'activation</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if app.user and app.user.isVerified == true  %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" 
+                    aria-label="close"></button>
+                    <div class="alert-message">
+                        <strong>Votre compte est activé </strong>
+                    </div>
+                </div>
+            {% endif %}
+            {% for message in app.flashes('Success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+            {% for message in app.flashes('Warning') %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('Danger') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+  </main>
+</body>
 {% endblock %}
 </html>
