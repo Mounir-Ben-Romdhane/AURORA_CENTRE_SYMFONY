@@ -25,16 +25,23 @@ class ReclamationType extends AbstractType
                 'Problèmes de qualité de produits ou de services' => 'Problèmes de qualité de produits ou de services',
                 'Problèmes de confidentialité et de sécurité des données'=>'Problèmes de confidentialité et de sécurité des données',
                 'autre'=>''
+
             ],
+            
             'empty_data' => '',
         ])
             ->add('email',TypeTextType::class,[
-                'empty_data' => ''
+                'empty_data' => '',
+                
             ])
             ->add('description',TextareaType::class,[
-                'empty_data' => ''
+                'empty_data' => '',
+               
             ])
+            
             ->add('save',SubmitType::class)
+            
+            
         ;
     }
 

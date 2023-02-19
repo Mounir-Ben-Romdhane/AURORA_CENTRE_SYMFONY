@@ -1,38 +1,66 @@
+{% extends "baseFront.html.twig" %}
+{% block title %}Reclamation{% endblock %}
+    
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-       
-        
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
-    
-    
-      <div class="row">
-    <div class="col-md-12">
-        <h1> envoyer reclamation </h1>
-        {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-        <fieldset>
-         {{form_label(form.type,'type de reclamation')}}
-         {{form_widget(form.type)}}
-         {{form_errors(form.type)}}
-        
-         {{form_label(form.email,'email')}}
-         {{form_widget(form.email)}}
-         {{form_errors(form.email)}}
-       
-         {{form_label(form.description,'description')}}
-         {{form_widget(form.description)}}
-         {{form_errors(form.description)}}
-         
-         {{form_end(form)}}
-        
+    {% block body2 %}
+    <style>
+.form-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-field {
+        display: block;
+        margin: 10px auto;
+    }
+    </style>
+<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
           
-        </fieldset>
-        <fieldset>  
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
         
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        
+        </div>
+        <div class="row">
+    <div class="col-md-12">
+   
+        <h1> envoyer une reclamation </h1>
+
+      <div class="form-container">
+    {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+    <div class="form-field">
+        {{ form_label(form.type) }}
+        {{ form_widget(form.type) }}
+        {{ form_errors(form.type) }}
+    </div>
+    <div class="form-field">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+    <div class="form-field">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+    {{form_widget(form.save)}}
+    {{ form_end(form) }}
+</div> 
+  
           
         </div>
       </div>
-      
-    </body>
-</html>
+                </div>   
+
+        </header>
+        
+        
+     
+    </body> 
+  {% endblock %}   
