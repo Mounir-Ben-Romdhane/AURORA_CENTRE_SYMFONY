@@ -1,3 +1,7 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Add Client !{% endblock %}
+{% block body %}
 <h1>mise a jour d'une reponse</h1>
 
 {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
@@ -25,3 +29,4 @@
     {% endfor %}
 {% endfor %}</td>
 </tr>
+{% endblock %}

@@ -66,12 +66,10 @@ class ReponseController extends AbstractController
     public function affiche(ManagerRegistry $doctrine)
     {
         $response=$doctrine->getRepository(Reponse::class)->findAll();
-        if(!$response){
-            return new Response('no response found');
-        }else{
+       
             return $this->render("reponse/affiche.html.twig",
             array('responses'=>$response));
-        }
+        
         
     }
     #[Route('reponse/update/{id}',name:"update_reponse")]
