@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Json;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
@@ -31,7 +32,7 @@ class User implements UserInterface
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
     #[Assert\Length([
         'min' => 5,
-        'max' => 20,
+        'max' => 40,
         'minMessage' => "Votre email doit être au moins {{ limit }} characters long",
         'maxMessage' => "Votre email ne peut pas dépasser {{ limit }} characters"
     ])]
@@ -59,6 +60,12 @@ class User implements UserInterface
 
     #[ORM\Column]
     private array $roles = [];
+
+    #[ORM\Column(length: 100)]
+    private ?string $resetToken = null;
+
+    #[ORM\Column]
+    private ?bool $is_verified = false;
 
     public function getId(): ?int
     {
@@ -113,6 +120,8 @@ class User implements UserInterface
         return $this;
     }
 
+    
+
     /**
      * @see UserInterface
      */
@@ -143,6 +152,30 @@ class User implements UserInterface
     
     public function getUserIdentifier(){
         return $this->email;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
+
+        return $this;
     }
 
 }
