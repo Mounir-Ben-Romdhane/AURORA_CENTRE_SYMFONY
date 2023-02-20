@@ -120,7 +120,7 @@ public function addService(Request $request, ManagerRegistry $doctrine): Respons
         ]);
     }
 
-    //salem
+   
     #[Route('/reservationService', name: 'app_reservationService')]
     public function reservationService(): Response
     {
