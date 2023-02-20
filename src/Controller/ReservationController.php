@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Reservation;
+use App\Form\ReservationType;
+use App\Repository\ReservationRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ReservationController extends AbstractController
+{
+    #[Route('/reservation', name: 'app_reservation')]
+    public function index(): Response
+    {
+        return $this->render('reservation/index.html.twig', [
+            'controller_name' => 'ReservationController',
+        ]);
+    }
+
+    #[Route('/reservationAffichage', name: 'app_reservationAffichage')]
+    public function affichage(ReservationRepository $reservationRepository)
+    {
+        $reservation = $reservationRepository->findAll();
+        return $this->render('reservation/affichage.html.twig',array ('tableau'=> $reservation));
+    }
+
+
+
+    #[Route('/reservationAdd', name: 'app_addreservation')]
+    public function addReservation(Request $request , ManagerRegistry $doctrine):Response
+    {
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+        
+        if ($form-> isSubmitted() && $form->isValid()) 
+        {
+            $em = $doctrine->getManager();
+            $em->persist(($reservation));
+            $em->flush();
+            return $this->redirectToRoute('app_reservationAffichage');
+
+        }
+
+       return $this->render('reservation/add.html.twig',[
+        "form" => $form->createView()
+       ]
+    );
+}
+
+    #[Route('/reservationUpdate/{id}', name: 'app_updatereservation')]
+    public function editReservation(Request $request, Reservation $reservation ,$id, ManagerRegistry $doctrine):Response
+    {
+       
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+        
+        if ($form-> isSubmitted() && $form->isValid()) 
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('app_reservationAffichage');
+
+        }
+
+       return $this->render('reservation/update.html.twig',[
+        "form" => $form->createView()
+       ]
+    );
+    }
+
+    #[Route('/reservationDelete/{id}', name: 'app_deletereservation')]
+        public function deleteReservation($id , ManagerRegistry $doctrine): Response
+        {   
+            $em = $doctrine->getManager();
+            $reservation = $doctrine->getRepository(Reservation::class);
+            $reservation = $reservation->find($id);
+            $em->remove($reservation);
+            $em->flush();
+            return $this->redirectToRoute('app_reservationAffichage'); 
+      
+            
+           
+        }
+}
+
+
+
+
+
