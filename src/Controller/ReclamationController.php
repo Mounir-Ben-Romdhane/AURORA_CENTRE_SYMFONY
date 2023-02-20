@@ -4,20 +4,25 @@ namespace App\Controller;
 
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
+use App\Repository\ReclamationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Security\Core\Security;
 
 class ReclamationController extends AbstractController
 {
+    
     private $flashBag;
+    private $security;
 
-    public function __construct(FlashBagInterface $flashBag)
+    public function __construct(FlashBagInterface $flashBag,Security $security)
     {
         $this->flashBag = $flashBag;
+        $this->security = $security;
     }
     #[Route('/reclamation/ajouter', name: 'ajouter_reclamation')]
     public function ajouter(ManagerRegistry $doctrine,Request $request): Response
@@ -32,11 +37,12 @@ class ReclamationController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            
             $em->persist($reclamation);
             $em->flush();
             $this->flashBag->add('success', 'Form submited successfully');
            
-            return $this->redirectToRoute('affiche_reclamation');
+            
             
         }
 
@@ -72,6 +78,21 @@ class ReclamationController extends AbstractController
             );
         }
     }
+    #[Route('reclamation/affichebyemail',name:"affiche_reclamation_byemail")]
+    public function affichebyemail(ManagerRegistry $doctrine,ReclamationRepository $reclamationRepository)
+    {
+        $useridentifier=$this->security->getUser()->getUserIdentifier();
+        $reclamation=$reclamationRepository->getclaimbyemail($useridentifier);
+        if(!$reclamation){
+            return new Response("no claim found");
+        }else{
+            return $this->render("reclamation/affiche.html.twig",
+            array('reclamations'=>$reclamation)
+
+            );
+        }
+    }
+
     #[Route('/reclamation/update/{id}',name:"update_reclamation")]
     public function update(ManagerRegistry $doctrine,$id,Request $request){
         $em=$doctrine->getManager();

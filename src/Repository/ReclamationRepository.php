@@ -29,6 +29,10 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getclaimbyemail($email){
+        return $this->findBy(['email'=>$email]);
+
+    }
 
     public function remove(Reclamation $entity, bool $flush = false): void
     {
