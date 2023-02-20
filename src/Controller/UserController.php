@@ -62,6 +62,8 @@ class UserController extends AbstractController
         return $this->render('baseFront.html.twig');
     }
 
+    
+    
     #[Route('/front', name: 'app_front_front')]
     public function front(): Response
     {
@@ -97,6 +99,8 @@ class UserController extends AbstractController
     if($form->isSubmitted() && $form->isValid()){
         $token = $this->tokenGenerator->generateToken();
         $user->setResetToken($token);
+        $password_hashed = $this->passwordEncoder->encodePassword($user,$user->getPassword());
+        $user->setPassword($password_hashed);
         $user->setRoles(['ROLE_USER']);
         $user = $form->getData();
         $entityManager = $this->getDoctrine()->getManager();

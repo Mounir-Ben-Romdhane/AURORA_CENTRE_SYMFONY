@@ -30,6 +30,7 @@ class AdminFixtures extends Fixture
         $user->setRoles(['ROLE_ADMIN']);
         $user->setEmail("admin@gmail.com");
         $user->setNumTel("9883838");
+        $user->setFullAddress("Tunisie , 4115 , Djerba");
         $user->setPassword($password_hashed);
         $manager->persist($user);
 

@@ -17,7 +17,7 @@
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
-  --bs-yellow: #ffc800;
+  --bs-yellow: #f9b331;
   --bs-green: #198754;
   --bs-teal: #20c997;
   --bs-cyan: #0dcaf0;
@@ -2186,6 +2186,8 @@ progress {
   color: #6c757d;
 }
 
+
+
 .form-control {
   display: block;
   width: 100%;
@@ -2196,12 +2198,12 @@ progress {
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #ffc800;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
   border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s #ffc800, box-shadow 0.15s rgba(184, 140, 18, 0.2);
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -2214,6 +2216,7 @@ progress {
 .form-control[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
+
 .form-control:focus {
   color: #212529;
   background-color: #fff;
@@ -2501,7 +2504,7 @@ textarea.form-control-lg {
   filter: brightness(90%);
 }
 .form-check-input:focus {
-  border-color: #ffe480;
+  border-color: #ffc800;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(255, 200, 0, 0.25);
 }
@@ -3121,24 +3124,24 @@ textarea.form-control-lg {
 
 .btn-info {
   color: #fff;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
+  background-color: #ffc800;
+  border-color: #ffc800;
 }
 .btn-info:hover {
   color: #fff;
-  background-color: #0baccc;
-  border-color: #0aa2c0;
+  background-color: #ffc800;
+  border-color: #ffc800;
 }
 .btn-check:focus + .btn-info, .btn-info:focus {
   color: #fff;
-  background-color: #0baccc;
-  border-color: #0aa2c0;
+  background-color: #ffc800;
+  border-color: #ffc800;
   box-shadow: 0 0 0 0.25rem rgba(49, 210, 242, 0.5);
 }
 .btn-check:checked + .btn-info, .btn-check:active + .btn-info, .btn-info:active, .btn-info.active, .show > .btn-info.dropdown-toggle {
   color: #fff;
-  background-color: #0aa2c0;
-  border-color: #0a98b4;
+  background-color: #ffc800;
+  border-color: #ffc800;
 }
 .btn-check:checked + .btn-info:focus, .btn-check:active + .btn-info:focus, .btn-info:active:focus, .btn-info.active:focus, .show > .btn-info.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(49, 210, 242, 0.5);
@@ -11880,3 +11883,4 @@ section#contact form#contactForm :-ms-input-placeholder {
     opacity: 0;
   }
 }
+
