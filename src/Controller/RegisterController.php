@@ -111,6 +111,8 @@ class RegisterController extends AbstractController
         //dd($this->jwt->check($token,$this->getParameter('app.jwtsecret')));
 
 
+
+
         //On verifie si le token est valide , n'a pas expiré et n'a pas ete modifier
         if($this->jwt->isValid($token) && !$this->jwt->isExpired($token) && 
                 $this->jwt->check($token,$this->getParameter('app.jwtsecret'))

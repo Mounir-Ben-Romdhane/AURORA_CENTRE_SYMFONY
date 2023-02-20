@@ -15,7 +15,7 @@
      * fill property, the color property is for HTML only */
     .Rrrrr {
       font: italic 40px serif;
-      fill: yellow;
+      fill: #ffc800;
     }
   </style>
 

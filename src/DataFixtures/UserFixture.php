@@ -24,11 +24,12 @@ class UserFixture extends Fixture
         $user = new User();
         $token = $this->tokenGenerator->generateToken();
         $user->setResetToken($token);
-        $password_hashed = $this->passwordEncoder->encodePassword($user,"mounir12345");
+        $password_hashed = $this->passwordEncoder->encodePassword($user,"mounir");
         $user->setUsername("Mounir2000");
         $user->setRoles(['ROLE_USER']);
         $user->setEmail("mounirbenben9@gmail.com");
         $user->setNumTel("9883838");
+        $user->setFullAddress("Tunisie , 4115 , Djerba");
         $user->setPassword($password_hashed);
         $manager->persist($user);
 
