@@ -72,9 +72,9 @@
                                             {{ form_widget(form.password.second,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }} 
                                             <br>
                                             <div class="col-12" align="start" style="margin-left:20px;">
-                                            
-                                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required="">
-                                                <label class="form-check-label" for="acceptTerms" style="color:#ffc800;"><b>Je suis d'accord et j'accepte les</b> <a href="#" style="color:white;">termes et conditions</a></label>
+                                                
+                                                <input class="form-check-input" name="terms" type="checkbox" value="#ffc800" id="acceptTerms" required="">
+                                                <label class="form-check-label" for="acceptTerms" style="color:#ffc800;"><b>Je suis d'accord et j'accepte les</b> <a href="#" style="color:white;"><b>termes et conditions</b></a></label>
                                                 <div class="invalid-feedback">Vous devez accepter avant de soumettre.</div>
                                             </div>
                                             <br>
@@ -85,7 +85,7 @@
                                             <br>
                                             
                                             <div class="col-12">
-                                            <p class="small mb-0" style="color:#ffc800;"><b>Vous avez déjà un compte ? </b><a href="{{path('app_login')}}" style="color:white;">Connexion</a></p>
+                                            <p class="small mb-0" style="color:#ffc800;"><b>Vous avez déjà un compte ? </b><a href="{{path('app_login')}}" style="color:white;"><b>Connexion</b></a></p>
                                             </div>
                                         {{ form_end(form) }}
 
