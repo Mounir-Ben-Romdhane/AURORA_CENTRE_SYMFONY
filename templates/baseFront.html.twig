@@ -136,9 +136,10 @@
         </nav>
         <!-- Masthead-->
         <header class="masthead" >
+        <div align="center">
         {% if app.user and app.user.isVerified == true  %}
             
-                            <div class="alert alert-success alert-dismissible" role="alert">
+                            <div class="alert alert-success alert-dismissible w-50" role="alert">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" 
                                 aria-label="close"></button>
                                 <div class="alert-message">
@@ -150,20 +151,21 @@
                         
                     
             {% for message in app.flashes('Success') %}
-                            <div class="alert alert-success">
+                            <div class="alert alert-success w-50">
                                 {{ message }}
                             </div>
                         {% endfor %}
             {% for message in app.flashes('Warning') %}
-                <div class="alert alert-warning">
+                <div class="alert alert-warning w-50">
                     {{ message }}
                 </div>
             {% endfor %}
             {% for message in app.flashes('Danger') %}
-                <div class="alert alert-danger">
+                <div class="alert alert-danger w-50">
                     {{ message }}
                 </div>
             {% endfor %}
+            </div>
             <div class="container">
                 <div class="masthead-subheading" >Bienvenue dans notre centre !</div>
                 <div class="masthead-heading text-uppercase" >Ravi de vous rencontrer</div>
