@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditProfilType;
 use App\Form\UserType;
 use App\Form\ReserPasswordFormType;
 use App\Repository\UserRepository;
@@ -156,9 +157,11 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/editClient/{id}', name: 'app_edit_client')]
-    public function editClients(User $user , Request $request)
+    #[Route('/editClient', name: 'app_edit_client')]
+    public function editClients(Request $request)
     {
+
+        $user = $this->getUser();
     $form = $this->createForm(UserType::class, $user);
     $form->handleRequest($request);
 

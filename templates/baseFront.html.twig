@@ -69,13 +69,14 @@
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('ajouter_reclamation')}}">Reclamation</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                            {% if app.user %}
                                 <li class="nav-item dropdown pe-3" >
 
                                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                                    <span class="d-none d-md-block dropdown-toggle ps-2" style="color:yellow;">{{ app.user.username }}</span>
+                                    <span class="d-none d-md-block dropdown-toggle ps-2" style="color:#ffc800;">{{ app.user.username }}</span>
                                 </a><!-- End Profile Iamge Icon -->
 
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -122,8 +123,8 @@
                             
                                 <li class="dropdown" ><a href="#"><span >S'authentifier</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
-                                    <li><a href="{{path('app_login')}}">Login</a></li>
-                                    <li><a href="{{path('app_register')}}">Register</a></li>
+                                    <li><a href="{{path('app_login')}}">Connexion</a></li>
+                                    <li><a href="{{path('app_register')}}">Inscription</a></li>
                                     </ul>
                                 </li>
                                 
