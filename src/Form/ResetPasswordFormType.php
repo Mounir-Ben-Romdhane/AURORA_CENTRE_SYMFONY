@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ResetPasswordFormType extends AbstractType
 {
@@ -16,8 +17,19 @@ class ResetPasswordFormType extends AbstractType
         $builder
             ->add('password',RepeatedType::class,[
                 "type" => PasswordType::class,
-                "first_options" => ["label" => "Entrer votre Mot de passe"],
-                "second_options" => ["label" => "Confirmation votre mot de passe"]
+                'required' => true,
+                'constraints' => [new Length(['min' => 5])],
+                "first_options" => ["label" => "Entrer votre Mot de passe",
+                "attr" => [
+                    'placeholder' => '********'
+                ],
+                
+            ],
+                "second_options" => ["label" => "Confirmation votre mot de passe",
+                "attr" => [
+                    'placeholder' => '********'
+                            ]],
+            
             ])
         ;
     }
