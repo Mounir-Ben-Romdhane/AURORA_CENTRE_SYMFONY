@@ -1,6 +1,6 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Add Client !{% endblock %}
+{% block title %}Ajouter une reponse !{% endblock %}
 
 {% block body %}
 <body>
@@ -8,9 +8,8 @@
   <main id="main" class="main">
 
   <div class="pagetitle">
-      <h1>Add Client</h1>
+      <h1>Ajouter une reponse</h1>
     </div><!-- End Page Title -->
-
       <div class="container">
         <div class="container">
                     <div class="row my-5">
@@ -18,45 +17,41 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        Add Client
+                                        Ajouter une reponse
                                     </h3>
                                 </div>
                                 <div class="card-body">
-                                   
+                            {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+                            <br>
                             <div class="col-12">
-                            <label for="yourName" class="form-label">Name Client</label>
-                           
+                            <label for="yourEmail" class="form-label">type</label>
+                            {{ form_widget(form.type,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
                             </div>
+                            {{ form_errors(form.type,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Nom</label>
+                            {{ form_widget(form.nom,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.nom,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Description</label>
+                            {{ form_widget(form.description,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.description,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Status</label>
+                            {{ form_widget(form.status,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.status,{'attr':{'class':'text-danger'}}) }}
                             
-
-                            <div class="col-12">
-                            <label for="yourEmail" class="form-label">Email Client</label>
+                            <br>
                             
+                            {{form_widget(form.save,{'attr':{'class':'btn btn-primary w-100'}})}}
                             </div>
-                           
-
-                            <div class="col-12">
-                            <label for="yourEmail" class="form-label">Phone Number Client</label>
-                           
-                            </div>
-                           
-
-                            <div class="col-12">
-                            <label for="yourPassword" class="form-label">Password Client</label>
-                          
-                            <div class="invalid-feedback">Please enter your password!</div>
-                            </div>
-                           
-
-                            <div class="col-12">
-                            <label for="yourPassword" class="form-label">Confirme Password Client</label>
-                            
-                            <div class="invalid-feedback">Please confirme your password!</div>
-                            </div>
-                            <div class="col-12">
-                            <button class="btn btn-primary w-100" type="submit">Add Client</button>
-                            </div>
-                        
+                        {{ form_end(form) }}
                                 </div>
                             </div>
                         </div>

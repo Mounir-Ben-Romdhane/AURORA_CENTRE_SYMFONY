@@ -42,6 +42,11 @@ class ReponseRepository extends ServiceEntityRepository
         return $this->findBy(['reclamation'=>$id]);
 
     }
+    public function get_par_idreclamation($id){
+        return $this->findBy(['reclamation'=>$id]);
+
+    }
+   
 
 //    /**
 //     * @return Reponse[] Returns an array of Reponse objects

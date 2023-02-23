@@ -8,6 +8,13 @@
         <title>{% block title %}Welcome !{% endblock %}</title>
 
          {% block stylesheet %}
+         <style>
+li.dropdownitem:hover {
+    background-color: #808080
+;
+    color: white;
+}
+         </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -23,6 +30,7 @@
 
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 
 
         
@@ -57,6 +65,7 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{asset('js/scripts.js')}}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
@@ -64,12 +73,10 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
 
         {% endblock %}       
-
-
-
-
 
     </head>
     {% block body %}
@@ -87,21 +94,22 @@
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{path('ajouter_reclamation')}}">Reclamation</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                       <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="reclamationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reclamation</a>
-  <div class="dropdown-menu bg-black" aria-labelledby="reclamationDropdown">
-    <a class="dropdown-item bg-black" href="{{ path('ajouter_reclamation') }}">envoyer une reclamation</a>
-    <a class="dropdown-item bg bg-black" href="{{path('affiche_reclamation_byemail')}}">Consulter mes reclamations</a>
-  </div>
-</li>
+                        <li class="dropdown" ><a class="nav-link" href="#">reclamation<i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li class="dropdownitem"><a href="{{path('ajouter_reclamation')}}">Envoyer une Reclamation</a></li>
+                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation')}}">Consulter mes Reclamation</a></li>
+                                    </ul>
+                                </li>
+
+
+                       
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                            {% if app.user %}
                                 <li class="nav-item dropdown pe-3" >
 
                                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                                    <span class="d-none d-md-block dropdown-toggle ps-2" style="color:#ffc800;">{{ app.user.username }}</span>
+                                    <span class="d-none d-md-block dropdown-toggle ps-2" style="color:yellow;">{{ app.user.username }}</span>
                                 </a><!-- End Profile Iamge Icon -->
 
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -148,8 +156,8 @@
                             
                                 <li class="dropdown" ><a href="#"><span >S'authentifier</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
-                                    <li><a href="{{path('app_login')}}">Connexion</a></li>
-                                    <li><a href="{{path('app_register')}}">Inscription</a></li>
+                                    <li><a href="{{path('app_login')}}">Login</a></li>
+                                    <li><a href="{{path('app_register')}}">Register</a></li>
                                     </ul>
                                 </li>
                                 
@@ -160,6 +168,7 @@
                 </div>
             </div>
         </nav>
+        {% block body2 %}
         <!-- Masthead-->
         <header class="masthead" >
         <div align="center">
@@ -192,6 +201,7 @@
                 </div>
             {% endfor %}
             </div>
+            
             <div class="container">
                 <div class="masthead-subheading" >Bienvenue dans notre centre !</div>
                 <div class="masthead-heading text-uppercase" >Ravi de vous rencontrer</div>
@@ -753,5 +763,5 @@
         </div>
     </body>
     {% endblock %}
-    
+    {% endblock %}
 </html>

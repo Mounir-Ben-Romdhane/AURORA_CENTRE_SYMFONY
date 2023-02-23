@@ -40,11 +40,11 @@
                 {% for reclamation in reclamations %}
                     <tr>
                         <td>{{ reclamation.type }}</td>
-                        <td>{{reclamation.email}}</td>
+                        <td>{{reclamation.nom}}</td>
                         <td>{{reclamation.description}}</td>
                         <td>{{reclamation.status}}</td>
                         <td>{{reclamation.datereclamation.format('Y-m-d H:i:s')}}</td>
-                        <td><a href="{{path('affiche_reponse',{'id':reclamation.id})}}"><button type="button">consulter</button></a></td>
+                        <td><a href="{{path('ajouter_reponse',{'id':reclamation.id})}}"><button type="button">consulter</button></a></td>
                         <td><a href="{{path('update_reclamation',{'id':reclamation.id})}}"><button type="button">mise a jour</button></a></td>
                         <td><a href="{{path('delete_reclamation',{'id':reclamation.id})}}"><button type="button">supprimer</button></a></td>
                         

@@ -23,11 +23,6 @@ class Reclamation
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
-    #[assert\NotBlank(message:"nom client should not be blank")]
-    #[assert\Email()]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"message should not be blank")]
     private ?string $description = null;
 
@@ -37,8 +32,12 @@ class Reclamation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_reclamation = null;
 
-    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reponse::class)]
+    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reponse::class,cascade:["remove"])]
     private Collection $reponses;
+
+    #[ORM\Column(length: 255)]
+    #[assert\NotBlank(message:"name should not be blank")]
+    private ?string $nom = null;
 
     public function __construct()
     {
@@ -58,18 +57,6 @@ class Reclamation
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -136,6 +123,18 @@ class Reclamation
                 $reponse->setReclamation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
