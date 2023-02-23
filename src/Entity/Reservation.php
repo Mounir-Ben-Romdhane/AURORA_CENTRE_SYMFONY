@@ -24,6 +24,10 @@ class Reservation
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[assert\NotBlank()]
+<<<<<<< Updated upstream
+=======
+    #[assert\Range(min: 'now',)]
+>>>>>>> Stashed changes
     private ?\DateTimeInterface $dateR = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]

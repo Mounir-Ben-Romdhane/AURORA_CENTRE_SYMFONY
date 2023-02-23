@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+<<<<<<< Updated upstream
+=======
+use App\Entity\Service;
+>>>>>>> Stashed changes
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -10,9 +14,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+<<<<<<< Updated upstream
 
 class ReservationController extends AbstractController
 {
+=======
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+
+class ReservationController extends AbstractController
+{
+
+   
+>>>>>>> Stashed changes
     #[Route('/reservation', name: 'app_reservation')]
     public function index(): Response
     {
@@ -30,7 +43,11 @@ class ReservationController extends AbstractController
 
 
 
+<<<<<<< Updated upstream
     #[Route('/reservationAdd', name: 'app_addreservation')]
+=======
+    #[Route('/reservationService', name: 'app_addreservation')]
+>>>>>>> Stashed changes
     public function addReservation(Request $request , ManagerRegistry $doctrine):Response
     {
         $reservation = new Reservation();
@@ -42,11 +59,20 @@ class ReservationController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist(($reservation));
             $em->flush();
+<<<<<<< Updated upstream
             return $this->redirectToRoute('app_reservationAffichage');
 
         }
 
        return $this->render('reservation/add.html.twig',[
+=======
+
+            return $this->redirectToRoute('app_serviceShow');
+
+        }
+
+       return $this->render('reservation/reservation.html.twig',[
+>>>>>>> Stashed changes
         "form" => $form->createView()
        ]
     );
@@ -82,10 +108,24 @@ class ReservationController extends AbstractController
             $em->remove($reservation);
             $em->flush();
             return $this->redirectToRoute('app_reservationAffichage'); 
+<<<<<<< Updated upstream
       
             
            
         }
+=======
+        }
+
+   
+        #[Route('/reservationList', name: 'app_reservationList')]
+        public function reservationList(): Response
+        {
+            return $this->render('reservation/reservationList.html.twig', [
+                'controller_name' => 'ReservationController',
+            ]);
+        }
+    
+>>>>>>> Stashed changes
 }
 
 

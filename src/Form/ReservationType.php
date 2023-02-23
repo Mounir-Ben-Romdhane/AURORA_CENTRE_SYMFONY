@@ -52,6 +52,10 @@ class ReservationType extends AbstractType
                 ])
 
             ->add('dateR', DateTimeType::class)
+<<<<<<< Updated upstream
+=======
+          
+>>>>>>> Stashed changes
             
 
         ;

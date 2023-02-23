@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 
@@ -401,12 +402,28 @@
                                         <div class="card-header bg-primary text-white" background="">Ajouter un service</div>
                                         <div class="card-body">
                                             {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+=======
+{% extends "baseBack.html.twig" %} 
+
+    {% block body %}
+     <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Ajouter un service</h5>
+           {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+>>>>>>> Stashed changes
                                             <div class="form-group">
                                                 {{ form_label(form.titreS, 'Titre :') }}
                                                 {{ form_widget(form.titreS, { 'attr': {'class': 'form-control'} }) }}
                                                 {{ form_errors(form.titreS, { 'attr': {'class': 'text-danger'} }) }}
                                             </div>
+<<<<<<< Updated upstream
                                             </br>
+=======
+                                            <br>
+>>>>>>> Stashed changes
                                             <div class="form-group">
                                                 {{ form_label(form.descriptionS, 'Description :') }}
                                                 {{ form_widget(form.descriptionS, { 'attr': {'class': 'form-control'} }) }}
@@ -418,12 +435,22 @@
                                                 {{ form_widget(form.typeS, { 'attr': {'class': 'form-control'} }) }}
                                                 {{ form_errors(form.typeS, { 'attr': {'class': 'text-danger'} }) }}
                                             </div></br>
+<<<<<<< Updated upstream
+=======
+                                            
+                                            <div class="form-group">
+                                                {{ form_label(form.image, 'Image :') }}
+                                                {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.image, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+>>>>>>> Stashed changes
                                             <div class="form-group">
                                                 {{ form_label(form.dateS, 'Date :') }}
                                                 {{ form_widget(form.dateS, { 'attr': {'class': 'form-control'} }) }}
                                                 {{ form_errors(form.dateS, { 'attr': {'class': 'text-danger'} }) }}
                                             </div>
                                             </br>
+<<<<<<< Updated upstream
                                             <div class="form-group">
                                                 {{ form_label(form.image, 'Image :') }}
                                                 {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
@@ -513,3 +540,16 @@
                     </body>
                     {% endblock %}
 
+=======
+<div class="d-flex justify-content-center">
+  <a href="{{ path('app_addreservation') }}">
+                                                        <button type="submit" class="btn btn-primary"  font-size: 15px; padding: 10px 20px;">Enregistrer</button>
+</div>
+                                            {{ form_end(form) }}
+</div>
+            </div>
+                </div>
+          </div>
+        {% endblock %}
+    
+>>>>>>> Stashed changes

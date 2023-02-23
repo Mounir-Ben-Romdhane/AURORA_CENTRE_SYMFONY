@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block title %}Welcome !{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        {% endblock %}
+         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{asset('js/scripts.js')}}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        {% endblock %}
+    </head>
+    {% block body %}
+    
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/lall-logo-_1_ copy.svg" alt="..." /></a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_reservationList')}}">Réservations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_back')}}">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+     
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Bienvenue chez AURORA.</div>
+                <div class="masthead-heading text-uppercase">On est là pour vous</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Savoir plus</a>
+            </div>
+        </header>
+<br>
+<br>
+ <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">SERVICES</h2>
+                   
+
+                </div>
+                <br>
+<br>
+
+<div class="container">
+  <div class="row text-center justify-content-center">
+    {% for i in tableauServiceFront %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+
+          <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"href="app_serviceDetails"></i></div>
+            </div>
+            <img src="{{asset('uploads/images/'~ i.image)}}" alt="photo">
+          </a>
+<br>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ i.titreS }}</h5>
+              <p class="card-text">{{ i.typeS }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+
+            </ul>
+            <div class="card-body">
+            <div class="portfolio-caption-subheading text-muted">{{ i.descriptionS}}</div><br>
+            
+          <form action="{{ path('app_addreservation',{'id':i.id}) }}">
+                                                        <button type="submit" class="btn btn-primary"  font-size: 15px; padding: 10px 20px;>  Réserver</button>
+
+          </form>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+                        {% endblock %}
+
+
+

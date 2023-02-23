@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,17 +22,32 @@
 
     </br>
       <div class= "container-lg">
+=======
+{% extends "baseBack.html.twig" %} 
+
+    {% block body %}
+     <div class= "container">
+>>>>>>> Stashed changes
        
             <div class="card">
         <div class="card-header"></div>
         <div class="card-body">
             <h5 class="card-title">Détails</h5>
             <table class="table table-striped">
+<<<<<<< Updated upstream
 
           {#  <table class="table table-light table_hover table_bordered"> #}
                 <thead  class="thead-dark">
                     <tr>
                         <th scope="col">ID</th>
+=======
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                      <tr>
+                         <th scope="col">ID</th>
+>>>>>>> Stashed changes
                         <th scope="col">Numero</th>
                         <th scope="col">UserName</th>
                         <th scope="col">Email</th>
@@ -42,7 +58,11 @@
                     </tr>
                 </thead>
                  <tbody>
+<<<<<<< Updated upstream
                  {% for i in tableau %}
+=======
+                  {% for i in tableau %}
+>>>>>>> Stashed changes
                     <tr>
                         <td>{{i.id}}</td>
                         <td>{{i.numero}}</td>
@@ -54,6 +74,7 @@
 
 
 
+<<<<<<< Updated upstream
                         <td>
                        <a href="{{ path('app_updatereservation',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill" >Editer</button></a>
                         <a href="{{ path('app_deletereservation',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill">Supprimer</button></a>
@@ -63,14 +84,38 @@
                     </tr>
                     {% endfor %}
                      <a href="{{ path('app_addreservation') }}"><button type="button" class="btn btn-success badge-pill" style="width:80px ">Ajouter</button></a>
+=======
+                      <td>
+                        <a href="{{ path('app_updatereservation',{id:i.id}) }}"><button type="button" class="btn btn-outline-secondary btn-sm mr-2">Editer</button></a>
+                        <form method="post" action="{{ path('app_deletereservation', {'id': i.id}) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ i.id) }}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                    </form>
+
+                        </td>
+                    </tr>  
+                    {% endfor %}
+
+      </tbody>
+</table>
+    {# <div class="d-flex justify-content-center">
+  <a href="{{ path('app_addreservation') }}">
+    <button type="button" class="btn btn-outline-success" style="width:150px">Ajouter</button>
+</div>#}
+>>>>>>> Stashed changes
       </tbody>
 </table>
 </div>
             </div>
                 </div>
           </div>
+<<<<<<< Updated upstream
     </div>
     </body>
 </html>
  
 
+=======
+        {% endblock %}
+    
+>>>>>>> Stashed changes

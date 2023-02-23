@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="Inscription" cloudDestinationProperty="Inscription" >
+  <component type="Container" name="Container" cloudDestinationProperty="Container" scrollVisible="false" scrollableY="false" layout="BoxLayout" boxLayoutAxis="Y" >
+    <component type="TextField" name="nom" cloudBoundProperty="text" cloudDestinationProperty="nom" text="" hint="Nom" >
+    </component>
+    <component type="TextField" name="prenom" cloudBoundProperty="text" cloudDestinationProperty="prenom" text="" hint="Prenom" >
+    </component>
+    <component type="TextField" name="password" cloudBoundProperty="text" cloudDestinationProperty="TextField" text="" constraint="65536" hint="Password" >
+    </component>
+    <component type="Picker" name="date" cloudDestinationProperty="Picker" text="" >
+    </component>
+    <component type="Container" name="Container1" cloudDestinationProperty="Container1" layout="BoxLayout" boxLayoutAxis="X" >
+      <component type="Label" name="Label" cloudDestinationProperty="Label" text="Genre" >
+      </component>
+      <component type="OnOffSwitch" name="genre" cloudDestinationProperty="genre" uiid="genre" >
+        <custom name="value" type="java.lang.Boolean" value="true" />
+        <custom name="on" type="java.lang.String" value="femme" />
+        <custom name="off" type="java.lang.String" value="homme" />
+      </component>
+    </component>
+    <component type="CheckBox" name="foot" cloudDestinationProperty="CheckBox" text="Foot" >
+    </component>
+    <component type="CheckBox" name="lecture" cloudDestinationProperty="lecture" text="Lecture" >
+    </component>
+    <component type="CheckBox" name="tennis" cloudDestinationProperty="tennis" text="Tennis" >
+    </component>
+    <component type="CheckBox" name="natation" cloudDestinationProperty="natation" text="Natation" >
+    </component>
+    <component type="Button" name="inscription" cloudDestinationProperty="Button" text="Button" >
+    </component>
+  </component>
+</component>

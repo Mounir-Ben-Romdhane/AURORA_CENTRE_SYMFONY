@@ -9,7 +9,7 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -23,7 +23,7 @@
             <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="{{asset('js/scripts.js')}}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
@@ -40,6 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_reservationList')}}">Réservations</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
@@ -49,12 +50,13 @@
                 </div>
             </div>
         </nav>
+        {% block body2 %}
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome To Our Studio!</div>
-                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+                <div class="masthead-subheading">Bienvenue chez AURORA.</div>
+                <div class="masthead-heading text-uppercase">On est là pour vous</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Savoir plus</a>
             </div>
         </header>
 
@@ -63,8 +65,13 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Services</h2>
+<<<<<<< Updated upstream
                     <h3 class="section-subheading text-muted">Voilà nos différents servies.</h3>
                       <a href="{{path('app_reservationService')}}"><button type="button" class="btn btn-success badge-pill" style="width:200px ">Réserver</button></a></br>  
+=======
+                    <h3 class="section-subheading text-muted">Voilà les principaux mots clés.</h3>
+                    
+>>>>>>> Stashed changes
                 </div>
 
                 <div class="row text-center">
@@ -74,8 +81,15 @@
                             <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
                         </span>
                        
+<<<<<<< Updated upstream
                         <h4 class="my-3">Yoga</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+=======
+                        <h4 class="my-3">Médecine douce</h4>
+                        <p class="text-muted">
+                        Naturelle, C'est soigner leurs maux du quotidien, soulager les douleurs chroniques, lutter contre le stress ou la fatigue, améliorer leur bien-être naturellement.
+                        </p>
+>>>>>>> Stashed changes
                     </div>
 
 
@@ -85,7 +99,13 @@
                             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">Coaching</h4>
+<<<<<<< Updated upstream
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+=======
+                        <p class="text-muted">
+                        Le coaching personnel est un accompagnement qui favorise le développement personnel en aidant une personne à faire face à une situation problématique  dans sa vie quotidienne.
+                        </p>
+>>>>>>> Stashed changes
                     </div>
 
 
@@ -95,6 +115,7 @@
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
                         </span>
+<<<<<<< Updated upstream
                         <h4 class="my-3">Consultation</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
@@ -102,6 +123,19 @@
                     <td>
                         <a href="{{path('app_serviceShow')}}"><button type="button" class="btn btn-success badge-pill" style="width:200px ">Réserver</button></a>   
                     </td>            
+=======
+                        <h4 class="my-3">Psychothérapie</h4>
+                        <p class="text-muted">
+                      Elle vise à provoquer des changements d’attitudes, de comportements, de manières de penser ou de réagir
+                      
+                      </p>
+                  
+                    </div>
+
+                          <div>
+                        <a href="{{path('app_serviceShow')}}"><button type="button" class="btn btn-primary btn-xl text-uppercase ">Voir Service Offerts</button></a>   
+                    </div>        
+>>>>>>> Stashed changes
                    
                 </div>
             </div>
@@ -630,4 +664,5 @@
         </div>
     </body>
     {% endblock %}
+      {% endblock %}
 </html>

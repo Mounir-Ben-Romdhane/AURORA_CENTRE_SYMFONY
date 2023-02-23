@@ -4,11 +4,19 @@ namespace App\Entity;
 
 use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+<<<<<<< Updated upstream
+=======
+use Doctrine\Common\Collections\ArrayAccess;
+>>>>>>> Stashed changes
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as assert;
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 class Service
 {    
@@ -31,16 +39,30 @@ class Service
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[assert\NotBlank()]
+<<<<<<< Updated upstream
+=======
+    #[assert\Range(min: 'now',)]
+
+>>>>>>> Stashed changes
     private ?\DateTimeInterface $dateS = null;
 
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+<<<<<<< Updated upstream
     #[ORM\Column(length: 255)]
+=======
+    #[ORM\Column(length: 255, nullable: true)]
+>>>>>>> Stashed changes
     private ?string $image = null;
 
 
 
+<<<<<<< Updated upstream
+=======
+    private $flashBag;
+
+>>>>>>> Stashed changes
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -53,7 +75,13 @@ class Service
 
     public function getTitreS(): ?string
     {
+<<<<<<< Updated upstream
         return $this->titreS;
+=======
+        
+        return $this->titreS;
+        
+>>>>>>> Stashed changes
     }
 
     public function setTitreS(string $titreS): self
@@ -129,12 +157,20 @@ class Service
         return $this;
     }
 
+<<<<<<< Updated upstream
+=======
+   
+>>>>>>> Stashed changes
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+<<<<<<< Updated upstream
     public function setImage(string $image): self
+=======
+    public function setImage(?string $image): self
+>>>>>>> Stashed changes
     {
         $this->image = $image;
 
@@ -142,4 +178,8 @@ class Service
     }
 
     
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 }

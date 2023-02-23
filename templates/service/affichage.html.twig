@@ -1,6 +1,7 @@
 {% extends "baseBack.html.twig" %} 
 
 
+<<<<<<< Updated upstream
 {% block body %}
 <body>
 
@@ -385,6 +386,26 @@
 
     </br>
       <div class= "container">
+=======
+
+
+
+    {% block body %}
+     {% for type, messages in app.session.flashBag.all %}
+          {% for message in messages %}
+          <div class="alert alert-{{type}}">
+          {{message}}
+                    </div>
+{% endfor %}
+    {% endfor %}
+    <style>
+      .table tbody tr:hover{
+        background-color:#ddd;
+      }
+    
+    </style>
+     <div class= "container">
+>>>>>>> Stashed changes
        
             <div class="card">
         <div class="card-header"></div>
@@ -410,33 +431,61 @@
                  <tbody>
                  {% for i in tableauService %}
                     <tr>
+<<<<<<< Updated upstream
                         <td>{{i.id}}</td>
+=======
+                        <td >{{i.id}}</td>
+>>>>>>> Stashed changes
                         <td>{{i.titreS}}</td>
                         <td>{{i.descriptionS}}</td>
                         <td>{{i.typeS}}</td>
                         <td>
                         {% if i.image %}
+<<<<<<< Updated upstream
                           <img src="{{asset('uploads'~ i.image)}}" alt="{{i.titreS}} Image" style ="width:100px: height:100px">                      
+=======
+                          <img src="{{asset('uploads/images/'~ i.image)}}" alt="photo">   
+>>>>>>> Stashed changes
                         {% else %}
                           No Image available
                         {% endif %}
                         </td>
                         <td>{{i.dateS.format('Y-m-d-H:i')}}</td>
                         <td>
+<<<<<<< Updated upstream
                         <a href="{{ path('app_updateservice',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill" >Editer</button></a>
                         <a href="{{ path('app_deleteservice',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill">Supprimer</button></a>
+=======
+                        <a href="{{ path('app_updateservice',{id:i.id}) }}"><button type="button" class="btn btn-outline-secondary btn-sm mr-2">Editer</button></a>
+                        <form method="post" action="{{ path('app_deleteservice', {'id': i.id}) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ i.id) }}">
+                          <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                        </form>
+>>>>>>> Stashed changes
 
                         </td>
                     </tr>  
                     {% endfor %}
+<<<<<<< Updated upstream
                     <a href="{{ path('app_addservice') }}"><button type="button" class="btn btn-success badge-pill" style="width:80px ">Ajouter</button></a>
 
       </tbody>
 </table>
+=======
+
+      </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <a href="{{ path('app_addservice') }}">
+    <button type="button" class="btn btn-outline-success" style="width:150px">Ajouter</button>
+</div>
+
+>>>>>>> Stashed changes
 </div>
             </div>
                 </div>
           </div>
+<<<<<<< Updated upstream
     </div>
     </body>
     
@@ -501,3 +550,11 @@
 </body>
 {% endblock %}
 
+=======
+
+         
+
+
+        {% endblock %}
+    
+>>>>>>> Stashed changes
