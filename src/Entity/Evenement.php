@@ -9,6 +9,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as assert;
 
+//use App\Entity\Participationns;
+
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -19,20 +21,32 @@ class Evenement
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[assert\NotBlank()]
+    #[assert\NotBlank(message:"le champ est obligatoire, veuillez saisir!")]
+    #[assert\Length(
+       // min:7,
+        max:50,
+        minMessage: "doit etre superieur a 3",
+        maxMessage:"doit etre inferieur a 20",
+        
+    )]
     private ?string $titreev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[assert\NotBlank()]
+    #[assert\NotBlank(message:"le champ est obligatoire, veuillez saisir!")]
     private ?string $descriptionev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageev = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[assert\Range(
+        min: 'now',
+       
+    )]
     private ?\DateTimeInterface $dateev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[assert\NotBlank(message:"le champ est obligatoire, veuillez entrer votre choix!")]
     private ?string $typeev = null;
 
     #[ORM\OneToMany(mappedBy: 'Evenement', targetEntity: Participationns::class)]

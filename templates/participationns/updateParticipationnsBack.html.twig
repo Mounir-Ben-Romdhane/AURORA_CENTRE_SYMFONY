@@ -380,86 +380,59 @@
 
 
 
-
-
-
-
-
-<head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        
-        
-    </head>
-
-
-    <body>
+<div class= "container">
 <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Liste des participationns :</a>
+  <a class="navbar-brand" href="#">Modifier une Participationn :</a>
 </nav>
-
-    </br>
-      <div class= "container">
-       
-            <div class="card">
+<div class="card">
         <div class="card-header"></div>
         <div class="card-body">
-            <h5 class="card-title">Détails</h5>
-            <table class="table table-striped">
+
+
+
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table class="table table-striped">
            {#{{form(studentSearch)}}#}
 
           {#  <table class="table table-light table_hover table_bordered"> #}
                 <thead  class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">DESCRIPTION</th>
-                        <th scope="col">USERNAME</th>
-                        <th scope="col">EMAIL</th>
-                        <th scope="col">TELEPHONE</th>
 
-                        
+<tr>
+<td>{{form_label(form.descriptionPn,'Commentaire')}}</td>
+<td><div class="form-control">{{form_widget(form.descriptionPn)}}</div></td>
+<td>{{form_errors(form.descriptionPn)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.usernameev,'Nom')}}</td>
+<td><div class="form-control">{{form_widget(form.usernameev)}}</div></td>
+<td>{{form_errors(form.usernameev)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.emailev,'Email')}}</td>
+<td><div class="form-control">{{form_widget(form.emailev)}}</div></td>
+<td>{{form_errors(form.emailev)}}</td>
 
-                        <th class="text-left">Actions</th>
-                    </tr>
-                </thead>
-                 <tbody>
-                 {% for i in tableauParticipationns %}
-                    <tr>
-                        <td>{{i.id}}</td>
-                        <td>{{i.descriptionPn}}</td>
-                        <td>{{i.usernameev}}</td>
-                        <td>{{i.emailev}}</td>
-                        <td>{{i.numtelev}}</td>
-                        
-                        
-                        <td>
-                         <a href="{{ path('app_updateParticipationnsBack',{id:i.id}) }}" class="btn btn-info rounded-pill m-2" class="nav-link nav-profile d-flex align-items-center pe-0"><img src="assets/assets/img/editer1.png"></a>
+</tr>
 
-                         <a href="{{ path('app_deleteParticipationns',{id:i.id}) }}" class="btn btn-info rounded-pill m-2" class="nav-link nav-profile d-flex align-items-center pe-0"><img src="assets/assets/img/supprimer.png"></a>
+<tr>
+<td>{{form_label(form.numtelev,'Téléphone')}}</td>
+<td><div class="form-control">{{form_widget(form.numtelev)}}</div></td>
+<td>{{form_errors(form.numtelev)}}</td>
 
-                        </td>
-                        
-                    </tr>   
+</tr>
 
 
-                    
-                    {% endfor %}
-
-                   
-
-      </tbody>
 </table>
+
+<div align=RIGHT>{{form_widget(form.save)}}</div>
+{{form_end(form)}}
+
 </div>
-            </div>
-                </div>
+
+          </div>
           </div>
     </div>
-    </body>
 
 
 
@@ -511,3 +484,8 @@
 </body>
 {% endblock %}
 </html>
+
+
+
+
+

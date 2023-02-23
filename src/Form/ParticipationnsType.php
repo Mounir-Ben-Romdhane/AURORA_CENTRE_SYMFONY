@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -20,7 +21,27 @@ class ParticipationnsType extends AbstractType
         $builder
         ->add('descriptionPn', TextType::class, [
             "attr" => [
-                "placeholder" => "descriptionP"
+                "placeholder" => "Commentaire"
+            ] 
+        ])
+        ->add('usernameev', TextType::class, [
+            "attr" => [
+                "placeholder" => "Nom"
+            ] 
+        ])
+        ->add('emailev', EmailType::class, [
+            "attr" => [
+                "placeholder" => "Email"
+            ] 
+        ])
+        /*->add('telephoneev', TextType::class, [
+            "attr" => [
+                "placeholder" => "telephoneev"
+            ] 
+        ])*/
+        ->add('numtelev', TextType::class, [
+            "attr" => [
+                "placeholder" => "Telephone"
             ] 
         ])
         ->add('save', SubmitType::class); 

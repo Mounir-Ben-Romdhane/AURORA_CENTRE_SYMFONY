@@ -353,39 +353,64 @@
 
 
 
+
+ 
+       
+       
+      
+
+
+
+
+
+
+
   
+<div class= "container">
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Ajouter un évènement :</a>
+</nav>
+<div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
 
 
-<h1>ajout evenements</h1>
 
 {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-<table>
-<tr>
-<td>{{form_label(form.titreev,'titreev')}}</td>
+
+<table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+
+
+<td>{{form_label(form.titreev,'TITRE')}}</td>
 <td>{{form_widget(form.titreev)}}</td>
 <td>{{form_errors(form.titreev)}}</td>
 </tr>
 <tr>
-<td>{{form_label(form.descriptionev,'descriptionev')}}</td>
+<td>{{form_label(form.descriptionev,'DESCRIPTION')}}</td>
 <td>{{form_widget(form.descriptionev)}}</td>
 <td>{{form_errors(form.descriptionev)}}</td>
 </tr>
 <tr>
-<td>{{form_label(form.imageev,'imageev')}}</td>
+<td>{{form_label(form.imageev,'IMAGE')}}</td>
 <td>{{form_widget(form.imageev)}}</td>
 <td>{{form_errors(form.imageev)}}</td>
 
 </tr>
 
 <tr>
-<td>{{form_label(form.dateev,'dateev')}}</td>
+<td>{{form_label(form.dateev,'DATE')}}</td>
 <td>{{form_widget(form.dateev)}}</td>
 <td>{{form_errors(form.dateev)}}</td>
 
 </tr>
 
 <tr>
-<td>{{form_label(form.typeev,'typeev')}}</td>
+<td>{{form_label(form.typeev,'TYPE')}}</td>
 <td>{{form_widget(form.typeev)}}</td>
 <td>{{form_errors(form.typeev)}}</td>
 
@@ -393,9 +418,20 @@
 
 
 </table>
-{{form_widget(form.save)}}
+<div align=RIGHT>{{form_widget(form.save)}}</div>
 
 {{form_end(form)}}
+
+
+
+</div>
+
+          </div>
+          </div>
+    </div>
+
+
+
 
 {% for type, messages in app.session.flashBag.all %}
     {% for message in messages %}

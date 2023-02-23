@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\File;
 
 class EvenementType extends AbstractType
 {
@@ -31,10 +32,49 @@ class EvenementType extends AbstractType
                     "placeholder" => "descriptionev"
                 ] 
             ])
-            ->add('imageev', TextType::class, [
+
+
+
+
+
+            /*->add('imageev', FileType::class, [
                 "attr" => [
                     "placeholder" => "imageev"
                 ] 
+            ])*/
+
+            /*->add('imageev', TextType::class, [
+                "attr" => [
+                    "placeholder" => "imageev"
+                ] 
+            ])*/
+
+
+
+            ->add('imageev', FileType::class, [
+                'label' => 'imageev (img file)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/gif',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image document',
+                    ])
+                ],
             ])
     
             ->add('dateev', DateTimeType::class)

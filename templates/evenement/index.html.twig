@@ -381,7 +381,7 @@
 
     <body>
 <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Liste des evenements :</a>
+  <a class="navbar-brand" href="#">Liste des évènements :</a>
 </nav>
 
     </br>
@@ -415,22 +415,32 @@
                         <td>{{i.id}}</td>
                         <td>{{i.titreev}}</td>
                         <td>{{i.descriptionev}}</td>
-                        <td>{{i.imageev}}</td>
+                        <td>
+                        <img src="{{asset('uploads/evenement/'~ i.imageev)}}" alt="photo de profil"></td>
                         <td>{{i.dateev.format('Y-m-d-H:i')}}</td>
                         <td>{{i.typeev}}</td>
 
                         
                         
                         <td>
-                        <a href="{{ path('app_updateevenement',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill" >Editer</button></a>
-                        <a href="{{ path('app_deleteevenement',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill">Supprimer</button></a>
 
+
+                       
+                    <a href="{{ path('app_updateevenement', {'id': i.id}) }}" class="btn btn-info rounded-pill m-2" class="nav-link nav-profile d-flex align-items-center pe-0"><img src="assets/assets/img/editer1.png"></a>
+
+
+                   <a href="{{ path('app_deleteevenement', {'id': i.id}) }}" class="btn btn-info rounded-pill m-2" class="nav-link nav-profile d-flex align-items-center pe-0"><img src="assets/assets/img/supprimer.png"></a>
+  
+
+
+
+                       
                         </td>
-                        <td> <a href="{{path('app_addParticipationns',{'id':i.id})}}"><button type="button">participer</button></a>
-                         <a href="{{path('app_participationnAffichage',{'id':i.id})}}"><button type="button">Gérer participation</button></a></td>
+                        <td> <a href="{{path('app_addParticipationnsback',{'id':i.id})}}"><button type="button" class="btn btn-success badge-pill">participer</button></a>
                     </tr>   
                     {% endfor %}
-                    <a href="{{ path('app_addevenement') }}"><button type="button" class="btn btn-success badge-pill" style="width:80px ">Ajouter</button></a>
+                     <a href="{{ path('app_addevenement') }}" class="btn btn-info rounded-pill m-2" class="nav-link nav-profile d-flex align-items-center pe-0"><img src="assets/assets/img/ajouter.png"></a>
+
 
       </tbody>
 </table>

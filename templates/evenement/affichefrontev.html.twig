@@ -9,21 +9,21 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
         {% endblock %}
          {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{{ asset('js/scripts.js') }}"></script>
+        <script src="js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
@@ -94,6 +94,112 @@
                 </div>
             </div>
         </section>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+
+
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        
+    </head>
+
+
+<div class="text-center">
+<h2 class="section-heading text-uppercase">Liste des évènements</h2>
+</div>
+
+    <body>
+<nav class="navbar navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="#">Liste des evenements :</a>
+</nav>
+
+    </br>
+      <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Détails</h5>
+            <table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">TITRE</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">IMAGE</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">TYPE</th>
+
+
+                        <th class="text-left">Actions</th>
+                        <th class="text-left">Participationn</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                 {% for i in tableauEvenement %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.titreev}}</td>
+                        <td>{{i.descriptionev}}</td>
+                        <td>
+                        <img src="{{asset('uploads/evenement/'~ i.imageev)}}" alt="photo de profil"></td>
+                        <td>{{i.dateev.format('Y-m-d-H:i')}}</td>
+                        <td>{{i.typeev}}</td>
+
+                        
+                        
+                        <td>
+                        <a href="{{ path('app_updateevenement',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill" >Editer</button></a>
+                        <a href="{{ path('app_deleteevenement',{id:i.id}) }}"><button type="button" class="btn btn-success badge-pill">Supprimer</button></a>
+
+                        </td>
+                        <td> <a href="{{path('app_addParticipationns',{'id':i.id})}}"><button type="button">participer</button></a>
+                         <a href="{{path('app_participationnAffichage',{'id':i.id})}}"><button type="button">Gérer participation</button></a></td>
+                    </tr>   
+                    {% endfor %}
+                    <a href="{{ path('app_addevenement') }}"><button type="button" class="btn btn-success badge-pill" style="width:80px ">Ajouter</button></a>
+
+      </tbody>
+</table>
+</div>
+            </div>
+                </div>
+          </div>
+    </div>
+    </body>
+    
+</html>
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
