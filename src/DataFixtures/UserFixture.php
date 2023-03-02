@@ -21,18 +21,22 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        for($i = 1 ; $i <= 15 ; $i++){
         $user = new User();
         $token = $this->tokenGenerator->generateToken();
         $user->setResetToken($token);
         $password_hashed = $this->passwordEncoder->encodePassword($user,"mounir");
-        $user->setUsername("Mounir2000");
+        $user->setUsername("Mounir".$i);
         $user->setRoles(['ROLE_USER']);
-        $user->setEmail("mounirbenben9@gmail.com");
-        $user->setNumTel("9883838");
+        $user->setEtat(true);
+        $user->setImage("images.png");
+        $user->setEmail("mounir".$i."@gmail.com");
+        $user->setNumTel("988388".$i);
         $user->setFullAddress("Tunisie , 4115 , Djerba");
         $user->setPassword($password_hashed);
         $manager->persist($user);
 
         $manager->flush();
+        }
     }
 }

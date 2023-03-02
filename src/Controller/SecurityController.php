@@ -30,19 +30,30 @@ class SecurityController extends AbstractController
                 //return $this->redirectToRoute('app_logout');
 
                 return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-            }
-             
-         }
-
-         if ($this->getUser()) {
-            
+            }else{
+                if (!$this->getUser()->getEtat()) {
+                    $this->addFlash(
+                        'Danger',
+                        'Vous ete bloqué !'
+                    );
+                    // get the login error if there is one
+                    $error = $authenticationUtils->getLastAuthenticationError();
+                    // last username entered by the user
+                    $lastUsername = $authenticationUtils->getLastUsername();
+    
+                    //return $this->redirectToRoute('app_logout');
+    
+                    return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+             }else{
                 $this->addFlash(
                     'Succes',
                     'Seccuss !'
                 );
                 return $this->redirectToRoute('app_front');
+             }
+            }
              
-         }
+         } 
           // get the login error if there is one
           $error = $authenticationUtils->getLastAuthenticationError();
           // last username entered by the user

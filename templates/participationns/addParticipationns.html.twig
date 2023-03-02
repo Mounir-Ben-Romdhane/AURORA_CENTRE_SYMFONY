@@ -1,0 +1,182 @@
+ {% extends "baseFront.html.twig" %} 
+
+
+
+
+{% block title %}Ajout Participation !{% endblock %}
+
+
+
+{% block body %}
+
+
+
+
+
+        
+
+
+        
+
+    <body id="page-top">
+         <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="{{ asset('assets/img/lall-logo-_1_ copy.svg')}}" alt="..." /></a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color:#ffc800;" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                           {% if app.user %}
+
+                                <li class="dropdown"><a href="#" style="color:#ffc800;"><span>{{ app.user.username }}</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_profilClient') }}">
+                                                <i class="bi bi-person"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li style="color:#ffc800;">
+                                            <hr class="dropdown-divider">
+                                        </li>   
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>Sign Out</span>
+                                            </a>
+                                        </li>
+                                    </ul><!-- End Profile Dropdown Items -->
+                                </li><!-- End Profile Nav -->
+                            {% else %}
+                            
+                                <li class="dropdown" ><a href="#"><span >S'authentifier</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li><a href="{{path('app_login')}}">Connexion</a></li>
+                                    <li><a href="{{path('app_register')}}">Inscription</a></li>
+                                    </ul>
+                                </li>
+                                
+                            {% endif %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+            
+                <div class="masthead-heading text-uppercase">PARTICIPATION</div>
+                <div class="masthead-subheading" >Veuillez participer ici !</div>
+            </div>
+        </header>
+        <!-- Services-->
+        <section class="page-section" id="">
+            <div class="container">
+                <div class="text-center">
+                    <h3 class="section-subheading text-muted">Entrez vos coordonnées pour valider votre participation.</h3>
+                </div>
+
+
+ {% if app.user %}
+
+   {{form_start(form1,{'attr':{'novalidate':'novalidate'}})}}
+
+<div align=center>
+
+<table>
+
+<tr>
+<td> {{form_label(form1.descriptionPn,'Commentaire')}}</td>
+<td><div class="form-control">{{form_widget(form1.descriptionPn)}}</div></td>
+<td>{{form_errors(form1.descriptionPn)}}</td>
+</tr>
+
+<tr>
+<td> {{form_label(form1.numtelev,'NumTel')}}</td>
+<td><div class="form-control">{{form_widget(form1.numtelev)}}</div></td>
+<td>{{form_errors(form1.numtelev)}}</td>
+</tr>
+
+</table>
+</div>
+
+<div align=CENTER > {{form_widget(form1.save)}}</div>
+
+
+{{form_end(form1)}}
+ {% else %}
+                            
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+
+<div align=center>
+
+<table>
+
+<tr>
+<td> {{form_label(form.descriptionPn,'Commentaire')}}</td>
+<td><div class="form-control">{{form_widget(form.descriptionPn)}}</div></td>
+<td>{{form_errors(form.descriptionPn)}}</td>
+</tr>
+
+<tr>
+<td>{{form_label(form.usernameev,'Nom')}}</td>
+<td><div class="form-control">{{form_widget(form.usernameev)}}</div></td>
+<td>{{form_errors(form.usernameev)}}</td>
+</tr>
+
+<tr>
+<td>{{form_label(form.emailev,'Email')}}</td>
+<td><div class="form-control">{{form_widget(form.emailev)}}</div></td>
+<td>{{form_errors(form.emailev)}}</td>
+</tr>
+
+
+<tr>
+<td>{{form_label(form.numtelev,'Telephone')}}</td>
+<td><div class="form-control">{{form_widget(form.numtelev)}}</div></td>
+<td>{{form_errors(form.numtelev)}}</td>
+</tr>
+
+</table>
+</div>
+
+<div align=CENTER > {{form_widget(form.save)}}</div>
+
+
+{{form_end(form)}}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+        </section>
+
+    </body>
+    
+
+
+
+
+
+
+        
+{% endblock %}

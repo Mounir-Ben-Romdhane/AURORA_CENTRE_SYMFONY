@@ -1,0 +1,191 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}List evenements !{% endblock %}
+    {% block body %}
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/lall-logo-_1_ copy.svg" alt="..." /></a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color:#ffc800;" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                           {% if app.user %}
+
+                                <li class="dropdown"><a href="#" style="color:#ffc800;"><span>{{ app.user.username }}</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_profilClient') }}">
+                                                <i class="bi bi-person"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li style="color:#ffc800;">
+                                            <hr class="dropdown-divider">
+                                        </li>   
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>Sign Out</span>
+                                            </a>
+                                        </li>
+                                    </ul><!-- End Profile Dropdown Items -->
+                                </li><!-- End Profile Nav -->
+                            {% else %}
+                            
+                                <li class="dropdown" ><a href="#"><span >S'authentifier</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li><a href="{{path('app_login')}}">Connexion</a></li>
+                                    <li><a href="{{path('app_register')}}">Inscription</a></li>
+                                    </ul>
+                                </li>
+                                
+                            {% endif %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            
+            <div class="container">
+                <div class="masthead-heading text-uppercase">EVENEMENTS</div>
+                <div class="masthead-subheading" >Profitez chers clients !</div>
+            </div>
+        </header>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+        
+            {% for message in app.flashes('Success') %}
+                <div class="alert alert-success" style="text-align:center;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+
+<div align=RIGHT>
+        <form action="">
+  <label for="Reclamation">Trier par:</label>
+ <select id="orderBy" name="Reclamation" onchange="location = this.value;">
+ <option value=""></option>
+  <option value="{{ path('app_triertitreev_evenement') }}">Titre</option>
+  <option value="{{ path('app_triertypeev_evenement') }}">Type</option>
+  <option value="{{ path('app_trierdateev_evenement') }}">Date</option>
+</select>
+</a>
+</form>
+</div>
+    </br>
+
+                <div class="row">
+
+                        {% for i in tableauEvenement %}
+
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{asset('uploads/users/'~ i.imageev)}}" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">{{i.titreev}}</div>
+                                <div class="portfolio-caption-subheading text-muted">{{i.typeev}}</div>
+                                <div class="portfolio-caption-subheading text-muted">{{i.descriptionev}}</div>
+                                <p class="item-intro text-muted">{{i.dateev | date('d-m-Y')}}</p>
+
+
+                                <strong><div class="nav-item"><a class="nav-link" href="{{path('app_addParticipationns',{'id':i.id})}}">Participer</a></div></strong>
+
+
+
+                   
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                    
+                  
+
+                </div>
+            </div>
+        </section>
+      
+        {% for ii in tableauEvenement %}
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                      
+                            
+                            <div class="col-lg-8">
+                                    
+
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    
+                                    <h2 class="text-uppercase">{{ii.titreev}}</h2>
+                                    <p class="item-intro text-muted">{{ii.typeev}}</p>
+                                     <p class="item-intro text-muted">{{ii.dateev | date('d-m-Y')}}</p>
+                                     
+
+                                    <img class="img-fluid d-block mx-auto" src="{{asset('uploads/evenement/'~ ii.imageev)}}" alt="..." />
+                                    <p>{{ii.descriptionev}}</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong></strong>
+                                            
+                                        </li>
+                                        <li>
+                                            <strong></strong>
+                                            
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button" href="{{path('app_addParticipationns',{'id':ii.id})}}">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Participer
+                                    </button>
+                                    
+                                </div>
+                                
+                            </div>
+                        
+
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            
+            </div>
+            
+        </div>
+        {% endfor %}
+    </body>
+    {% endblock %}
