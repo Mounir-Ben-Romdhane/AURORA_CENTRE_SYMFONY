@@ -52,6 +52,7 @@ class RegisterController extends AbstractController
             $password_hashed = $this->passwordEncoder->encodePassword($user,$user->getPassword());
             $user->setPassword($password_hashed);
             $user->setRoles(['ROLE_USER']);
+            $user->setImage("images.png");
             $user = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
 

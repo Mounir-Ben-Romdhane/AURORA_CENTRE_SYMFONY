@@ -16,6 +16,7 @@
 
   <link href="{{asset('/assets/img/favicon.png')}}" rel="icon">
   <link href="{{asset('/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -238,7 +239,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
 
-            <img src="{{asset('/assets/img/profilImg1.jpg')}}" alt="Profile" class="rounded-circle">
+            <img src="{{asset('/uploads/users/'~ app.user.image )}}" alt="Profile" class="rounded-circle">
 
 
 
@@ -312,6 +313,29 @@
             </li>
           </ul>
       </li>
+
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#components-nav1" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Gestion evenements</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+        <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{{ path('app_evenementAffichage') }}">
+                <i class="bi bi-circle"></i><span>List evenement</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('app_addevenement') }}">
+                <i class="bi bi-circle"></i><span>Add evenement</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('app_participationnAffichage') }}">
+                <i class="bi bi-circle"></i><span>list participants</span>
+              </a>
+            </li>
+          </ul>
+      </li>
       
       
        <li class="nav-item">
@@ -372,6 +396,7 @@
 <body>
 
   <main id="main" class="main">
+  <div align="center">
     {% if app.user and app.user.isVerified == false %}
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" 
@@ -406,6 +431,7 @@
                     {{ message }}
                 </div>
             {% endfor %}
+        </div>
   </main>
 </body>
 {% endblock %}

@@ -84,65 +84,31 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{path('ajouter_reclamation')}}">Reclamation</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                       <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="reclamationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reclamation</a>
-  <div class="dropdown-menu bg-black" aria-labelledby="reclamationDropdown">
-    <a class="dropdown-item bg-black" href="{{ path('ajouter_reclamation') }}">envoyer une reclamation</a>
-    <a class="dropdown-item bg bg-black" href="{{path('affiche_reclamation_byemail')}}">Consulter mes reclamations</a>
-  </div>
-</li>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                            {% if app.user %}
-                                <li class="nav-item dropdown pe-3" >
 
-                                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                                    <span class="d-none d-md-block dropdown-toggle ps-2" style="color:#ffc800;">{{ app.user.username }}</span>
-                                </a><!-- End Profile Iamge Icon -->
-
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                                    <li class="dropdown-header">
-                                    <h6 >{{ app.user.useridentifier }}</h6>
-                                    </li>
-                                    <li>
-                                    <hr class="dropdown-divider">
-                                    </li>
-
-                                    <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                        <i class="bi bi-person"></i>
-                                        <span>My Profile</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <hr class="dropdown-divider">
-                                    </li>
-
-                                    <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                        <i class="bi bi-gear"></i>
-                                        <span>Account Settings</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                    <hr class="dropdown-divider">
-                                    </li>
-
-                                    <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
-                                        <i class="bi bi-box-arrow-right"></i>
-                                        <span>Sign Out</span>
-                                    </a>
-                                    </li>
-
-                                </ul><!-- End Profile Dropdown Items -->
+                                <li class="dropdown"><a href="#" style="color:#ffc800;"><span>{{ app.user.username }}</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_profilClient') }}">
+                                                <i class="bi bi-person"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li style="color:#ffc800;">
+                                            <hr class="dropdown-divider">
+                                        </li>   
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>Sign Out</span>
+                                            </a>
+                                        </li>
+                                    </ul><!-- End Profile Dropdown Items -->
                                 </li><!-- End Profile Nav -->
                             {% else %}
                             
@@ -163,7 +129,7 @@
         <!-- Masthead-->
         <header class="masthead" >
         <div align="center">
-        {% if app.user and app.user.isVerified == true  %}
+        {% if app.user and app.user.isVerified == true  and app.user.etat == true %}
             
                             <div class="alert alert-success alert-dismissible w-50" role="alert">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" 

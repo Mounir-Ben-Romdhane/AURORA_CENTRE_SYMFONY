@@ -1,0 +1,277 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Edit Client!{% endblock %}
+
+
+
+{% block body %}
+<body >
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <div class="pt-1 pb-1">
+                    <h4 class="card-title text-center pb-1 fs-2" style="color:#ffc800;"><i>AURORA<i></h4>
+                  </div>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                <li class="dropdown"><a href="#" style="color:#ffc800;"><span>{{ app.user.username }}</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_profilClient') }}">
+                                                <i class="bi bi-person"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li style="color:#ffc800;">
+                                            <hr class="dropdown-divider">
+                                        </li>   
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>Sign Out</span>
+                                            </a>
+                                        </li>
+                                    </ul><!-- End Profile Dropdown Items -->
+                                </li><!-- End Profile Nav -->
+
+        </nav>
+
+
+        
+        <!-- Masthead-->
+         <header class="masthead">
+                <main id="main" class="main">
+                
+
+    <div class="pagetitle">
+      <h1 style="color:#ffc800;">Profile</h1>
+    </div><!-- End Page Title -->
+    <div align="center">
+    {% for message in app.flashes('Success') %}
+                            <div class="alert alert-success w-50">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+            {% for message in app.flashes('Warning') %}
+                <div class="alert alert-warning w-50">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('Danger') %}
+                <div class="alert alert-danger w-50">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+            <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-8 d-flex flex-column align-items-center justify-content-center">
+            <div class="containerr">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <h2 style="color:black;">{{ app.user.email }}</h2>
+                    <h3 style="color:black;">Client</h3>
+                    <div class="social-links mt-2">
+                        <a href="#" class="twitter"><i class="bi bi-twitter" style="color:black;"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook" style="color:black;"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram" style="color:black;"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin" style="color:black;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-xl-8">
+            
+            <div class="containerr">
+                <div class="card-body pt-3">
+                <!-- Bordered Tabs -->
+                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                    <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" style="color:#ffc800;">À propos</button>
+                    </li>
+
+                    <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" style="color:#ffc800;">Editer le profil</button>
+                    </li>
+
+                    <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" style="color:#ffc800;">Changer le mot de passe</button>
+                    </li>
+
+                </ul>
+                <div class="tab-content pt-2">
+
+                    <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                        <h5 class="card-title" style="color:black;">About</h5>
+                        <p class="small fst-italic"style="color:black;">Client AURORA.</p>
+
+                        <h5 class="card-title" style="color:black;">Détails du profil</h5>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label " style="color:black;">Nom et prénom</div>
+                            <div class="col-lg-9 col-md-8" style="color:black;">{{ app.user.username }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label" style="color:black;">Role</div>
+                            <div class="col-lg-9 col-md-8" style="color:black;">Simple Client</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label" style="color:black;">Adresse</div>
+                            <div class="col-lg-9 col-md-8" style="color:black;">{{ app.user.fullAddress }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label" style="color:black;">Téléphone</div>
+                            <div class="col-lg-9 col-md-8" style="color:black;">(+216) {{ app.user.numTel }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label" style="color:black;">E-mail</div>
+                            <div class="col-lg-9 col-md-8" style="color:black;">{{ app.user.email }}</div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                    <!-- Profile Edit Form -->
+                    {{ form_start(modifForm) }}
+                        <div class="row mb-3">
+                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Profile Image</label>
+                        <div class="col-md-8 col-lg-9">
+                            <img src="assets/img/profile-img.jpg" alt="Profile">
+                            <div class="pt-2">
+                            <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Name complète</label>
+                        <div class="col-md-8 col-lg-9">
+                            {{ form_widget(modifForm.username,{'attr':{'class':'form-control'}})}}
+                        </div>
+                        {{ form_errors(modifForm.username,{'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Address" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Address</label>
+                        <div class="col-md-8 col-lg-9">
+                            {{ form_widget(modifForm.fullAddress,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                            {{ form_errors(modifForm.fullAddress,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Address" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Numéro téléphone</label>
+                        <div class="col-md-8 col-lg-9">
+                            {{ form_widget(modifForm.numTel,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                            {{ form_errors(modifForm.numTel,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Twitter Profile</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
+                        </div>
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Facebook Profile</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
+                        </div>
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Instagram Profile</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
+                        </div>
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label"style="color:black;">Linkedin Profile</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                        </div>
+                        </br>
+                        </br>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning" style="color:white;">Sauvegarder les modifications</button>
+                        </div>
+                        </div>
+                    {{ form_end(modifForm) }}
+                    <!-- End Profile Edit Form -->
+
+                    </div>
+
+                    <div class="tab-pane fade pt-3" id="profile-change-password">
+                    <!-- Change Password Form -->
+
+                    {{ form_start(passForm) }}
+                        <div class="row mb-3">
+                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Entrer votre Mot de passe</label>
+                            <div class="col-md-8 col-lg-9">
+                                {{ form_widget(passForm.password.first,{'attr':{'class':'form-control'}}) }}
+                                <div class="invalid-feedback">S'il vous plait entrez une mot de passe valide!</div>
+                            </div>
+                            {{ form_errors(passForm.password,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+                        <br>
+
+                        <div class="row mb-3">
+                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label" style="color:black;">Confirmation votre mot de passe</label>
+                            <div class="col-md-8 col-lg-9">
+                                {{ form_widget(passForm.password.second,{'attr':{'class':'form-control'}}) }} 
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning" style="color:white;">Change Password</button>
+                        </div>
+                    {{ form_end(passForm) }}
+
+                    </div>
+
+                </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </section> 
+</main>
+
+        
+        
+        </header>
+        
+    
+       
+        
+    </body>  
+{% endblock %}
