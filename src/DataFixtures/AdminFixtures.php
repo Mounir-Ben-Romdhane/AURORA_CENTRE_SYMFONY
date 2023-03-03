@@ -28,7 +28,9 @@ class AdminFixtures extends Fixture
         $user->setIsVerified(true);
         $password_hashed = $this->passwordEncoder->encodePassword($user,"admin");
         $user->setUsername("Admin");
+        $user->setEtat(true);
         $user->setRoles(['ROLE_ADMIN']);
+        $user->setImage("images.png");
         $user->setEmail("admin@gmail.com");
         $user->setNumTel("9883838");
         $user->setFullAddress("Tunisie , 4115 , Djerba");
