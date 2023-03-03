@@ -26,6 +26,7 @@ class UserFixture extends Fixture
         $user->setResetToken($token);
         $password_hashed = $this->passwordEncoder->encodePassword($user,"mounir");
         $user->setUsername("Mounir2000");
+        $user->setIsVerified(true);
         $user->setRoles(['ROLE_USER']);
         $user->setEmail("mounirbenben9@gmail.com");
         $user->setNumTel("9883838");

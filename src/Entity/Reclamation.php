@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as assert;
 
 
@@ -14,22 +15,27 @@ use Symfony\Component\Validator\Constraints as assert;
 class Reclamation
 {
     #[ORM\Id]
+    #[Groups("reclamation:read")]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"type should not be blank")]
+    #[Groups("reclamation:read")]
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"message should not be blank")]
+    #[Groups("reclamation:read")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("reclamation:read")]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("reclamation:read")]
     private ?\DateTimeInterface $date_reclamation = null;
 
     #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reponse::class,cascade:["remove"])]
