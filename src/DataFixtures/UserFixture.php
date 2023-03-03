@@ -26,6 +26,8 @@ class UserFixture extends Fixture
         $token = $this->tokenGenerator->generateToken();
         $user->setResetToken($token);
         $password_hashed = $this->passwordEncoder->encodePassword($user,"mounir");
+        $user->setUsername("Mounir2000");
+        $user->setIsVerified(true);
         $user->setUsername("Mounir".$i);
         $user->setRoles(['ROLE_USER']);
         $user->setEtat(true);
