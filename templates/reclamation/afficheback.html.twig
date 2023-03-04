@@ -103,6 +103,7 @@ $(document).ready(function(){
       <th scope="col">Id</th>
         <th scope="col">Type</th>
         <th scope="col">Nom Client</th>
+        <th scope="col">Email</th>
         <th scope="col">description</th>
         <th scope="col">status</th>
         <th scope="col">date reclamation</th>
@@ -114,6 +115,7 @@ $(document).ready(function(){
                   <td scope="row">{{reclamation.id}}</td>
                   <td scope="row">{{reclamation.type}}</td>
                   <td>{{reclamation.nom}}</td>
+                  <td>{{reclamation.emailreclamation}}</td>
                   <td>{{reclamation.description}}</td>
                   <td>{{reclamation.status}}</td>
                   <td>{{reclamation.datereclamation.format('Y-m-d H:i:s')}}</td>

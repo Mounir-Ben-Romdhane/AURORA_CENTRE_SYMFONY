@@ -36,6 +36,13 @@
                             {{ form_errors(form.nom,{'attr':{'class':'text-danger'}}) }}
                             <br>
                             <div class="col-12">
+                            <label for="yourEmail" class="form-label">Email</label>
+                            {{ form_widget(form.emailreclamation,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.emailreclamation,{'attr':{'class':'text-danger'}}) }}
+                            
+                            <br>
+                            <div class="col-12">
                             <label for="yourEmail" class="form-label">Description</label>
                             {{ form_widget(form.description,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
                             </div>

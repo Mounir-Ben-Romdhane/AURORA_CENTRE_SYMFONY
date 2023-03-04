@@ -61,8 +61,6 @@ class ReponseController extends AbstractController
         $currentDateTime = new \DateTime();
         $currentDateTime->format('Y-m-d H:i:s'); 
         $reponse->setReclamation($recalamation);
-        $status=$form->get('status')->getData();
-        $reponse->setStatus($status);
         $reponse->setDateReponse($currentDateTime);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){

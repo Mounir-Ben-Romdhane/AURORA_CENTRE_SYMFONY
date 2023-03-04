@@ -34,6 +34,9 @@ class ReclamationType extends AbstractType
                 'empty_data' => '',
                 
             ])
+            ->add('emailreclamation',TypeTextType::class,[
+                'empty_data'=>'',
+            ])
             ->add('description',TextareaType::class,[
                 'empty_data' => '',
                

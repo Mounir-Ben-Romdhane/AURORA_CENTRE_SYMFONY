@@ -31,7 +31,7 @@ class ReclamationRepository extends ServiceEntityRepository
         }
     }
     public function getclaimbyemail($email){
-        return $this->findBy(['email'=>$email]);
+        return $this->findBy(['email_connecte'=>$email]);
 
     }
 
