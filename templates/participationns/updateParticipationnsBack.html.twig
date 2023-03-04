@@ -1,0 +1,100 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Update participation !{% endblock %}
+{% block body %}
+<body>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+<div class= "container">
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Modifier une Participationn :</a>
+</nav>
+<div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+
+<tr>
+<td>{{form_label(form.descriptionPn,'Commentaire')}}</td>
+<td><div class="form-control">{{form_widget(form.descriptionPn)}}</div></td>
+<td>{{form_errors(form.descriptionPn)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.usernameev,'Nom')}}</td>
+<td><div class="form-control">{{form_widget(form.usernameev)}}</div></td>
+<td>{{form_errors(form.usernameev)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.emailev,'Email')}}</td>
+<td><div class="form-control">{{form_widget(form.emailev)}}</div></td>
+<td>{{form_errors(form.emailev)}}</td>
+
+</tr>
+
+<tr>
+<td>{{form_label(form.numtelev,'Téléphone')}}</td>
+<td><div class="form-control">{{form_widget(form.numtelev)}}</div></td>
+<td>{{form_errors(form.numtelev)}}</td>
+
+</tr>
+
+
+</table>
+
+<div align=RIGHT>{{form_widget(form.save)}}</div>
+{{form_end(form)}}
+
+</div>
+
+          </div>
+          </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+  </main><!-- End #main -->
+
+  
+</body>
+{% endblock %}
+
+
+
+
+
+

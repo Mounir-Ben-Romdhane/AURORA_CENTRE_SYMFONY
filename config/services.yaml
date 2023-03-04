@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.jwtsecret: '%env(JWT_SECRET)%'
+    user_directory: '%kernel.project_dir%/public/uploads/users'
 
 services:
     # default configuration for services in *this* file

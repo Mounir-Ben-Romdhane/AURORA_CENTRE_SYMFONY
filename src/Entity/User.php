@@ -77,6 +77,12 @@ class User implements UserInterface
     ])]
     private ?string $fullAddress = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $etat = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -196,6 +202,30 @@ class User implements UserInterface
     public function setFullAddress(string $fullAddress): self
     {
         $this->fullAddress = $fullAddress;
+
+        return $this;
+    }
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

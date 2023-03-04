@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reponse;
 use App\Entity\User;
 use App\Form\EditProfilType;
 use App\Form\UserType;
@@ -16,10 +17,14 @@ use App\Form\ResetPasswordFormType;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class UserController extends AbstractController
 {
@@ -104,6 +109,7 @@ class UserController extends AbstractController
         $user->setPassword($password_hashed);
         $user->setRoles(['ROLE_USER']);
         $user = $form->getData();
+        $user->setImage("images.png");
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
@@ -147,6 +153,7 @@ class UserController extends AbstractController
     ]);
     }
 
+
     #[Route('/showClient/{id}', name: 'app_show_client')]
     public function showClients($id)
     {
@@ -154,6 +161,36 @@ class UserController extends AbstractController
         return $this->render('showClient.html.twig', [
             'client' => $client
         ]);
+    }
+
+    #[Route('/bloqueClient/{id}', name: 'app_block_client')]
+    public function bloqueClients($id)
+    {
+        $client = $this->userRepository->find($id);
+        $client->setEtat(false);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($client);
+        $entityManager->flush();
+        $this->addFlash(
+            'Success',
+            ''.$client->getUserName().' blocked successfully!'
+        );
+        return $this->redirectToRoute('app_list_clients');
+    }
+
+    #[Route('/debloqueClient/{id}', name: 'app_deblock_client')]
+    public function debloqueClients($id)
+    {
+        $client = $this->userRepository->find($id);
+        $client->setEtat(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($client);
+        $entityManager->flush();
+        $this->addFlash(
+            'Success',
+            ''.$client->getUserName().' deblocked successfully!'
+        );
+        return $this->redirectToRoute('app_list_clients');
     }
 
 
@@ -311,5 +348,262 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
+
+
+
+
+    //MOBILE
+    #[Route('/addClientjson', name: 'app_add_client_json')]
+    public function addClientJSON(Request $request)
+    {
+        $user = new User();
+
+        $userName = $request->query->get("userName");
+        $email = $request->query->get("email");
+        $numTel = $request->query->get("numTel");
+        //$password = $request->query->get("password");
+        $address = $request->query->get("address");
+
+        $password_hashed = $this->passwordEncoder->encodePassword($user,$request->query->get("password"));
+        $user->setPassword($password_hashed);
+
+        $user->setUsername($userName);
+        $user->setEmail($email);
+        $user->setNumTel($numTel);
+        $user->setIsVerified(true);
+        $user->setImage("images.png");
+        $user->setRoles(['ROLE_USER']);
+        //$user->setPassword($password);
+        $user->setFullAddress($address);
+
+
+       
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+
+    }
+
+    #[Route('/deleteClientjson', name: 'app_delete_client_json')]
+    public function deleteClientJSON(Request $request)
+    {
+        $id = $request->get("id");
+       
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->userRepository->find($id);
+        if($user!=null){
+            $entityManager->remove($user);
+            $entityManager->flush();
+    
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize("Utilisateur a ete supprimée avec success.");
+            return new JsonResponse($formatted);
+        }
+
+        return new JsonResponse("id utilisateur invalid!");
+        
+
+    }
+
+
+    #[Route('/modifieUserJson', name: 'app_modifier_client_json')]
+    public function modifieUserJSON(Request $request)
+    {
+        $id = $request->get("id");
+       
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->userRepository->find($id);
+        if($user!=null){
+
+            $userName = $request->query->get("userName");
+            $email = $request->query->get("email");
+            $numTel = $request->query->get("numTel");
+            //$password = $request->query->get("password");
+            $address = $request->query->get("address");
+    
+            //$password_hashed = $this->passwordEncoder->encodePassword($user,$user->getPassword());
+            $user->setPassword($user->getPassword());
+            $user->setUsername($userName);
+            $user->setEmail($email);
+            $user->setNumTel($numTel);
+            $user->setImage("images.png");
+            //$user->setPassword($password);
+            $user->setRoles(['ROLE_USER']);
+            $user->setIsVerified(true);
+            $user->setFullAddress($address);
+            $entityManager->persist($user);
+            $entityManager->flush();
+    
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize("Utilisateur a ete modifie avec success.");
+            return new JsonResponse($formatted);
+        }
+
+        return new JsonResponse("id utilisateur invalid!");
+
+    }
+
+    #[Route('/modifieAdminJson', name: 'app_modifier_admin_json')]
+    public function modifieAdminJSON(Request $request)
+    {
+        $id = $request->get("id");
+       
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->userRepository->find($id);
+        if($user!=null){
+
+            $userName = $request->query->get("userName");
+            $email = $request->query->get("email");
+            $numTel = $request->query->get("numTel");
+            //$password = $request->query->get("password");
+            $address = $request->query->get("address");
+    
+            //$password_hashed = $this->passwordEncoder->encodePassword($user,$user->getPassword());
+            $user->setPassword($user->getPassword());
+            $user->setUsername($userName);
+            $user->setEmail($email);
+            $user->setImage("images.png");
+            $user->setNumTel($numTel);
+            //$user->setPassword($password);
+            $user->setRoles(['ROLE_ADMIN']);
+            $user->setIsVerified(true);
+            $user->setFullAddress($address);
+            $entityManager->persist($user);
+            $entityManager->flush();
+    
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize("Utilisateur a ete modifie avec success.");
+            return new JsonResponse($formatted);
+        }
+
+        return new JsonResponse("id utilisateur invalid!");
+
+    }
+
+    #[Route('/displayUserJson', name: 'app_display_client_json')]
+    public function displayUserJSON(Request $request)
+    {
+        $user = $this->userRepository->findAll();
+        
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+
+    }
+
+
+    #[Route('/userJson/signUp', name: 'app_signup_client_json')]
+    public function SignUpUserJSON(Request $request)
+    {
+        $user = new User();
+
+        $userName = $request->query->get("userName");
+        $email = $request->query->get("email");
+        $numTel = $request->query->get("numTel");
+        //$password = $request->query->get("password");
+        $address = $request->query->get("address");
+        $password_hashed = $this->passwordEncoder->encodePassword($user,$request->query->get("password"));
+        
+
+        //Controlle de saissir email
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+            return new Response("Email invalid!");
+        }
+        $user->setPassword($password_hashed);
+        $user->setUsername($userName);
+        $user->setEmail($email);
+        $user->setNumTel($numTel);
+        $user->setRoles(['ROLE_USER']);
+        $user->setImage("images.png");
+        $user->setIsVerified(true);
+        //$user->setPassword($password);
+        $user->setFullAddress($address);
+
+        try{
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return new JsonResponse("Account is created!",200);//Repense OK
+        }catch(Exception $ex){
+            return new Response("execption".$ex->getMessage());
+        } 
+
+    }
+
+    #[Route('/userJson/signIn', name: 'app_signin_client_json')]
+    public function SignInUserJSON(Request $request)
+    {
+        
+        $email = $request->query->get("email");
+        $password = $request->query->get("password");
+        
+        $user = $this->userRepository->findOneByEmail($email);
+
+        if($user){
+            //verif password
+            if(password_verify($password,$user->getPassword())){
+                $serializer = new Serializer([new ObjectNormalizer()]);
+                $formatted = $serializer->normalize($user);
+                return new JsonResponse($formatted);
+            }
+            else{
+                return new JsonResponse("Password not found!");
+            }
+        }
+        else{
+            return new JsonResponse("User not found!");
+        }
+    }
+
+    #[Route('/userJson/editProfil', name: 'app_modifier_profil_json')]
+    public function modifieProfilJSON(Request $request)
+    {
+        $id = $request->get("id");
+       
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->userRepository->find($id);
+        if($user!=null){
+
+            $userName = $request->query->get("userName");
+            $email = $request->query->get("email");
+            $numTel = $request->query->get("numTel");
+            //$password = $request->query->get("password");
+            $address = $request->query->get("address");
+    
+            $password_hashed = $this->passwordEncoder->encodePassword($user,$request->query->get("password"));
+            $user->setPassword($password_hashed);
+            $user->setUsername($userName);
+            $user->setEmail($email);
+            $user->setNumTel($numTel);
+            $user->setImage("images.png");
+            //$user->setPassword($password);
+            $user->setRoles(['ROLE_USER']);
+            $user->setIsVerified(true);
+            $user->setFullAddress($address);
+
+            try{
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+    
+                return new JsonResponse("Profil edited successfully!",200);//Repense OK
+            }catch(Exception $ex){
+                return new Response("execption".$ex->getMessage());
+            } 
+        }
+
+        return new JsonResponse("id utilisateur invalid!");
+
+    }
+        
+
 }
+    
+
+
 
