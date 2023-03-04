@@ -1,3 +1,5 @@
 framework:
     mailer:
-        dsn: '%env(MAILER_DSN)%'
+        dsn: 'smtp://smtp.gmail.com?port=587&encryption=tls&auth_mode=login&username=recycle.tunisia&password=ztntffukvpwraygm'
+        envelope:
+            sender: 'recycle.tunisia@gmail.com'

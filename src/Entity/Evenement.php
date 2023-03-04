@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 //use App\Entity\Participationns;
 
@@ -18,6 +20,7 @@ class Evenement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("evenement:read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -29,13 +32,16 @@ class Evenement
         maxMessage:"doit etre inferieur a 20",
         
     )]
+    #[Groups("evenement:read")]
     private ?string $titreev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[assert\NotBlank(message:"le champ est obligatoire, veuillez saisir!")]
+    #[Groups("evenement:read")]
     private ?string $descriptionev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("evenement:read")]
     private ?string $imageev = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -43,14 +49,19 @@ class Evenement
         min: 'now',
        
     )]
+    #[Groups("evenement:read")]
     private ?\DateTimeInterface $dateev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[assert\NotBlank(message:"le champ est obligatoire, veuillez entrer votre choix!")]
+    #[Groups("evenement:read")]
     private ?string $typeev = null;
 
     #[ORM\OneToMany(mappedBy: 'Evenement', targetEntity: Participationns::class)]
     private Collection $participationns;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $Color = null;
 
     public function __construct()
     {
@@ -152,6 +163,18 @@ class Evenement
                 $participationn->setEvenement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->Color;
+    }
+
+    public function setColor(?string $Color): self
+    {
+        $this->Color = $Color;
 
         return $this;
     }

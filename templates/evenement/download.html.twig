@@ -1,0 +1,38 @@
+{% extends "evenement/base-pdf.html.twig" %}
+
+
+
+ {% block body %}
+ <title>{% block title %}Liste des évènements{% endblock %}</title>
+ <p>Liste des évènements</p>
+ <table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">TITRE</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">IMAGE</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">TYPE</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                 {% for i in tableauEvenement %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.titreev}}</td>
+                        <td>{{i.descriptionev}}</td>
+                        <td>
+                        <img src="{{asset('uploads/evenement/'~ i.imageev)}}" alt="photo de profil"></td>
+                        <td>{{i.dateev.format('Y-m-d-H:i')}}</td>
+                        <td>{{i.typeev}}</td>
+                    </tr>   
+                    {% endfor %}
+      </tbody>        
+</table>
+ 
+ {% endblock %}
+

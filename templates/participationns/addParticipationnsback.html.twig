@@ -381,14 +381,23 @@
 
 
 
-
+<div class= "container">
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Modifier une Participationn :</a>
+</nav>
+<div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
 
 
 
 {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table class="table table-striped">
+           {#{{form(studentSearch)}}#}
 
-<div align=center>
-<table>
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+
 <tr>
 <td> {{form_label(form.descriptionPn,'Commentaire')}}</td>
 <td><div class="form-control">{{form_widget(form.descriptionPn)}}</div></td>

@@ -88,9 +88,7 @@
 
 
     <body>
-
-
-    </br>
+ 
       <div class= "container">
        
             <div class="card">
@@ -110,75 +108,7 @@
         </div>
     {% endfor %}
 {% endfor %}
-                 <tbody>
-
-
-<div class="text-center">
-                    <h2 class="section-heading text-uppercase">Evènements</h2>
-                    <h3 class="section-subheading text-muted">Profitez chers utilisateurs.</h3>
-                </div>
-
-
-
-                
-
-
-
-             {% for i in tableauEvenement %}
-
-                <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container">
-                
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class=""></i>
-              
-                            <div class="zoom-in-out-box"><img src="{{asset('uploads/evenement/'~ i.imageev)}}" alt="photo"></div>
-                        </span>
-                    </div>
-
-                    <div class="col-md-8">
-                        
-                        <strong><h1 class="my-3" >{{i.titreev}}</h1></strong>
-                        
-                        <p class="btn  w-50" align=RIGHT>{{i.descriptionev}}</p> <br>
-                        
-                        <strong> Type :<p class="text-muted"> {{i.typeev}}</p></strong>
-                        <p class="text-muted"> {{i.dateev.format('Y-m-d-H:i')}}</p>
-                        <strong><p class="nav-item"><a class="nav-link" href="{{path('app_addParticipationns',{'id':i.id})}}">PARTICIPER</a></p></div></strong>  
-                        
-                        <div class="col-lg-20 text-lg-end">
-                      {#<button class="btn btn-warning w-30" type="submit" style="color:white;"><b>PARTICIPER</b></button>#}
-                      
-                    </div>
-                    
-                 
-
-
-                        <strong><p Align=RIGHT class="nav-item"><a class="nav-link" href="{{path('app_updateParticipationns',{'id':i.id})}}">MODIFIER PARTICIPATION</a></p></div></strong>                       
-                        <strong><p Align=RIGHT class="nav-item"><a class="nav-link" href="{{path('app_deleteParticipationns',{'id':i.id})}}">SUPPRIMER PARTICIPATION</a></p></div></strong>                       
-
-
-                    </div>
-
-                    
-                    
-                </div>
-            </div>
              
-        </section>
-
-
-
-
-
-                    
-                    {% endfor %}
-                    
-
-      </tbody>
 
 </div>
             </div>
@@ -202,6 +132,35 @@
 
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
+        
+
+
+
+<div align=RIGHT>
+        <form action="">
+  <label for="Reclamation">Trier par:</label>
+ <select id="orderBy" name="Reclamation" onchange="location = this.value;">
+ <option value=""></option>
+  <option value="{{ path('app_triertitreev_evenement') }}">Titre</option>
+  <option value="{{ path('app_triertypeev_evenement') }}">Type</option>
+  <option value="{{ path('app_trierdateev_evenement') }}">Date</option>
+</select>
+</a>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    </br>
+    
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Evènements</h2>
@@ -224,95 +183,22 @@
                                 <div class="portfolio-caption-heading">{{i.titreev}}</div>
                                 <div class="portfolio-caption-subheading text-muted">{{i.typeev}}</div>
                                 <div class="portfolio-caption-subheading text-muted">{{i.descriptionev}}</div>
+                                <p class="item-intro text-muted">{{i.dateev | date('d-m-Y')}}</p>
+
 
                                 <strong><div class="nav-item"><a class="nav-link" href="{{path('app_addParticipationns',{'id':i.id})}}">Participer</a></div></strong>
 
 
 
+                   
                             </div>
                         </div>
                     </div>
                     {% endfor %}
 
 
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Explore</div>
-                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Finish</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Lines</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Southwest</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Window</div>
-                                <div class="portfolio-caption-subheading text-muted">Photography</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+                    
+                  
 
                 </div>
             </div>
@@ -423,21 +309,24 @@
                                     
                                     <h2 class="text-uppercase">{{ii.titreev}}</h2>
                                     <p class="item-intro text-muted">{{ii.typeev}}</p>
+                                     <p class="item-intro text-muted">{{ii.dateev | date('d-m-Y')}}</p>
+                                     
+
                                     <img class="img-fluid d-block mx-auto" src="{{asset('uploads/evenement/'~ ii.imageev)}}" alt="..." />
                                     <p>{{ii.descriptionev}}</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Threads
+                                            <strong></strong>
+                                            
                                         </li>
                                         <li>
-                                            <strong>Category:</strong>
-                                            Illustration
+                                            <strong></strong>
+                                            
                                         </li>
                                     </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button" href="{{path('app_addParticipationns',{'id':ii.id})}}">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Participer
                                     </button>
                                     
                                 </div>

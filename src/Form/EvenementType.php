@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Validator\Constraints\File;
 
 class EvenementType extends AbstractType
@@ -91,6 +92,8 @@ class EvenementType extends AbstractType
                 ]
             ])
     
+
+            ->add('color', ColorType::class)
             
     
             ->add('save', SubmitType::class); 

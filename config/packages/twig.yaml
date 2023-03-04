@@ -4,3 +4,5 @@ twig:
 when@test:
     twig:
         strict_variables: true
+    paths:
+        '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates': KnpPaginator

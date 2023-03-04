@@ -12,6 +12,16 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Form\ParticipationnsType;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Swift_Message;
+use Swift_Mailer;
+use Swift_SmtpTransport;
+
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+
 
 
 class ParticipationnsController extends AbstractController
@@ -187,6 +197,76 @@ class ParticipationnsController extends AbstractController
         "form" => $form->createView()
        ]
     );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #[Route('/participationnsdownload', name: 'app_participationns_download')]
+    public function indexdownload(ParticipationnsRepository $participationnsRepository)
+    {
+        
+        $participationns= $participationnsRepository->findAll();
+        return $this->render('participationns/data.html.twig',array ('tableauParticipationns'=> $participationns));
+    }
+
+
+    #[Route('/participationns/data/download', name: 'app_participationns_data_download')]
+    public function indexdownloaddata(ParticipationnsRepository $participationnsRepository)
+    {
+        $pdfOptions =new Options();
+        //police
+        $pdfOptions->set('defaultFont','Arial');
+
+        $pdfOptions->setIsRemoteEnabled(true);
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $tableauParticipationns= $participationnsRepository->findAll();
+
+        $context = stream_context_create([
+            'ssl' =>[
+                'verify_peer' =>FALSE,
+                'verify_peer_name'=> False,
+                'allow_self_signed' =>TRUE
+            ]
+            ]);
+            $dompdf ->setHttpContext($context);
+
+            $html = $this->renderView('participationns/download.html.twig', 
+            ['tableauParticipationns'=> $tableauParticipationns]);
+
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4','portrait');
+            $dompdf->render();
+
+            $fichier= 'participation-data-.pdf';
+
+            $dompdf->stream($fichier,[
+                'Attachement' => TRUE
+            ]);
+
+            return new Response();
+           //return  $this->render('evenement/download.html.twig',['evenement'=> $evenement], new Response());
+        
+       
     }
 
 

@@ -11799,3 +11799,18 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
+
+
+
+#my-pie-chart {
+  height: 100px;
+  width: 100px;
+}
+
+#my-pie-chart {
+  border-radius: 50%;
+}
+
+#my-pie-chart {
+  background: conic-gradient(brown 0.00%, black 0.00% 0.55%, blue 0.55% 6.08%, green 6.08% 13.68%, yellow 13.68% 23.27%, orange 23.27% 40.47%, red 40.47%);
+}

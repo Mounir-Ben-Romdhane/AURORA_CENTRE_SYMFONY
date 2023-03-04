@@ -39,6 +39,14 @@ class EvenementRepository extends ServiceEntityRepository
         }
     }
 
+
+
+
+
+
+
+
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */
@@ -63,4 +71,40 @@ class EvenementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function triertitreev(){
+    $queryBuilder = $this->createQueryBuilder('i')
+        ->orderBy('i.titreev', 'ASC')
+        ->getQuery()
+        ->getResult();
+    return $queryBuilder;}
+
+
+    public function triertypeev(){
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->orderBy('i.typeev', 'ASC')
+            ->getQuery()
+            ->getResult();
+        return $queryBuilder;}
+
+
+        public function trierdateev(){
+            $queryBuilder = $this->createQueryBuilder('i')
+                ->orderBy('i.dateev', 'ASC')
+                ->getQuery()
+                ->getResult();
+            return $queryBuilder;}
+
+
+
+
+
+
+
+
+
+
+
+
 }
