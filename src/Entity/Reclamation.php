@@ -50,7 +50,6 @@ class Reclamation
 
     #[ORM\Column(length: 255)]
     private ?string $email_reclamation = null;
-
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
@@ -150,7 +149,6 @@ class Reclamation
 
         return $this;
     }
-
     public function getEmailConnecte(): ?string
     {
         return $this->email_connecte;
