@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Reponse;
+use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Reponse>
+ * @extends ServiceEntityRepository<Reservation>
  *
- * @method Reponse|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reponse|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reponse[]    findAll()
- * @method Reponse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reservation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reservation[]    findAll()
+ * @method Reservation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ReponseRepository extends ServiceEntityRepository
+class ReservationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Reponse::class);
+        parent::__construct($registry, Reservation::class);
     }
 
-    public function save(Reponse $entity, bool $flush = false): void
+    public function save(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ReponseRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Reponse $entity, bool $flush = false): void
+    public function remove(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,18 +38,9 @@ class ReponseRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function getidreclamation($id){
-        return $this->findBy(['reclamation'=>$id]);
-
-    }
-    public function get_par_idreclamation($id){
-        return $this->findBy(['reclamation'=>$id]);
-
-    }
-   
 
 //    /**
-//     * @return Reponse[] Returns an array of Reponse objects
+//     * @return Reservation[] Returns an array of Reservation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -63,7 +54,7 @@ class ReponseRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Reponse
+//    public function findOneBySomeField($value): ?Reservation
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')

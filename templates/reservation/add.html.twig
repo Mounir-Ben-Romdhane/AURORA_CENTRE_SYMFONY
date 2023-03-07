@@ -1,0 +1,52 @@
+{% extends "baseBack.html.twig" %} 
+
+    {% block body %}
+     <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Ajouter une réservation</h5>
+           {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+                                             <div class="form-group">
+                                                {{ form_label(form.numero, 'Numéro :') }}
+                                                {{ form_widget(form.numero, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numero, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                {{ form_label(form.email, 'Email :') }}
+                                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.email, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.userName, 'userName :') }}
+                                                {{ form_widget(form.userName, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.userName, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.numeroTel, 'NuméroTel :') }}
+                                                {{ form_widget(form.numeroTel, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numeroTel, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.service, 'Service :') }}
+                                                {{ form_widget(form.service, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.service, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.dateR, 'Date :') }}
+                                                {{ form_widget(form.dateR, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.dateR, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                                        <button type="submit" class="btn btn-primary" style="border-radius: 8px; background-color: #f1c40f; color: #fff; font-size: 18px; padding: 10px 20px;">Enregistrer</button>
+    
+                                            {{ form_end(form) }}
+</div>
+            </div>
+                </div>
+          </div>
+        {% endblock %}
+    

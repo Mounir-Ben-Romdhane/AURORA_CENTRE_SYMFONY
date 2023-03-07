@@ -299,7 +299,7 @@
 
       <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Gestion Client</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-menu-button-wide"></i><span>Gestion Clients</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
@@ -309,7 +309,30 @@
             </li>
             <li>
               <a href="{{ path('app_add_client') }}">
-                <i class="bi bi-circle"></i><span>Add Client</span>
+                <i class="bi bi-circle"></i><span>Ajout Client</span>
+              </a>
+            </li>
+          </ul>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#components-nav4" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Gestion Services</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+        <ul id="components-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{{ path('app_serviceAffichage') }}">
+                <i class="bi bi-circle"></i><span>Liste Services</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('app_addservice') }}">
+                <i class="bi bi-circle"></i><span>Ajout Service</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('app_reservationAffichage') }}">
+                <i class="bi bi-circle"></i><span>Liste réservations</span>
               </a>
             </li>
           </ul>
@@ -327,7 +350,7 @@
             </li>
             <li>
               <a href="{{ path('app_addevenement') }}">
-                <i class="bi bi-circle"></i><span>Add evenement</span>
+                <i class="bi bi-circle"></i><span>Ajout evenement</span>
               </a>
             </li>
             <li>
@@ -341,17 +364,12 @@
       
        <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-nav2" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Gestion Reclamation</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-menu-button-wide"></i><span>Gestion Reclamations</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
         <ul id="components-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="{{ path('affiche_reclamation') }}">
-                <i class="bi bi-circle"></i><span>List Reclamation</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ path('app_add_client') }}">
-                <i class="bi bi-circle"></i><span>supprimer Reclamation</span>
+              <a href="{{ path('afficheback_reclamation') }}">
+                <i class="bi bi-circle"></i><span>List Reclamations</span>
               </a>
             </li>
           </ul>

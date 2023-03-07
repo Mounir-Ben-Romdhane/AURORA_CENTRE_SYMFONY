@@ -25,8 +25,6 @@
         <th scope="col">Id</th>
         <th scope="col">Reponse</th>
         <th scope="col">Status</th>
-        <th scope="col">date_reponse</th>
-        <th scope="col">status</th>
         <th scope="col">date reponse</th>
       </tr>
     </thead>
@@ -36,17 +34,13 @@
                   <td>{{response.id}}</td>
                   <td>{{response.reponse}}</td>
                   <td>{{response.status}}</td>
-                  <td>{{response.datereponse}}</td>
-                  <td>{{reclamation.status}}</td>
-                  <td>{{reclamation.datereponse.format('Y-m-d H:i:s')}}</td>
+                  <td>{{response.datereponse.format('Y-m-d H:i:s')}}</td>
                   <td>
-                      <a href="{{path('ajouterback_reponse',{'id':reclamation.id})}}" class="btn btn-sm btn-primary">
-                          <i class="bi bi-plus"></i>
-                      </a>
-                      <a href="{{path('updateback_reclamation',{'id':reclamation.id})}}" class="btn btn-sm btn-warning">
+                      
+                      <a href="{{path('updateback_reponse',{'id':response.id})}}" class="btn btn-sm btn-warning">
                           <i class="fa fa-edit"></i>
                       </a>
-                      <a href="{{path('delete_reclamation',{'id':reclamation.id})}}" class="btn btn-sm btn-danger">
+                      <a href="{{path('delete_reponse',{'id':response.id})}}" class="btn btn-sm btn-danger">
                           <i class="fa fa-trash"></i>
                       </a>
                       <td>

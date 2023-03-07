@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as assert;
 
 
@@ -14,31 +15,41 @@ use Symfony\Component\Validator\Constraints as assert;
 class Reclamation
 {
     #[ORM\Id]
+    #[Groups("reclamation:read")]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"type should not be blank")]
+    #[Groups("reclamation:read")]
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
-    #[assert\NotBlank(message:"nom client should not be blank")]
-    #[assert\Email()]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"message should not be blank")]
+    #[Groups("reclamation:read")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("reclamation:read")]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("reclamation:read")]
     private ?\DateTimeInterface $date_reclamation = null;
 
-    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reponse::class)]
+    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Reponse::class,cascade:["remove"])]
     private Collection $reponses;
+
+    #[ORM\Column(length: 255)]
+    #[assert\NotBlank(message:"name should not be blank")]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email_connecte = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email_reclamation = null;
 
     public function __construct()
     {
@@ -58,18 +69,6 @@ class Reclamation
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -136,6 +135,42 @@ class Reclamation
                 $reponse->setReclamation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getEmailConnecte(): ?string
+    {
+        return $this->email_connecte;
+    }
+
+    public function setEmailConnecte(string $email_connecte): self
+    {
+        $this->email_connecte = $email_connecte;
+
+        return $this;
+    }
+
+    public function getEmailReclamation(): ?string
+    {
+        return $this->email_reclamation;
+    }
+
+    public function setEmailReclamation(string $email_reclamation): self
+    {
+        $this->email_reclamation = $email_reclamation;
 
         return $this;
     }

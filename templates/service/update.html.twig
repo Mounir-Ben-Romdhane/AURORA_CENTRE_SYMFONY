@@ -1,0 +1,57 @@
+{% extends "baseBack.html.twig" %} 
+
+{% block title %}Modifier service !{% endblock %}
+
+    {% block body %}
+    <body>
+     <main id="main" class="main">
+  <div>
+     <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Editer un service</h5>
+           {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+                                             <div class="form-group">
+                                                {{ form_label(form.titreS, 'TITRE :') }}
+                                                {{ form_widget(form.titreS, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.titreS, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                {{ form_label(form.descriptionS, 'DESCRIPTION :') }}
+                                                {{ form_widget(form.descriptionS, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.descriptionS, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.typeS, 'TYPE :') }}
+                                                {{ form_widget(form.typeS, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.typeS, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.dateS, 'DATE :') }}
+                                                {{ form_widget(form.dateS, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.dateS, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.image, 'IMAGE :') }}
+                                                {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.image, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                           
+                                                        <button type="submit" class="btn btn-primary" style="border-radius: 8px; background-color: #f1c40f; color: #fff; font-size: 18px; padding: 10px 20px;">Enregistrer</button>
+
+                                            {{ form_end(form) }}
+</div>
+            </div>
+                </div>
+          </div>
+
+          </div>
+          </main>
+          </body>
+        {% endblock %}
+    

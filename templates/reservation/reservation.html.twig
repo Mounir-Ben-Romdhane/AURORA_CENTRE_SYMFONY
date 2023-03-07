@@ -1,5 +1,5 @@
 {% extends "baseFront.html.twig" %}
-{% block title %}Reclamation{% endblock %}
+{% block title %}Reservation{% endblock %}
     
 
     {% block body %}
@@ -13,10 +13,10 @@
         display: block;
         margin: 10px auto;
     }
-    .reclamation {
+    .reservation {
   position: relative;
-  height: 560px;
-  width: 405px;
+  height: 800px;
+  width: 420px;
   margin: 100px auto;
   padding: 60px 60px;
   background: #0000ffff  
@@ -42,6 +42,7 @@
     </style>
 <body id="page-top">
         <!-- Navigation-->
+        <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <div class="pt-1 pb-1">
@@ -50,7 +51,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_serviceShow')}}">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
@@ -100,8 +101,6 @@
                 </div>
             </div>
         </nav>
-          
-        </nav>
         <!-- Masthead-->
         <header class="masthead" style="padding-top: 70px;">
         
@@ -111,31 +110,49 @@
         
         </div>
         <div class="row">
-        <div class="reclamation">
+        <div class="reservation">
     <div class="col-md-12">
    
-        <h1> envoyer une reclamation </h1>
+        <h1> Réserver</h1><br>
 
       <div class="form-container">
-    {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-    <div class="form-field">
-        {{ form_label(form.type) }}
-        {{ form_widget(form.type) }}
-        {{ form_errors(form.type) }}
-    </div>
-    <div class="form-field">
-        {{ form_label(form.nom) }}
-        {{ form_widget(form.nom) }}
-        {{ form_errors(form.nom) }}
-    </div>
-    <div class="form-field">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-    </div>
-    
-    {{form_widget(form.save,{'attr': {'class': 'button -regular center'}})}}
-    {{ form_end(form) }}
+   {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+                                             <div class="form-group">
+                                                {{ form_label(form.numero, 'Numéro :') }}
+                                                {{ form_widget(form.numero, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numero, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                {{ form_label(form.email, 'Email :') }}
+                                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.email, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.userName, 'userName :') }}
+                                                {{ form_widget(form.userName, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.userName, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.numeroTel, 'NuméroTel :') }}
+                                                {{ form_widget(form.numeroTel, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numeroTel, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.service, 'Service :') }}
+                                                {{ form_widget(form.service, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.service, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.dateR, 'Date :') }}
+                                                {{ form_widget(form.dateR, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.dateR, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                                        <button type="submit" class="btn btn-primary" style="border-radius: 8px; background-color: #f1c40f; color: #fff; font-size: 18px; padding: 10px 20px;">Enregistrer</button>
+
+                                            {{ form_end(form) }}
 </div> 
   
           
@@ -149,4 +166,4 @@
         
      
     </body> 
-  {% endblock %}   
+  {% endblock %}

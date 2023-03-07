@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Reclamation;
-use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -11,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ReclamationType extends AbstractType
+class ReclamationbackType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -30,18 +29,25 @@ class ReclamationType extends AbstractType
             
             'empty_data' => '',
         ])
-            ->add('nom',TypeTextType::class,[
-                'empty_data' => '',
-                
-            ])
             ->add('description',TextareaType::class,[
                 'empty_data' => '',
                
             ])
+            ->add('status',ChoiceType::class,[
             
+                'choices'=>[
+                    ' '=>'',
+                    'accepter' => 'accepter',
+                    'refuser' => 'refuser',
+                ],
+                'empty_data' => '',
+            ])
+            
+            ->add('nom',TextareaType::class,[
+                'empty_data' => '',
+                
+            ])
             ->add('save',SubmitType::class)
-            
-            
         ;
     }
 
