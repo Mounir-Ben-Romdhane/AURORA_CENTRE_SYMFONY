@@ -327,7 +327,7 @@ class EvenementController extends AbstractController
     
   
 
-    #[Route('/getevenement',name:"app_api_getallevenement",methods:'GET')]
+    #[Route('/get',name:"app_api_getallevenement")]
     public function getevenement(EvenementRepository $evenementRepository)
     {
         $evenement=$evenementRepository->findAll();
@@ -335,11 +335,12 @@ class EvenementController extends AbstractController
         return $response;
     }
 
-    
 
 
 
-    #[Route('/evenementAddjson', name: 'app_addevenementjson')]
+
+
+    #[Route('/create', name: 'app_addevenementjson')]
     public function addEvenementjson(Request $request)
     {
         $evenement = new Evenement();
@@ -351,7 +352,7 @@ class EvenementController extends AbstractController
 
         $evenement->setTitreev($titreev);
         $evenement->setDescriptionev($descriptionev);
-        $evenement->setDateev($dateev);
+        $evenement->setDateev(new \DateTime($dateev));
         $evenement->settypeev($typeev);
 
         $em->persist($evenement);

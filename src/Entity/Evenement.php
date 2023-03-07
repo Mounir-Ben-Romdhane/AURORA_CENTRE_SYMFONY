@@ -37,6 +37,7 @@ class Evenement
 
     #[ORM\Column(length: 255, nullable: true)]
     #[assert\NotBlank(message:"le champ est obligatoire, veuillez saisir!")]
+    #[Groups("evenement:read")]
     private ?string $descriptionev = null;
 
     #[ORM\Column(length: 255, nullable: true)]

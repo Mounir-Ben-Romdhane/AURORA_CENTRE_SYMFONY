@@ -1,0 +1,183 @@
+{% extends "baseBack.html.twig" %} 
+
+
+{% block title %}Liste des Services !{% endblock %}
+
+
+{% block body %}
+     
+  
+   
+    <style>
+      .table tbody tr:hover{
+        background-color:#ddd;
+      }
+    search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color:#fff;
+}
+.input-search::placeholder{
+  color:rgba(255,255,255,.5);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#ffffff ;
+  background-color:transparent;
+  pointer-events: painted;  
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: #44509c;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: #646fb3;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+    </style>
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+     });
+    });
+  });
+</script>
+<main id="main" class="main">
+
+<div>
+
+{% for message in app.flashes('Success') %}
+            <div class="alert alert-success" style="text-align:center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+<div class="pagetitle">
+          <h3 style="text-align:center;color:#012970;" >Liste des Services</h3>
+        </div><!-- End Page Title -->
+     <div class= "container">
+
+
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Détails</h5>
+<div class="d-flex justify-content-center">
+       <div class="sidebar-search">
+        <div class="input-group custom-search-form">
+        <div class="search-box">
+    <button class="btn-search"><i class="fas fa-search"></i></button>
+    <input type="text" name="search" id="search" class="input-search" placeholder="Type to Search...">
+  </div>    
+</div>
+        </div>
+        </div>
+        <table class="table table-striped">
+
+
+           <table class="table table-light table_hover table_bordered"> 
+                <thead  class="thead-dark">
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">TITRE</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">TYPE</th>
+                        <th scope="col">image</th>
+                        <th scope="col">DATE</th>
+                     
+
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                 <tbody id="myTable">
+                 {% for i in tableauService %}
+                    <tr>
+                        <td >{{i.id}}</td>
+                        <td>{{i.titreS}}</td>
+                        <td>{{i.descriptionS}}</td>
+                        <td>{{i.typeS}}</td>
+                        <td>
+                        {% if i.image %}
+                          <img src="{{asset('uploads/users/'~ i.image)}}" style="width:50px" alt="photo">   
+                        {% else %}
+                          No Image available
+                        {% endif %}
+                        </td>
+                        <td>{{i.dateS.format('Y-m-d-H:i')}}</td>
+                        <td>
+                        <a href="{{ path('app_updateservice',{id:i.id}) }}"><button type="button" class="btn btn-outline-secondary btn-sm mr-2">Editer</button></a>
+                        <form method="post" action="{{ path('app_deleteservice', {'id': i.id}) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ i.id) }}">
+                          <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                        </form>
+
+                        </td>
+                    </tr>  
+                    {% endfor %}
+
+      </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <a href="{{ path('app_addservice') }}">
+    <button type="button" class="btn btn-outline-success" style="width:150px">Ajouter</button><br>
+</div><br>
+<div class="d-flex justify-content-center">
+  <a href="{{ path('app_trierservice') }}">
+    <button type="button" class="btn btn-success badge-pill" style="width:200px" background-color: red; color: white; >Trier avec le titre</button></a>
+</div><br>
+   
+<div class="d-flex justify-content-center">
+  <a href="{{ path('app_trierservice2') }}">
+    <button type="button" class="btn btn-success badge-pill" style="width:200px" background-color: red; color: white; >Trier avec la date</button></a>
+</div>
+   
+</div>
+            </div>
+                </div>
+          </div>
+  </div>
+         </main>
+
+
+        {% endblock %}
+    

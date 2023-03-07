@@ -43,6 +43,8 @@ class ReclamationController extends AbstractController
         $currentDateTime = new \DateTime();
         $currentDateTime->format('Y-m-d H:i:s');
         $reclamation->setDateReclamation($currentDateTime);
+        //$useridentifier=$this->security->getUser()->getUserIdentifier();
+        //$reclamation->setEmailConnecte($useridentifier);
         $em=$doctrine->getManager();
         $form->handleRequest($request);
         $description = $form->get('description')->getData();
@@ -78,7 +80,21 @@ class ReclamationController extends AbstractController
             $em->remove($reclamation);
             $em->flush();
             $this->flashBag->add('success', 'claim deleted successfully');
-            return $this->redirectToRoute('affiche_reclamation');    
+            return $this->redirectToRoute('affiche_reclamation_byemail');    
+        } 
+    }
+    #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
+    public function deleteback(ManagerRegistry $doctrine,Request $request,$id)
+    {
+        $em=$doctrine->getManager();
+        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
+        if(!$reclamation){
+            return new Response("claim not found "); 
+        }else{
+            $em->remove($reclamation);
+            $em->flush();
+            $this->flashBag->add('success', 'claim deleted successfully');
+            return $this->redirectToRoute('afficheback_reclamation');    
         } 
     }
     #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
@@ -200,8 +216,8 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
     #[Route('reclamation/affichebyemail',name:"affiche_reclamation_byemail")]
     public function affichebyemail(ManagerRegistry $doctrine,ReclamationRepository $reclamationRepository)
     {
-        $useridentifier=$this->security->getUser()->getUserIdentifier();
-        $reclamation=$reclamationRepository->getclaimbyemail($useridentifier);
+        //$useridentifier=$this->security->getUser()->getUserIdentifier();
+        $reclamation=$reclamationRepository->getclaimbyemail("akaa@gmail.com");
         if(!$reclamation){
             return new Response("no claim found");
         }else{
@@ -225,7 +241,32 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
            if($form->isSubmitted() && $form->isValid()){
             $em->flush();
             $this->flashBag->add('success', 'Form updated successfully');
-            return $this->redirectToRoute('affiche_reclamation');
+            return $this->redirectToRoute('affiche_reclamation_byemail');
+            
+           }
+        }
+        return $this->render('reclamation/updatefront.html.twig',
+            ['form'=>$form->createView(),
+ 
+            ]);
+    }
+
+    #[Route('/reclamation/updateback/{id}',name:"updateback_reclamation")]
+    public function updateback(ManagerRegistry $doctrine,$id,Request $request){
+        $em=$doctrine->getManager();
+        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
+        if(!$reclamation){
+            return new Response("no claim found with this id");
+        }else{
+           $form=$this->createForm(ReclamationbackType::class,$reclamation);
+           $form->handleRequest($request); 
+           $description = $form->get('status')->getData();
+           
+
+           if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+            $this->flashBag->add('success', 'Form updated successfully');
+            return $this->redirectToRoute('afficheback_reclamation');
             
            }
         }
@@ -271,6 +312,8 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         $nom=$request->query->get('nom');
         $description=$request->query->get('description');
         $status=$request->query->get('status');
+        $email=$request->query->get('email_reclamation');
+        $email_c=$request->query->get('email_connecte');
         $date=new \DateTime('now');
         $em=$doctrine->getManager();
         $reclamation->setType($type);
@@ -278,6 +321,8 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         $reclamation->setNom($nom);
         $reclamation->setStatus($status);
         $reclamation->setDateReclamation($date);
+        $reclamation->setEmailConnecte($email_c);
+        $reclamation->setEmailReclamation($email);
         $em->persist($reclamation);
         $em->flush();
         return $this->json($reclamation,200,[],['groups'=>'reclamation:read']);
