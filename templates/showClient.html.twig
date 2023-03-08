@@ -1,0 +1,72 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Afficher client !{% endblock %}
+
+
+{% block body %}
+<body>
+
+  <main id="main" class="main">
+
+  <div class="pagetitle">
+      <h1>Afficher client</h1>
+    </div><!-- End Page Title -->
+
+  
+       <div class="container">
+                    <div class="row my-5">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Client id : {{ client.id }}
+                                    </h3>
+                                </div>
+                                </br>
+
+                                <div class="card-body">
+                                    <div class="card">
+                                       Client name : {{ client.username }}
+                                    </div>
+                                    </br>
+                                    <div class="card">
+                                        Client Email : {{ client.email }}
+                                    </div>
+                                    </br>
+                                    <div class="card">
+                                        Client Adresse complète : {{ client.fullAddress }}
+                                    </div>
+                                    </br>
+                                    <div class="card">
+                                        Client Numero telephone : {{ client.numTel }}
+                                    </div>
+                                    </br>
+                                    {% if client.isVerified == 1 %}
+                                        <div class="card">
+                                            <p> Statut de compte : Compte vérifie</p>
+                                        </div>
+                                        {% else %}
+                                        <div class="card">
+                                             <p>Statut de compte : Compte non vérifie</p>
+                                        </div>
+                                        
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    
+        </div>
+        
+
+  </main>
+
+  
+
+</body>
+
+            
+{% endblock %}

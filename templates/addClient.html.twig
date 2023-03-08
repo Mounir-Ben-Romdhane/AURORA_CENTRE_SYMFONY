@@ -1,0 +1,93 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Ajouter un client !{% endblock %}
+
+{% block body %}
+<body>
+
+  <main id="main" class="main">
+
+  <div class="pagetitle">
+      <h1>Ajouter un client</h1>
+    </div><!-- End Page Title -->
+
+  {% for message in app.flashes('Success') %}
+      <div class="alert alert-success">
+          {{ message }}
+      </div>
+  {% endfor %}
+      <div class="container">
+        <div class="container">
+                    <div class="row my-5">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Ajouter un client
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                            {{ form_start(client,{attr:{novalidate:'novalidate'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourName" class="form-label">Nom Client</label>
+                            {{ form_widget(client.username,{'attr':{'class':'form-control', 'style':'width:662px;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(client.username,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Email Client</label>
+                            {{ form_widget(client.email,{'attr':{'class':'form-control', 'style':'width:662px;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(client.email,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                                <label for="yourEmail" class="form-label">Numéro de téléphone client</label>
+                                <div>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="inputGroupPrepend">+216</span>
+                                        {{ form_widget(client.numTel,{'attr':{'class':'form-control' , 'style':'text-align:center;'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_errors(client.numTel,{'attr':{'class':'text-danger', 'style':'width:662px;text-align:center;'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label" >Adresse complète client</label>
+                            {{ form_widget(client.fullAddress,{'attr':{'class':'form-control' , 'style':'width:662px;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(client.fullAddress,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Mot de passe Client</label>
+                            {{ form_widget(client.password.first,{'attr':{'class':'form-control', 'style':'width:662px;text-align:center;'}}) }}
+                            <div class="invalid-feedback">S'il vous plait entrez votre mot de passe !</div>
+                            </div>
+                            {{ form_errors(client.password,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Confirmer le mot de passe du client</label>
+                            {{ form_widget(client.password.second,{'attr':{'class':'form-control', 'style':'width:662px;text-align:center;'}}) }} 
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-12" align="centre">
+                            <button class="btn btn-primary w-100" type="submit" >Ajouter un client</button>
+                            </div>
+                        {{ form_end(client) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+
+  </main>
+
+  
+
+</body>
+
+            
+{% endblock %}

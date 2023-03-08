@@ -5,8 +5,6 @@ namespace App\Repository;
 use App\Entity\Participationns;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Twilio\Rest\Client;
-
 
 /**
  * @extends ServiceEntityRepository<Participationns>
@@ -65,40 +63,4 @@ class ParticipationnsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
-
-
-
-
-
-public  function sms(){
-    // Your Account SID and Auth Token from twilio.com/console
-    
-            $sid = 'AC93ce05ca52439d2cc91aa39a64981bfe';
-
-            $auth_token = '83b577d752355a928583f5982803a940';
-    // In production, these should be environment variables. E.g.:
-    // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
-    // A Twilio number you own with SMS capabilities
-    
-            $twilio_number = "+15077095484";
-    
-            $client = new Client($sid, $auth_token);
-            $client->messages->create(
-            // the number you'd like to send the message to
-    
-                '+21699850223',
-                [
-                    // A Twilio phone number you purchased at twilio.com/console
-              
-    'from' => '+15077095484',
-                    // the body of the text message you'd like to send
-                    'body' => 'Nous avons répondu à votre participation,allez vérifier !!'
-                ]
-            );
-        }
-
-
-
-
 }

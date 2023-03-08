@@ -1,0 +1,169 @@
+{% extends "baseFront.html.twig" %}
+{% block title %}Reservation{% endblock %}
+    
+
+    {% block body %}
+    <style>
+.form-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-field {
+        display: block;
+        margin: 10px auto;
+    }
+    .reservation {
+  position: relative;
+  height: 800px;
+  width: 420px;
+  margin: 100px auto;
+  padding: 60px 60px;
+  background: #0000ffff  
+  background-size: cover;
+  box-shadow: 0px 30px 60px -5px #000;
+}
+.button.-regular {
+  color: #202129;
+  background-color: #f2f2f2;
+  
+  &:hover {
+    color: #202129;
+    background-color: #e1e2e2;
+    opacity: 1;
+  }
+  
+  &:active {
+    background-color: #d5d6d6;
+    opacity: 1;
+  }
+  
+}
+    </style>
+<body id="page-top">
+        <!-- Navigation-->
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <div class="pt-1 pb-1">
+                    <h4 class="card-title text-center pb-1 fs-2" style="color:#ffc800;"><i>AURORA<i></h4>
+                  </div>
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_serviceShow')}}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <li class="dropdown" ><a  href="#">reclamation<i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li class="dropdownitem"><a href="{{path('ajouter_reclamation')}}">Envoyer une Reclamation</a></li>
+                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation')}}">Consulter mes Reclamation</a></li>
+                                    </ul>
+                        </li>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                           {% if app.user %}
+
+                                <li class="dropdown"><a href="#" style="color:#ffc800;"><span>{{ app.user.username }}</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_profilClient') }}">
+                                                <i class="bi bi-person"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li style="color:#ffc800;">
+                                            <hr class="dropdown-divider">
+                                        </li>   
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>Sign Out</span>
+                                            </a>
+                                        </li>
+                                    </ul><!-- End Profile Dropdown Items -->
+                                </li><!-- End Profile Nav -->
+                            {% else %}
+                            
+                                <li class="dropdown" ><a href="#"><span >S'authentifier</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li><a href="{{path('app_login')}}">Connexion</a></li>
+                                    <li><a href="{{path('app_register')}}">Inscription</a></li>
+                                    </ul>
+                                </li>
+                                
+                            {% endif %}
+                        </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead" style="padding-top: 70px;">
+        
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        
+        </div>
+        <div class="row">
+        <div class="reservation">
+    <div class="col-md-12">
+   
+        <h1> Réserver</h1><br>
+
+      <div class="form-container">
+   {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+                                             <div class="form-group">
+                                                {{ form_label(form.numero, 'Numéro :') }}
+                                                {{ form_widget(form.numero, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numero, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                {{ form_label(form.email, 'Email :') }}
+                                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.email, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.userName, 'userName :') }}
+                                                {{ form_widget(form.userName, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.userName, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.numeroTel, 'NuméroTel :') }}
+                                                {{ form_widget(form.numeroTel, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.numeroTel, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div>
+                                            </br>
+                                            <div class="form-group">
+                                                {{ form_label(form.service, 'Service :') }}
+                                                {{ form_widget(form.service, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.service, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                            <div class="form-group">
+                                                {{ form_label(form.dateR, 'Date :') }}
+                                                {{ form_widget(form.dateR, { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.dateR, { 'attr': {'class': 'text-danger'} }) }}
+                                            </div></br>
+                                                        <button type="submit" class="btn btn-primary" style="border-radius: 8px; background-color: #f1c40f; color: #fff; font-size: 18px; padding: 10px 20px;">Enregistrer</button>
+
+                                            {{ form_end(form) }}
+</div> 
+  
+          
+        </div>
+      </div>
+      </div>
+                </div>   
+
+        </header>
+        
+        
+     
+    </body> 
+  {% endblock %}

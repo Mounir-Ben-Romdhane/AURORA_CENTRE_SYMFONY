@@ -10,7 +10,7 @@ use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +26,6 @@ use Knp\Component\Pager\PaginatorInterface;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use phpDocumentor\Reflection\PseudoTypes\False_;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class EvenementController extends AbstractController
 {
@@ -55,6 +53,12 @@ class EvenementController extends AbstractController
     public function affichage(EvenementRepository $evenementRepository,Request $request)
     {
         $evenement= $evenementRepository->findAll();
+
+
+
+        
+
+
     
         return $this->render('evenement/index.html.twig',array ('tableauEvenement'=> $evenement));
 
@@ -100,7 +104,7 @@ class EvenementController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $photo->move(
-                        $this->getParameter('evenement_directory'),
+                        $this->getParameter('user_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -123,9 +127,13 @@ class EvenementController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($evenement);
             $em->flush();
+            $this->addFlash(
+                'Success',
+                'Event ajouter avec succés !'
+            );
             return $this->redirectToRoute('app_evenementAffichage');
 
-            $this->addFlash('Success','Evenement ajoute avec succes!');
+            
               }
 
        return $this->render('evenement/add.html.twig',[
@@ -172,7 +180,7 @@ class EvenementController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $photo->move(
-                        $this->getParameter('evenement_directory'),
+                        $this->getParameter('user_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -340,13 +348,11 @@ class EvenementController extends AbstractController
         $descriptionev=$request->query->get("descriptionev");
         $dateev=$request->query->get("dateev");
         $typeev=$request->query->get("typeev");
-        $imageev=$request->query->get("imageev");
         $em = $this->getDoctrine()->getManager();
 
         $evenement->setTitreev($titreev);
         $evenement->setDescriptionev($descriptionev);
         $evenement->setDateev(new \DateTime($dateev));
-        $evenement->setImageev($imageev);
         $evenement->settypeev($typeev);
 
         $em->persist($evenement);
@@ -359,7 +365,7 @@ class EvenementController extends AbstractController
 
 
 
-/*#[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
+#[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
     public function deleteEvenementJSON(Request $request)
     {
         $id = $request->get("id");
@@ -374,41 +380,11 @@ class EvenementController extends AbstractController
             $formatted = $serializer->normalize("Evenement a ete supprime avec success.");
             return new JsonResponse($formatted);
         }
+
         return new JsonResponse("id evenement invalid!");
-    }*/
+        
 
-
-
-
-
-
-    #[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
-    public function deleteEvenementJSON(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager): Response
-    {
-        $id = $request->query->get("id");
-    $entityManager = $this->getDoctrine()->getManager();
-    $evenementRepository = $entityManager->getRepository(Evenement::class);
-    $evenement = $evenementRepository->find($id);
-
-    if ($evenement !== null) {
-        $entityManager->remove($evenement);
-        $entityManager->flush();
-        $formatted = $serializer->serialize($evenement, 'json');
-
-        return new Response($formatted);
     }
-
-          
-
-        return new Response(" Evenement does not exist ");
-    }
-
-
-
-
-
-
-
 
 
     #[Route('/modifieEvenementJson', name: 'app_modifier_evenement_json')]

@@ -1,0 +1,70 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Ajouter une reponse !{% endblock %}
+
+{% block body %}
+<body>
+
+  <main id="main" class="main">
+
+  <div class="pagetitle">
+      <h1>Ajouter une reponse</h1>
+    </div><!-- End Page Title -->
+      <div class="container">
+        <div class="container">
+                    <div class="row my-5">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Ajouter une reponse
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                            {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">type</label>
+                            {{ form_widget(form.type,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.type,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Nom</label>
+                            {{ form_widget(form.nom,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.nom,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Description</label>
+                            {{ form_widget(form.description,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.description,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Status</label>
+                            {{ form_widget(form.status,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.status,{'attr':{'class':'text-danger'}}) }}
+                            
+                            <br>
+                            
+                            {{form_widget(form.save,{'attr':{'class':'btn btn-primary w-100'}})}}
+                            </div>
+                        {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+
+  </main>
+
+  
+
+</body>
+
+            
+{% endblock %}

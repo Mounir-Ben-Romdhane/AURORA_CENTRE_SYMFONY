@@ -3,20 +3,21 @@
 
 
  {% block body %}
- <title>{% block title %}PDF{% endblock %}</title>
- 
+ <title>{% block title %}Liste des participants{% endblock %}</title>
 <html style="border: 1px solid black; padding: 10px;">
-<div class= "container">
+
 
               <img />
 
-      <h2><FONT face="Script" color="red" size="50pt"><u> <center><I>AURORA  </I></center></u></FONT></h2>
+      <center><h2><FONT face="Script" color="red" size="50pt"><u> <I>AURORA  </I></u></FONT></h2></center>
 <br>
  
 
 
     <center><h2><FONT face="Script" color="" size="30pt"> <I>Liste des participants  </I></FONT></h2></center>
-
+ 
+ <br>
+ <br>
  <table class="table table-striped">
            {#{{form(studentSearch)}}#}
 
@@ -53,13 +54,7 @@
 <br>
 <br>
 
-<br>
-<br><br>
-<br><br>
-<br>
-<br><br>
-<br><br><br>
-<br>
+
 
 <section class="page-section" id="contact">
             <div class="container">
@@ -73,14 +68,16 @@
                     <h10 class="section-subheading text-muted">Esprit, Cité El Ghazela, 5080</10>
                 </div>
 
-               
+                <div class="text-center">
+                    <h11 class="section-heading text-uppercase">1</h11>
+                </div>
+                
                 
             </div>
         </section>
 
- </div>
+
   </html>
- 
  {% endblock %}
 
 

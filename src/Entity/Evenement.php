@@ -41,7 +41,6 @@ class Evenement
     private ?string $descriptionev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups("evenement:read")]
     private ?string $imageev = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

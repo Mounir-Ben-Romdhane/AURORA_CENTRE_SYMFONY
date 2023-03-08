@@ -1,0 +1,71 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Client!{% endblock %}
+
+
+
+{% block body %}
+<body>
+<main id="main" class="main">
+
+  <div class="pagetitle">
+      <h1>Edit Client</h1>
+    </div><!-- End Page Title -->
+
+<div class="container">
+        <div class="container">
+                <div class="row my-5">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Edit Client
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                {{ form_start(client,{attr:{novalidate:'novalidate'}}) }}
+                            <div class="col-12">
+                            <label for="yourName" class="form-label">Name Client</label>
+                            {{ form_widget(client.username,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(client.username,{'attr':{'class':'text-danger'}}) }}
+                            </br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Email Client</label>
+                            {{ form_widget(client.email,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(client.email,{'attr':{'class':'text-danger'}}) }}
+                            </br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Phone Number Client</label>
+                            {{ form_widget(client.numTel,{'attr':{'class':'form-control'}}) }}
+                            </div>
+                            {{ form_errors(client.numTel,{'attr':{'class':'text-danger'}}) }}
+                            </br>
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Password Client</label>
+                            {{ form_widget(client.password.first,{'attr':{'class':'form-control'}}) }}
+                            <div class="invalid-feedback">Please enter your password!</div>
+                            </div>
+                            {{ form_errors(client.password,{'attr':{'class':'text-danger'}}) }}
+                            </br>
+                            <div class="col-12">
+                            <label for="yourPassword" class="form-label">Confirme Password Client</label>
+                            {{ form_widget(client.password.second,{'attr':{'class':'form-control'}}) }}
+                            <div class="invalid-feedback">Please confirme your password!</div>
+                            </div>
+                            </br>
+                            <div class="col-12">
+                            <button class="btn btn-primary w-100" type="submit">Save change</button>
+                            </div>
+                        {{ form_end(client) }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+        </div>
+</div>
+</main>
+       </body>     
+{% endblock %}
