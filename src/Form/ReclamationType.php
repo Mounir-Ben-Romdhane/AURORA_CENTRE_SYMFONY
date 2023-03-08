@@ -24,6 +24,7 @@ class ReclamationType extends AbstractType
                 'Problèmes de navigation sur le site' => 'Problèmes de navigation sur le site',
                 'Problèmes de qualité de produits ou de services' => 'Problèmes de qualité de produits ou de services',
                 'Problèmes de confidentialité et de sécurité des données'=>'Problèmes de confidentialité et de sécurité des données',
+                'autre'=>''
 
             ],
             
@@ -32,9 +33,6 @@ class ReclamationType extends AbstractType
             ->add('nom',TypeTextType::class,[
                 'empty_data' => '',
                 
-            ])
-            ->add('emailreclamation',TypeTextType::class,[
-                'empty_data'=>'',
             ])
             ->add('description',TextareaType::class,[
                 'empty_data' => '',

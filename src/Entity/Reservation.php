@@ -57,6 +57,9 @@ class Reservation
 
     private ?string $userName = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email_connect = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +133,18 @@ class Reservation
     public function setUserName(string $userName): self
     {
         $this->userName = $userName;
+
+        return $this;
+    }
+
+    public function getEmailConnect(): ?string
+    {
+        return $this->email_connect;
+    }
+
+    public function setEmailConnect(string $email_connect): self
+    {
+        $this->email_connect = $email_connect;
 
         return $this;
     }
