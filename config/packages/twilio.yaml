@@ -1,0 +1,6 @@
+services:
+  twilio.client:
+    class: Twilio\Rest\Client
+    arguments:
+      - '%env(TWILIO_ACCOUNT_SID)%'
+      - '%env(TWILIO_AUTH_TOKEN)%'

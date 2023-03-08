@@ -1,0 +1,87 @@
+{% extends "evenement/base-pdf.html.twig" %}
+
+
+
+ {% block body %}
+ <title>{% block title %}PDF{% endblock %}</title>
+ 
+<html style="border: 1px solid black; padding: 10px;">
+<div class= "container">
+
+              <img />
+
+      <h2><FONT face="Script" color="red" size="50pt"><u> <center><I>AURORA  </I></center></u></FONT></h2>
+<br>
+ 
+
+
+    <center><h2><FONT face="Script" color="" size="30pt"> <I>Liste des participants  </I></FONT></h2></center>
+
+ <table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">USERNAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">TELEPHONE</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                 {% for i in tableauParticipationns %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.descriptionPn}}</td>
+                        <td>{{i.usernameev}}</td>
+                        <td>{{i.emailev}}</td>
+                        <td>{{i.numtelev}}</td>
+                    </tr>   
+
+
+                    
+                    {% endfor %}
+
+
+                   
+
+      </tbody>
+</table>
+
+<br>
+<br>
+
+<br>
+<br><br>
+<br><br>
+<br>
+<br><br>
+<br><br><br>
+<br>
+
+<section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h8 class="section-heading text-uppercase">Contact</h8>
+                    <h10 class="section-subheading text-muted">Télephone: 97 312 558</h10>
+                </div>
+                <br>
+                <div class="text-center">
+                    <h8 class="section-heading text-uppercase">Local</h8>
+                    <h10 class="section-subheading text-muted">Esprit, Cité El Ghazela, 5080</10>
+                </div>
+
+               
+                
+            </div>
+        </section>
+
+ </div>
+  </html>
+ 
+ {% endblock %}
+
+
+

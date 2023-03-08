@@ -319,33 +319,13 @@ class EvenementController extends AbstractController
     
   
 
-    #[Route('/get',name:"app_api_getallevenement",methods:'GET')]
+    #[Route('/get',name:"app_api_getallevenement")]
     public function getevenement(EvenementRepository $evenementRepository)
     {
         $evenement=$evenementRepository->findAll();
         $response=$this->json($evenement,200,[],['groups'=>'evenement:read']);
         return $response;
     }
-
-
-
-
-
-
-    /*#[Route('/frontjson', name: 'event_list_json')]
-    public function ListEventsjson(EvenementRepository $repository,SerializerInterface $SerializerInterface ): Response
-    {
-        $evenement=$repository->findAll();
-        $json = $SerializerInterface->serialize($evenement, 'json', ['groups' => 'evenement']);
-
-        return new JsonResponse($json, 200, [], true);
-    }*/
-
-
-
-
-
-   
 
 
 
@@ -360,11 +340,13 @@ class EvenementController extends AbstractController
         $descriptionev=$request->query->get("descriptionev");
         $dateev=$request->query->get("dateev");
         $typeev=$request->query->get("typeev");
+        $imageev=$request->query->get("imageev");
         $em = $this->getDoctrine()->getManager();
 
         $evenement->setTitreev($titreev);
         $evenement->setDescriptionev($descriptionev);
         $evenement->setDateev(new \DateTime($dateev));
+        $evenement->setImageev($imageev);
         $evenement->settypeev($typeev);
 
         $em->persist($evenement);
@@ -377,7 +359,7 @@ class EvenementController extends AbstractController
 
 
 
-#[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
+/*#[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
     public function deleteEvenementJSON(Request $request)
     {
         $id = $request->get("id");
@@ -392,11 +374,41 @@ class EvenementController extends AbstractController
             $formatted = $serializer->normalize("Evenement a ete supprime avec success.");
             return new JsonResponse($formatted);
         }
-
         return new JsonResponse("id evenement invalid!");
-        
+    }*/
 
+
+
+
+
+
+    #[Route('/deleteEvenementjson', name: 'app_delete_evenement_json')]
+    public function deleteEvenementJSON(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager): Response
+    {
+        $id = $request->query->get("id");
+    $entityManager = $this->getDoctrine()->getManager();
+    $evenementRepository = $entityManager->getRepository(Evenement::class);
+    $evenement = $evenementRepository->find($id);
+
+    if ($evenement !== null) {
+        $entityManager->remove($evenement);
+        $entityManager->flush();
+        $formatted = $serializer->serialize($evenement, 'json');
+
+        return new Response($formatted);
     }
+
+          
+
+        return new Response(" Evenement does not exist ");
+    }
+
+
+
+
+
+
+
 
 
     #[Route('/modifieEvenementJson', name: 'app_modifier_evenement_json')]

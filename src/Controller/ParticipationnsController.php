@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Entity\Participationns;
+use App\Entity\PdfGeneratorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Form\ParticipationnsType;
+use App\Service\JWTService;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Swift_Message;
@@ -26,6 +28,8 @@ use Symfony\Component\Mime\Email;
 
 class ParticipationnsController extends AbstractController
 {
+
+
     #[Route('/participationns', name: 'app_participationns')]
     public function index(): Response
     {
@@ -48,7 +52,7 @@ class ParticipationnsController extends AbstractController
 
 
     #[Route('/ParticipationnsAdd/{id}', name: 'app_addParticipationns')]
-    public function addParticipationns(Request $request , $id,ManagerRegistry$doctrine):Response
+    public function addParticipationns(Request $request , $id,ManagerRegistry$doctrine, ParticipationnsRepository $participationnsRepository):Response
     {
         $evenement=$doctrine->getRepository(Evenement::class)->find($id);
         $participationns = new Participationns();
@@ -61,6 +65,24 @@ class ParticipationnsController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($participationns);
             $em->flush();
+
+
+
+
+            $participationns = new participationns();
+            $participationns = $participationnsRepository->find($id);
+            // $reclamation->setEtat(1 );
+            $em = $doctrine->getManager();
+            $em->flush();
+            $participationnsRepository->sms();
+            $this->addFlash('danger', 'participationns envoyée avec succées');
+
+
+
+
+
+
+
             //return $this->redirectToRoute('app_participationnAffichage');
             $this->addFlash('Success','Participation ajoutée avec succès!');
             return $this->redirectToRoute('app_evenementAffichageFront');
@@ -266,6 +288,32 @@ class ParticipationnsController extends AbstractController
             return new Response();
            //return  $this->render('evenement/download.html.twig',['evenement'=> $evenement], new Response());
         
+       
+    }
+
+
+
+
+
+
+    //PDF Wessim
+    #[Route('/participationns/pdf', name: 'generator_service')]
+    public function pdfService(): Response
+    { 
+        $participationns= $this->getDoctrine()
+        ->getRepository(Participationns::class)
+        ->findAll();
+
+   
+
+        $html =$this->renderView('pdf/index.html.twig', ['tableauParticipationns' => $participationns]);
+        $pdfGeneratorService=new PdfGeneratorService;
+        $pdf = $pdfGeneratorService->generatePdf($html);
+
+        return new Response($pdf, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="document.pdf"',
+        ]);
        
     }
 
