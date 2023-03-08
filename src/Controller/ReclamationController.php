@@ -1,16 +1,11 @@
 <?php
-
 namespace App\Controller;
-use ApiPlatform\Metadata\Post;
-use App\Data\SearchData;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Reclamation;
-use App\Entity\User;
 use App\Form\ReclamationbackType;
 use App\Form\ReclamationType;
-use App\Form\SearchFormType;
-use App\Form\SearchType;
 use App\Repository\ReclamationRepository;
-use Doctrine\ORM\EntityManager;
+use App\Service\NotificationService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Dompdf\Dompdf;
 
 class ReclamationController extends AbstractController
 {
@@ -39,12 +34,20 @@ class ReclamationController extends AbstractController
     {
         $reclamation=new Reclamation();
         $form=$this->createForm(ReclamationType::class,$reclamation);
-        $reclamation->setStatus("en cours");
+        $reclamation->setStatus(0);
         $currentDateTime = new \DateTime();
         $currentDateTime->format('Y-m-d H:i:s');
         $reclamation->setDateReclamation($currentDateTime);
-        //$useridentifier=$this->security->getUser()->getUserIdentifier();
-        //$reclamation->setEmailConnecte($useridentifier);
+
+        $user = $this->security->getUser();
+        if(!$user){
+            $reclamation->setEmailConnecte("");     
+        }else{
+            $useridentifier=$this->security->getUser()->getUserIdentifier();
+            $reclamation->setEmailConnecte($useridentifier);
+        }
+        
+
         $em=$doctrine->getManager();
         $form->handleRequest($request);
         $description = $form->get('description')->getData();
@@ -58,7 +61,7 @@ class ReclamationController extends AbstractController
             
             $em->flush();
             $this->flashBag->add('success', 'Form submited successfully');
-            return $this->redirectToRoute('affiche_reclamation'); 
+            return $this->redirectToRoute('affiche_reclamation_byemail'); 
            
             
             
@@ -68,6 +71,29 @@ class ReclamationController extends AbstractController
             'controller_name' => 'ReclamationController',
             'form'=>$form->createView(),
         ]);
+    }
+    #[Route('/AccepterReclamation/{id}', name: 'app_accepter_reclamation')]
+    public function AccepterReclamation($id,ReclamationRepository $reclamationRepository,ManagerRegistry $doctrine)
+    {
+        $reclamation = $reclamationRepository->find($id);
+        $email=$reclamation->getEmailConnecte();
+        $reclamation->setStatus(1);
+        $em = $doctrine->getManager();
+        $em->persist($reclamation);
+        $em->flush();
+        return $this->redirectToRoute('afficheback_reclamation');
+    }
+
+    #[Route('/RefuseReclamation/{id}', name: 'app_refuser_reclamation')]
+    public function RefuserReclamation($id,ReclamationRepository $reclamationRepository,ManagerRegistry $doctrine)
+    {
+        $reclamation =$reclamationRepository->find($id);
+        $email=$reclamation->getEmailConnecte();
+        $reclamation->setStatus(2);
+        $em = $doctrine->getManager();
+        $em->persist($reclamation);
+        $em->flush();
+        return $this->redirectToRoute('afficheback_reclamation');
     }
     #[Route('/reclamation/delete/{id}', name:"delete_reclamation")]
     public function delete(ManagerRegistry $doctrine,Request $request,$id)
@@ -81,6 +107,7 @@ class ReclamationController extends AbstractController
             $em->flush();
             $this->flashBag->add('success', 'claim deleted successfully');
             return $this->redirectToRoute('affiche_reclamation_byemail');    
+
         } 
     }
     #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
@@ -95,6 +122,7 @@ class ReclamationController extends AbstractController
             $em->flush();
             $this->flashBag->add('success', 'claim deleted successfully');
             return $this->redirectToRoute('afficheback_reclamation');    
+
         } 
     }
     #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
@@ -118,34 +146,22 @@ class ReclamationController extends AbstractController
         $orderBy = $request->request->get('orderBy');
         $iconClass = $request->query->get('iconClass');
 
-    switch ($orderBy) {
-        case 'type':
-            $reclamation = $reclamationRepository->orderByType();
-            break;
-        case 'nom':
-            $reclamation = $reclamationRepository->orderByNom();
-            break;
-        case 'datereclamation':
-            $reclamation=$reclamationRepository->orderByDate();
-            break;
-        default:
-            $reclamation = $doctrine->getRepository(Reclamation::class)->findAll();
-            break;
-    }
-        if(!$reclamation){
+    
+       
             return new Response("no claim found");
-        }else{
-            return $this->render("reclamation/affiche.html.twig", array(
-                'reclamations' => $reclamation
+        
+            return $this->render("reclamation/affiche.html.twig"
                 
-        ));
-        }
+                
+        );
+        
     }
 
     #[Route('/reclamation/orderbytype', name: 'reclamation_orderbytype', methods: ['GET'])]
 public function orderByType(Request $request, ReclamationRepository $reclamationRepository): Response
 {
-    $reclamation = $reclamationRepository->orderByType();
+    $useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByType($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
@@ -154,7 +170,8 @@ public function orderByType(Request $request, ReclamationRepository $reclamation
 #[Route('/reclamation/orderbytypeDESC', name: 'reclamation_orderbytypeDESC', methods: ['GET'])]
 public function orderByTypeDESC(Request $request, ReclamationRepository $reclamationRepository): Response
 {
-    $reclamation = $reclamationRepository->orderByTypeDESC();
+    $useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByTypeDESC($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
@@ -164,7 +181,8 @@ public function orderByTypeDESC(Request $request, ReclamationRepository $reclama
 #[Route('/reclamation/orderbynom', name: 'reclamation_orderbynom', methods: ['GET'])]
 public function orderByNom(Request $request, ReclamationRepository $reclamationRepository): Response
 {
-    $reclamation = $reclamationRepository->orderByNom();
+    $useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByNom($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
@@ -172,8 +190,8 @@ public function orderByNom(Request $request, ReclamationRepository $reclamationR
 }
 #[Route('/reclamation/orderbynomDESC', name: 'reclamation_orderbynomDESC', methods: ['GET'])]
 public function orderByNomDESC(Request $request, ReclamationRepository $reclamationRepository): Response
-{
-    $reclamation = $reclamationRepository->orderByNomDESC();
+{$useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByNomDESC($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
@@ -181,8 +199,8 @@ public function orderByNomDESC(Request $request, ReclamationRepository $reclamat
 }  
 #[Route('/reclamation/orderbydate', name: 'reclamation_orderbydate', methods: ['GET'])]
 public function orderByDate(Request $request, ReclamationRepository $reclamationRepository): Response
-{
-    $reclamation = $reclamationRepository->orderByDate();
+{$useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByDate($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
@@ -191,38 +209,54 @@ public function orderByDate(Request $request, ReclamationRepository $reclamation
 #[Route('/reclamation/orderbydateDESC', name: 'reclamation_orderbydateDESC', methods: ['GET'])]
 public function orderByDateDESC(Request $request, ReclamationRepository $reclamationRepository): Response
 {
-    $reclamation = $reclamationRepository->orderByDateDESC();
+    $useridentifier=$this->security->getUser()->getUserIdentifier();
+    $reclamation = $reclamationRepository->orderByDateDESC($useridentifier);
 
     return $this->render('reclamation/affiche.html.twig', [
         'reclamations' => $reclamation,
     ]);
 }
-
-
-    #[Route('/reclamation/afficheback',name:"afficheback_reclamation")]
-    public function afficheback(ManagerRegistry $doctrine)
-    {
-        $reclamation=$doctrine->getRepository(Reclamation::class)->findAll();
-        if(!$reclamation){
-            return new Response("no claim found");
-        }else{
-            return $this->render("reclamation/afficheback.html.twig",
+#[Route('reclamation/affichebyemail',name:"affiche_reclamation_byemail")]
+    public function affichebyemail(ManagerRegistry $doctrine,ReclamationRepository $reclamationRepository)
+    {$user = $this->security->getUser();
+        if(!$user){
+            return $this->render("baseFront.html.twig");
+        }
+        else{
+            $useridentifier=$this->security->getUser()->getUserIdentifier();
+        $reclamation=$reclamationRepository->getclaimbyemail($useridentifier);
+        
+        
+            return $this->render("reclamation/affiche.html.twig",
             array('reclamations'=>$reclamation)
 
             );
         }
+        
+        
     }
     
-    #[Route('reclamation/affichebyemail',name:"affiche_reclamation_byemail")]
-    public function affichebyemail(ManagerRegistry $doctrine,ReclamationRepository $reclamationRepository)
+    
+    #[Route('/reclamation/afficheback',name:"afficheback_reclamation")]
+    public function afficheback(Request $request,ManagerRegistry $doctrine,PaginatorInterface $paginator)
     {
-        //$useridentifier=$this->security->getUser()->getUserIdentifier();
-        $reclamation=$reclamationRepository->getclaimbyemail("akaa@gmail.com");
+
+        $reclamation=$doctrine->getRepository(Reclamation::class)->findAll();
+        $query=$doctrine->getRepository(Reclamation::class)->findAll();
+
         if(!$reclamation){
-            return new Response("no claim found");
+            
         }else{
-            return $this->render("reclamation/affiche.html.twig",
-            array('reclamations'=>$reclamation)
+            $pagination = $paginator->paginate(
+                $query, // query to paginate
+                $request->query->getInt('page', 1), // current page number
+                5   // number of items per page
+            );
+        
+            return $this->render("reclamation/afficheback.html.twig",[
+                'pagination' => $pagination,
+                'reclamations'=>$reclamation,
+            ]
 
             );
         }
@@ -242,6 +276,7 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
             $em->flush();
             $this->flashBag->add('success', 'Form updated successfully');
             return $this->redirectToRoute('affiche_reclamation_byemail');
+
             
            }
         }
@@ -267,6 +302,7 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
             $em->flush();
             $this->flashBag->add('success', 'Form updated successfully');
             return $this->redirectToRoute('afficheback_reclamation');
+
             
            }
         }
@@ -285,6 +321,9 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         }else{
            $form=$this->createForm(ReclamationbackType::class,$reclamation);
            $form->handleRequest($request); 
+          
+           
+
            if($form->isSubmitted() && $form->isValid()){
             $em->flush();
             $this->flashBag->add('success', 'Form updated successfully');
@@ -330,7 +369,7 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
 
     }
     
-    #[Route('/api/deletereclamation/{id}',name:"app_api_deletereclamation",methods:'DELETE')]
+    #[Route('/api/deletereclamation/{id}',name:"app_api_deletereclamation",methods:'GET')]
     public function deletereclamationapi($id,ManagerRegistry $doctrine){
         $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
         if(!$reclamation){
@@ -339,7 +378,7 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         $em=$doctrine->getManager();
         $em->remove($reclamation);
         $em->flush();
-        return new JsonResponse(null,Response::HTTP_NO_CONTENT);
+        return $this->json($reclamation,200,[]);
 
     }
     #[Route('/api/updatereclamation/{id}',name:"app_api_updatereclamation",methods:'PUT')]
@@ -366,4 +405,35 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         
         return $this->json($reclamation, 201, [], ['groups' => 'reclamation:read']);
     }
+    #[Route('/reclamationpdf/{id}', name: 'app_reclamationpdf')]
+        public function pdfreser(ManagerRegistry $doctrine,$id): Response
+        {
+            $dompdf = new Dompdf();
+            $reclamation = $doctrine->getRepository(Reclamation::class)->find($id);
+
+            // Load some HTML content into the document
+            $html=$this->render('reclamation/reclamationPDF.html.twig', [
+                'reclamations' => $reclamation
+            ]);
+              
+            // Load the HTML content into the Dompdf instance
+            $dompdf->loadHtml($html);
+    
+            // Set the paper size and orientation (optional)
+            $dompdf->setPaper('A3', 'landscape');
+    
+            // Render the HTML content as a PDF document
+            $dompdf->render();
+    
+            // Output the PDF document to the browser for download
+            $response = new Response($dompdf->output());
+            $response->headers->set('Content-Type', 'application/pdf');
+            $response->headers->set('Content-Disposition', 'attachment; filename="DonRapport.pdf"');
+    
+            return $response;
+
+            return $this->render('reclamation/reclamationPDF.html.twig', [
+                array('reclamations'=>$reclamation)
+            ]);
+        }
 }

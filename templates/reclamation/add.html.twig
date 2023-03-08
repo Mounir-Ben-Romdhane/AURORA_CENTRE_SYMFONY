@@ -129,6 +129,11 @@
         {{ form_errors(form.nom) }}
     </div>
     <div class="form-field">
+        <label>Email</label>
+        {{ form_widget(form.emailreclamation) }}
+        {{ form_errors(form.emailreclamation) }}
+    </div>
+    <div class="form-field">
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
