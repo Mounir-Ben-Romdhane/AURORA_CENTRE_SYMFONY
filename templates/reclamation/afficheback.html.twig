@@ -150,7 +150,6 @@ $(document).ready(function(){
           <table class="table table-striped table-bordered">
             <thead class="table-primary">
                 <tr>
-                   <th scope="col">Id</th>
         <th scope="col">Type</th>
         <th scope="col">Nom Client</th>
         <th scope="col">Email</th>
@@ -165,7 +164,6 @@ $(document).ready(function(){
             <tbody id="myTable">
                 {% for reclamation in pagination %}
                       <tr>
-                       <td scope="row">{{reclamation.id}}</td>
                               <td scope="row">{{reclamation.type}}</td>
                               <td>{{reclamation.nom}}</td>
                               <td>{{reclamation.emailreclamation}}</td>
@@ -227,7 +225,6 @@ $(document).ready(function(){
             </tbody>
             <tfoot>
                 <tr>
-                    <th scope="col">Id</th>
         <th scope="col">Type</th>
         <th scope="col">Nom Client</th>
         <th scope="col">Email</th>

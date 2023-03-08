@@ -110,6 +110,7 @@ class ReclamationController extends AbstractController
 
         } 
     }
+
     #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
     public function deleteback(ManagerRegistry $doctrine,Request $request,$id)
     {
@@ -125,20 +126,7 @@ class ReclamationController extends AbstractController
 
         } 
     }
-    #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
-    public function deleteback(ManagerRegistry $doctrine,Request $request,$id)
-    {
-        $em=$doctrine->getManager();
-        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
-        if(!$reclamation){
-            return new Response("claim not found "); 
-        }else{
-            $em->remove($reclamation);
-            $em->flush();
-            $this->flashBag->add('success', 'claim deleted successfully');
-            return $this->redirectToRoute('afficheback_reclamation');    
-        } 
-    }
+    
     #[Route('/reclamation/affiche',name:"affiche_reclamation")]
     public function affiche(ManagerRegistry $doctrine,Request $request,ReclamationRepository $reclamationRepository)
     {
@@ -250,7 +238,7 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
             $pagination = $paginator->paginate(
                 $query, // query to paginate
                 $request->query->getInt('page', 1), // current page number
-                5   // number of items per page
+                3  // number of items per page
             );
         
             return $this->render("reclamation/afficheback.html.twig",[
@@ -295,7 +283,6 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
         }else{
            $form=$this->createForm(ReclamationbackType::class,$reclamation);
            $form->handleRequest($request); 
-           $description = $form->get('status')->getData();
            
 
            if($form->isSubmitted() && $form->isValid()){
@@ -303,31 +290,6 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
             $this->flashBag->add('success', 'Form updated successfully');
             return $this->redirectToRoute('afficheback_reclamation');
 
-            
-           }
-        }
-        return $this->render('reclamation/updatefront.html.twig',
-            ['form'=>$form->createView(),
- 
-            ]);
-    }
-
-    #[Route('/reclamation/updateback/{id}',name:"updateback_reclamation")]
-    public function updateback(ManagerRegistry $doctrine,$id,Request $request){
-        $em=$doctrine->getManager();
-        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
-        if(!$reclamation){
-            return new Response("no claim found with this id");
-        }else{
-           $form=$this->createForm(ReclamationbackType::class,$reclamation);
-           $form->handleRequest($request); 
-          
-           
-
-           if($form->isSubmitted() && $form->isValid()){
-            $em->flush();
-            $this->flashBag->add('success', 'Form updated successfully');
-            return $this->redirectToRoute('afficheback_reclamation');
             
            }
         }
@@ -336,6 +298,8 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
  
             ]);
     }
+
+    
     #[Route('/api/getreclamation',name:"app_api_getallreclamation",methods:'GET')]
     public function getreclamation(ReclamationRepository $reclamationRepository)
     {
