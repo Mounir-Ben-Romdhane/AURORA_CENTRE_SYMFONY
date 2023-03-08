@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Service;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Service[]    findAll()
  * @method Service[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class ServiceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -63,4 +65,22 @@ class ServiceRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+
+    public function chartRepository()
+    {
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->select('s.titreS as Service, COUNT(r.id) as nombre_reservation')
+            ->leftJoin('s.reservations', 'r')
+            ->groupBy('s.id')
+            ->orderBy('nombre_reservation', 'DESC');
+    
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    
+       
+
 }

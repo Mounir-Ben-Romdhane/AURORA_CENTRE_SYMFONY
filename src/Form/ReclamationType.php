@@ -30,7 +30,7 @@ class ReclamationType extends AbstractType
             
             'empty_data' => '',
         ])
-            ->add('email',TypeTextType::class,[
+            ->add('nom',TypeTextType::class,[
                 'empty_data' => '',
                 
             ])

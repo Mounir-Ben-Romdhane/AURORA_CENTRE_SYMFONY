@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Fichier téléchargé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+   
+   
+
+    
+    
+  </style>
+</head>
+  <body>
+
+    <!-- Header -->
+       
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+      <tr>
+        <td height="20"></td>
+      </tr>
+      <tr>
+        <td>
+          <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+           <br>
+
+            <tr>
+              <td>
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table  width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                          <tbody>
+                          <tr>
+
+                             <td style="font-size: 20px; color:#ffc800; font-family: 'Open Sans', sans-serif; line-height: 12px; vertical-align: top;">
+                                AURORA CENTER.
+                              </td>
+                            </tr>
+                            
+
+                           
+
+                            <tr class="hiddenMobile">
+                              <td height="20"></td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 19px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                Liste des réservations
+                              </td>
+                              
+                            </tr>
+                            <tr>
+                              <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 15px; vertical-align: top; text-align: left;">
+                           
+                                <small>MARCH 9TH 2023</small>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                          <tbody>
+                            
+                            
+                            <tr>
+                            <tr class="hiddenMobile">
+                              <td height="10"></td>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- /Header -->
+    <!-- Order Details -->
+     
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+      <tbody>
+        <tr>
+          <td>
+            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+              <tbody>
+                <tr>
+                <tr class="visibleMobile">
+                  <td height="50"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="80%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                      <tbody>
+                        <tr>
+                         
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
+                            UserName
+                          </th>
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
+                            EMAIL
+                          </th>
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
+                            NumeroTel
+                          </th>
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
+                            Type
+                          </th>
+                         
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
+                           Date Réservation
+                          </th>
+                        </tr>
+                        <tr>
+                          <td height="1" style="background: #bebebe;" colspan="4"></td>
+                        </tr>
+                        <tr>
+                          <td height="10" colspan="4"></td>
+                        </tr>
+                        {% for reservation in reservations %}
+                        <tr>
+                        
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
+                            {{reservation.userName}}
+                          </td>
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top;" class="article">
+                            {{reservation.email}}
+                          </td>
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
+                            {{reservation.numeroTel}}
+                          </td>
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
+                            {{reservation.service.titreS}}
+                          </td>
+                          
+                                
+                          
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">{{reservation.dateR.format('Y-m-d H:i:s')}}</td>
+                           {% endfor %}
+                        </tr>                        
+                        <tr>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+   
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+      <tbody>
+        <tr>
+          <td>
+            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+              <tbody>
+                <tr class="spacer">
+              <td height="30"></td>
+            </tr>
+               
+                
+                <tr>
+                  <td>
+                    <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+
+                              <tbody>
+                                <tr>
+                                  <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                    <strong>INFORMATION</strong>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="100%" height="10"></td>
+                                </tr>
+                                <tr>
+                                  <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                    Adresse : AuroraCenter, Menzah 9<br>Pays : Tunisia<br> Région : Tunis<br> PostalZip: 1091
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="visibleMobile">
+                  <td height="30"></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- /Information -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+
+      <tr>
+        <td>
+          <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+            <tr>
+              <td>
+                <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                  <tbody>
+                    <tr>
+                      <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                        Bonne journée!
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="spacer">
+              <td height="50"></td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+       
+    </table>
+    
+</body>
+  
+</html>

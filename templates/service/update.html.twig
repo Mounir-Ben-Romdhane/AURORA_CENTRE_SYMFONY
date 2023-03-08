@@ -1,90 +1,11 @@
-<<<<<<< Updated upstream
-
-{% block body %}
-    <h1>Editer un service</h1>
-
-    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_errors(form) }}
-
-        <div class="form-group">
-            {{ form_label(form.titreS) }}
-            {{ form_widget(form.titreS) }}
-            {{ form_errors(form.titreS) }}
-        </div>
-
-        <div class="form-group">
-            {{ form_label(form.descriptionS) }}
-            {{ form_widget(form.descriptionS) }}
-            {{ form_errors(form.descriptionS) }}
-        </div>
-
-        <div class="form-group">
-            {{ form_label(form.typeS) }}
-            {{ form_widget(form.typeS) }}
-            {{ form_errors(form.typeS) }}
-        </div>
-
-        <div class="form-group">
-            {{ form_label(form.dateS) }}
-            {{ form_widget(form.dateS) }}
-            {{ form_errors(form.dateS) }}
-        </div>
-         <div class="form-group">
-            {{ form_label(form.image) }}
-            {{ form_widget(form.image) }}
-            {{ form_errors(form.image) }}
-        </div>
-
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
-{% endblock %}
-
-
-
-
-{% extends 'baseBack.html.twig' %}
-
-{% block body %}
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">Editer un service</div>
-                    <div class="card-body">
-                        {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
-                        <div class="form-group">
-                            {{ form_label(form.titreS, 'Title') }}
-                            {{ form_widget(form.titreS, { 'attr': {'class': 'form-control'} }) }}
-                            {{ form_errors(form.titreS, { 'attr': {'class': 'text-danger'} }) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.descriptionS, 'Description') }}
-                            {{ form_widget(form.descriptionS, { 'attr': {'class': 'form-control'} }) }}
-                            {{ form_errors(form.descriptionS, { 'attr': {'class': 'text-danger'} }) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.dateS, 'Date') }}
-                            {{ form_widget(form.dateS, { 'attr': {'class': 'form-control'} }) }}
-                            {{ form_errors(form.dateS, { 'attr': {'class': 'text-danger'} }) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.image, 'Location') }}
-                            {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
-                            {{ form_errors(form.image, { 'attr': {'class': 'text-danger'} }) }}
-                        </div>
-                        {{ form_end(form) }}
-                    </div>
-                                             <button type="submit" class="btn btn-primary">Enregistrer</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-=======
 {% extends "baseBack.html.twig" %} 
 
+{% block title %}Modifier service !{% endblock %}
+
     {% block body %}
+    <body>
+     <main id="main" class="main">
+  <div>
      <div class= "container">
        
             <div class="card">
@@ -121,13 +42,19 @@
                                                 {{ form_errors(form.image, { 'attr': {'class': 'text-danger'} }) }}
                                             </div></br>
                                            
-                                                        <button type="submit" class="btn btn-primary" style="border-radius: 8px; background-color: #f1c40f; color: #fff; font-size: 18px; padding: 10px 20px;">Enregistrer</button>
+                                                        <div class="d-flex justify-content-center">
+  
+                                                        <button type="submit" class="btn btn-primary"  font-size=" 15px;" padding="10px 20px;">Enregistrer</button>
+</div>
 
                                             {{ form_end(form) }}
 </div>
             </div>
                 </div>
           </div>
+
+          </div>
+          </main>
+          </body>
         {% endblock %}
     
->>>>>>> Stashed changes

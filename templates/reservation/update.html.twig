@@ -1,50 +1,10 @@
-<<<<<<< Updated upstream
-
-
-{% block body %}
-    <h1>Editer une réservation</h1>
-
-    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_errors(form) }}
-
- <div class="form-group">
-            {{ form_label(form.numero) }}
-            {{ form_widget(form.numero) }}
-            {{ form_errors(form.numero) }}
-        <div class="form-group">
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-        </div>
-         <div class="form-group">
-            {{ form_label(form.userName) }}
-            {{ form_widget(form.userName) }}
-            {{ form_errors(form.userName) }}
-        </div>
-         <div class="form-group">
-            {{ form_label(form.numeroTel) }}
-            {{ form_widget(form.numeroTel) }}
-            {{ form_errors(form.numeroTel) }}
-        </div>
-         <div class="form-group">
-            {{ form_label(form.service) }}
-            {{ form_widget(form.service) }}
-            {{ form_errors(form.service) }}
-        </div>
-
-        <div class="form-group">
-            {{ form_label(form.dateR) }}
-            {{ form_widget(form.dateR) }}
-            {{ form_errors(form.dateR) }}
-        </div>
-        
-
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
-{% endblock %}
-=======
 {% extends "baseBack.html.twig" %} 
+{% block title %}Update réservation !{% endblock %}
     {% block body %}
+    <body>
+    <main id="main" class="main">
+
+<div>
      <div class= "container">
         <div class="card">
             <div class="card-header"></div>
@@ -88,16 +48,18 @@
 
 
 <div class="d-flex justify-content-center">
-  <a href="{{ path('app_reservationAffichage') }}">
-                                                        <button type="submit" class="btn btn-primary"  font-size: 15px; padding: 10px 20px;">Enregistrer</button>
+  
+                                                        <button type="submit" class="btn btn-primary"  font-size=" 15px;" padding="10px 20px;">Enregistrer</button>
 </div>
                     {{ form_end(form) }}
             </div>
                 </div>
           </div>
+          </div>
+          </main>
+          </body>
 {% endblock %}
 
 
 
 
->>>>>>> Stashed changes

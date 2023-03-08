@@ -19,10 +19,6 @@ class Reponse
     #[assert\NotBlank(message:"reponse should not be blank")]
     private ?string $reponse = null;
 
-    #[ORM\Column(length: 255)]
-    #[assert\NotBlank(message:"reponse should not be blank")]
-    private ?string $status = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_reponse = null;
 
@@ -43,18 +39,6 @@ class Reponse
     public function setReponse(string $reponse): self
     {
         $this->reponse = $reponse;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

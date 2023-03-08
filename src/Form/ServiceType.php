@@ -6,19 +6,12 @@ use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-<<<<<<< Updated upstream
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-=======
->>>>>>> Stashed changes
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-<<<<<<< Updated upstream
-=======
 use Symfony\Component\Validator\Constraint\File;
 use Symfony\Component\Validator\Constraints\File as ConstraintsFile;
->>>>>>> Stashed changes
 
 class ServiceType extends AbstractType
 {
@@ -40,28 +33,6 @@ class ServiceType extends AbstractType
         ->add('typeS', ChoiceType::class, [
             'choices' => [
                 "" => "",
-<<<<<<< Updated upstream
-                "Médecine douce"  => "Médecine douce",
-                "Coaching"  => "Coaching",
-                "Consultation"  => "Consultation",
-            ],
-            'empty_data'=>''
-        ])
-        ->add('image', FileType::class, [
-            "attr" => [
-                'label' => 'Image',
-                'required' => 'false',
-                'data_class'=> null
-            ] 
-        ])
-        
-        ->add('dateS', DateTimeType::class)
-
-        
-
-     
-
-=======
                 "Méditation"=>"Méditation",
                 "Médecine douce"  => "Médecine douce",
                 "Coaching"  => "Coaching",
@@ -94,7 +65,6 @@ class ServiceType extends AbstractType
         ->add('dateS', DateTimeType::class)
         
 
->>>>>>> Stashed changes
         ;
     }
 

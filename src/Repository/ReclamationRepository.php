@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Reclamation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,7 +31,7 @@ class ReclamationRepository extends ServiceEntityRepository
         }
     }
     public function getclaimbyemail($email){
-        return $this->findBy(['email'=>$email]);
+        return $this->findBy(['email_connecte'=>$email]);
 
     }
 
@@ -42,6 +43,43 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function orderByType()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.type', 'ASC')
+            ->getQuery()->getResult();
+    }
+    public function orderByTypeDESC()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.type', 'DESC')
+            ->getQuery()->getResult();
+    }
+    public function orderByNom()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()->getResult();
+    }
+    public function orderByNomDESC()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.nom', 'DESC')
+            ->getQuery()->getResult();
+    }
+    public function orderBydate(){
+        return $this->createQueryBuilder('s')
+        ->orderBy('s.date_reclamation','ASC')
+        ->getQuery()
+        ->getResult();
+    }
+    public function orderBydateDESC(){
+        return $this->createQueryBuilder('s')
+        ->orderBy('s.date_reclamation','DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
 
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects

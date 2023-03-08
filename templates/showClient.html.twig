@@ -1,6 +1,6 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Show Client !{% endblock %}
+{% block title %}Afficher client !{% endblock %}
 
 
 {% block body %}
@@ -9,7 +9,7 @@
   <main id="main" class="main">
 
   <div class="pagetitle">
-      <h1>Show Client</h1>
+      <h1>Afficher client</h1>
     </div><!-- End Page Title -->
 
   
@@ -34,8 +34,24 @@
                                     </div>
                                     </br>
                                     <div class="card">
+                                        Client Adresse complète : {{ client.fullAddress }}
+                                    </div>
+                                    </br>
+                                    <div class="card">
                                         Client Numero telephone : {{ client.numTel }}
                                     </div>
+                                    </br>
+                                    {% if client.isVerified == 1 %}
+                                        <div class="card">
+                                            <p> Statut de compte : Compte vérifie</p>
+                                        </div>
+                                        {% else %}
+                                        <div class="card">
+                                             <p>Statut de compte : Compte non vérifie</p>
+                                        </div>
+                                        
+                                    {% endif %}
+                                    
                                 </div>
                             </div>
                         </div>

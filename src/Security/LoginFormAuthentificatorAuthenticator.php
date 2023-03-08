@@ -48,6 +48,8 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
 
         $user=$token->getUser();
 
+        
+
         if(in_array('ROLE_ADMIN',$user->getRoles(),true)){
             return new RedirectResponse($this->urlGenerator->generate('app_back'));
         }
@@ -55,8 +57,8 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
         // For example:
        // return new RedirectResponse($this->urlGenerator->generate('club_list_show'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-
-        return new RedirectResponse($this->urlGenerator->generate('app_front'));
+        
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 
     protected function getLoginUrl(Request $request): string
