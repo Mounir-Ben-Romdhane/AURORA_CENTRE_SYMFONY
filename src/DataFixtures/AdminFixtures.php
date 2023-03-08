@@ -25,7 +25,6 @@ class AdminFixtures extends Fixture
         $user = new User();
         $token = $this->tokenGenerator->generateToken();
         $user->setResetToken($token);
-        $user->setIsVerified(true);
         $password_hashed = $this->passwordEncoder->encodePassword($user,"admin");
         $user->setUsername("Admin");
         $user->setEtat(true);

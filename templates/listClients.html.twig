@@ -51,17 +51,6 @@
 
 {% block body %}
 <body >
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function(){
-  $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
 
   <main id="main" class="main">
   <div>
@@ -81,35 +70,7 @@ $(document).ready(function(){
             </div>
         {% endfor %}
 
-<br>
-
-         <div class="sidebar-search">
-          <div class="input-group custom-search-form">
-            <div class="search-box">
-              <input type="text" name="search" id="search" class="input-search" placeholder="Rechercher client...">
-      
-              </div>    
-          </div>
-
-        </div>
-
-        <div align=RIGHT>
-              <form action="">
-                <label >Trier par :</label>
-                <select id="orderBy" name="client" onchange="location = this.value;">
-                  <option value=""></option>
-                  <option value="{{ path('app_trier_name_client') }}">Name</option>
-                  <option value="{{ path('app_trier_email_client') }}">Email</option>
-                  <option value="{{ path('app_trier_tel_client') }}">Tel</option>
-                  <option value="{{ path('app_trier_address_client') }}">Addresse</option>
-                  <option value="{{ path('app_trier_status_client') }}">Status</option>
-                  <option value="{{ path('app_trier_etat_client') }}">Etat</option>
-                </select>
-              </a>
-      </form>
-      </div>
-<br>
-          <table class="table table-striped table-bordered">
+          <table id="example" class="table table-striped table-bordered">
             <thead class="table-primary">
                 <tr>
                     <th scope="col">Name</th>
@@ -121,7 +82,7 @@ $(document).ready(function(){
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody id="myTable">
+            <tbody>
                 {% for client in clients %}
                       <tr>
                               <td scope="row">{{client.username}}</td>
@@ -169,12 +130,12 @@ $(document).ready(function(){
             </tbody>
             <tfoot>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Tel</th>
                     <th scope="col">Adresse complète</th>
                     <th scope="col">Statut</th>
-                    <th scope="col">Etat</th>
                     <th scope="col">Actions</th>
                 </tr>
             </tfoot>

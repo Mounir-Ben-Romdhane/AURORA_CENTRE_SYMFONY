@@ -1,0 +1,107 @@
+{% extends "baseBack.html.twig" %}
+
+
+
+{% block body %}
+
+<style>
+
+    myChartContainer {
+        width: 1000px;
+        height: 800px;
+    }
+
+    grid{
+        left: 3%;
+        right: 4%;
+        bottom: 3%;
+        containLabel: true
+    }
+    
+</style>
+
+  
+    <!-- ============================================================== -->
+
+    <!-- Start right Content here -->
+
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+               
+                    <div id="myChart" style="width: 1500px; height: 800px; padding-left: 100px;margin-left:15%;margin-top:100px"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        {% set data = [] %}
+        {% for result in results %}
+            {% set data = data|merge([{value: result.valeur, name: result.value}]) %}
+        {% endfor %}
+        {% block jsChart %}
+            <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+            <script>
+
+        
+
+                var Chart = echarts.init(document.getElementById('myChart'));
+                Chart.setOption({
+                    title: {
+                        text: 'Statistique sur les réservations par rapports les services disponibles :'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: { show: true },
+                            dataView: { show: true, readOnly: true },
+                            saveAsImage: { show: true }
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: [
+                            {% for result in results %}
+                            '{{ result.value }}',
+                            {% endfor %}
+                        ]
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    series: [{
+                        name: 'nombre des réservations',
+                        type: 'bar',
+                        data: [
+                            {% for result in results %}
+                            {{ result.valeur }},
+                            {% endfor %}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(102, 255, 51)'
+                            }
+                        }
+                    }]
+
+                });
+            </script>
+         
+  
+  
+
+        {% endblock %}
+        
+{% endblock %}

@@ -1,85 +1,31 @@
-{% extends "baseFront.html.twig" %}
-{% block title %}Reclamation{% endblock %}
-    
+{% extends 'baseBack.html.twig' %}
 
-    {% block body2 %}
-    <style>
-.form-container {
-        display: flex;
-        justify-content: center;
-    }
+{% block title %}Add Client !{% endblock %}
 
-    .form-field {
-        display: block;
-        margin: 10px auto;
-    }
-    .reclamation {
-  position: relative;
-  height: 560px;
-  width: 405px;
-  margin: 100px auto;
-  padding: 60px 60px;
-  background: #0000ffff  
-  background-size: cover;
-  box-shadow: 0px 30px 60px -5px #000;
-}
-.button.-regular {
-  color: #202129;
-  background-color: #f2f2f2;
-  
-  &:hover {
-    color: #202129;
-    background-color: #e1e2e2;
-    opacity: 1;
-  }
-  
-  &:active {
-    background-color: #d5d6d6;
-    opacity: 1;
-  }
-  
-}
-    </style>
-<body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-          
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead" style="padding-top: 70px;">
-        
-            <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-        
+<h1>repondre a une reclamation</h1>
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<table>
+<tr>
+<td>{{form_label(form.status,'status')}}</td>
+<td>{{form_widget(form.status)}}</td>
+<td>{{form_errors(form.status)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.reponse,'ajouter une reponse')}}</td>
+<td>{{form_widget(form.reponse)}}</td>
+<td>{{form_errors(form.reponse)}}</td>
+</tr>
+<tr>
+<td>{{form_widget(form.save)}}</td>
+</tr>
+
+
+{{form_end(form)}}
+{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}">
+            {{ message }}
         </div>
-        <div class="row">
-        <div class="reclamation">
-    <div class="col-md-12">
-   
-        <h1> envoyer une reclamation </h1>
-
-      <div class="form-container">
-    {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-    <div class="form-field">
-        {{ form_label(form.reponse) }}
-        {{ form_widget(form.reponse) }}
-        {{ form_errors(form.reponse) }}
-    </div>
-    
-    {{form_widget(form.save,{'attr': {'class': 'button -regular center'}})}}
-    {{ form_end(form) }}
-</div> 
-  
-          
-        </div>
-      </div>
-      </div>
-                </div>   
-
-        </header>
-        
-        
-     
-    </body> 
-  {% endblock %}   
+    {% endfor %}
+{% endfor %}

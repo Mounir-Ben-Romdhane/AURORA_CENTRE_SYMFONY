@@ -5,12 +5,12 @@ function disable(x)
 var count = 10;
 function delayAction(event,x) {
     event.preventDefault();
-    x.innerHTML = "Chargement : "+count;
+    x.innerHTML = "Loading : "+count;
     x.className = "btn btn-sm btn-warning";
     var timer = setInterval(function() {
         count--;
         //countdown.innerHTML = count;
-        x.innerHTML = "Chargement : "+count;
+        x.innerHTML = "Loading : "+count;
         x.className = "btn btn-sm btn-warning";
         if (count === 0) {
           clearInterval(timer);

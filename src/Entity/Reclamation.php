@@ -30,6 +30,10 @@ class Reclamation
     #[Groups("reclamation:read")]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups("reclamation:read")]
+    private ?string $status = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups("reclamation:read")]
     private ?\DateTimeInterface $date_reclamation = null;
@@ -45,13 +49,7 @@ class Reclamation
     private ?string $email_connecte = null;
 
     #[ORM\Column(length: 255)]
-
-    #[assert\Email()]
     private ?string $email_reclamation = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $status = null;
-
 
     public function __construct()
     {
@@ -83,6 +81,18 @@ class Reclamation
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
@@ -140,6 +150,7 @@ class Reclamation
 
         return $this;
     }
+
     public function getEmailConnecte(): ?string
     {
         return $this->email_connecte;
@@ -160,20 +171,6 @@ class Reclamation
     public function setEmailReclamation(string $email_reclamation): self
     {
         $this->email_reclamation = $email_reclamation;
-
-        return $this;
-    }
-
-   
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?int $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
