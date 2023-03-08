@@ -30,11 +30,6 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
-    public function getclaimbyemail($email){
-        return $this->findBy(['email_connect'=>$email]);
-
-    }
-
     public function remove(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -68,37 +63,4 @@ class ReservationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
-public function trierReservation(){
-    $entityManager =$this->getEntityManager();
-    $query = $entityManager
-    ->createQuery('SELECT s FROM App\Entity\Reservation s ORDER BY s.dateR ASC');
-    return $query->getResult();
-}   
-public function trierReservation2(){
-    $entityManager =$this->getEntityManager();
-    $query = $entityManager
-    ->createQuery('SELECT s FROM App\Entity\Reservation s ORDER BY s.dateR DESC');
-    return $query->getResult();
-}
-
-
-public function trierReservationFront(){
-    $entityManager =$this->getEntityManager();
-    $query = $entityManager
-    ->createQuery('SELECT s FROM App\Entity\Reservation s ORDER BY s.dateR ASC');
-    return $query->getResult();
-}   
-
-public function trierReservationFront2(){
-    $entityManager =$this->getEntityManager();
-    $query = $entityManager
-    ->createQuery('SELECT s FROM App\Entity\Reservation s ORDER BY s.dateR DESC');
-    return $query->getResult();
-}   
-
-
-
-
-
 }

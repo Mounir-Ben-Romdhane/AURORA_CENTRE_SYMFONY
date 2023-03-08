@@ -141,7 +141,7 @@ class UserController extends AbstractController
             
             $this->addFlash(
                 'Success',
-                'Client added successfully! !'
+                'Client ajouter avec succès !!'
             );
 
         return $this->redirectToRoute('app_list_clients');
@@ -163,6 +163,60 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/trierParName', name: 'app_trier_name_client')]
+    public function triertitreev(): Response
+    {
+        $clients = $this->userRepository->trierName();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParEmail', name: 'app_trier_email_client')]
+    public function trierEmail(): Response
+    {
+        $clients = $this->userRepository->trierEmail();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParTel', name: 'app_trier_tel_client')]
+    public function trierTel(): Response
+    {
+        $clients = $this->userRepository->trierTel();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParAddress', name: 'app_trier_address_client')]
+    public function trierAddress(): Response
+    {
+        $clients = $this->userRepository->trierAddress();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParStatus', name: 'app_trier_status_client')]
+    public function trierStatus(): Response
+    {
+        $clients = $this->userRepository->trierStatus();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParEtat', name: 'app_trier_etat_client')]
+    public function trierEtat(): Response
+    {
+        $clients = $this->userRepository->trierEtat();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
     #[Route('/bloqueClient/{id}', name: 'app_block_client')]
     public function bloqueClients($id)
     {
@@ -173,7 +227,7 @@ class UserController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
             'Success',
-            ''.$client->getUserName().' blocked successfully!'
+            ''.$client->getUserName().' bloqué avec succès !'
         );
         return $this->redirectToRoute('app_list_clients');
     }
@@ -188,7 +242,7 @@ class UserController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
             'Success',
-            ''.$client->getUserName().' deblocked successfully!'
+            ''.$client->getUserName().' débloqué avec succès !'
         );
         return $this->redirectToRoute('app_list_clients');
     }
@@ -211,7 +265,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'Success',
-            'Client edited successfully!'
+            'Client modifié avec succès!'
         );
 
         return $this->redirectToRoute('app_list_clients');
@@ -232,7 +286,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'Success',
-            'Client removed successfully!'
+            'Client supprimé avec succès!'
         );
 
         return $this->redirectToRoute('app_list_clients');

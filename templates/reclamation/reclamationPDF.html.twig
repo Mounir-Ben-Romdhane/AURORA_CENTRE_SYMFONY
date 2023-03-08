@@ -1,22 +1,15 @@
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
+ <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Fichier téléchargé</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-   
-   
-
-    
-    
-  </style>
-</head>
-  <body>
+  <title>Invoice template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ </head>
+  
+  <body style="margin: 0; padding: 0;">
 
     <!-- Header -->
-       
     <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
       <tr>
         <td height="20"></td>
@@ -24,7 +17,7 @@
       <tr>
         <td>
           <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
-           <br>
+           
 
             <tr>
               <td>
@@ -32,31 +25,29 @@
                   <tbody>
                     <tr>
                       <td>
-                        <table  width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                        <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
                           <tbody>
-                          <tr>
+                            <tr>
+                             <h4 class="card-title text-center pb-1 fs-2" style="color:#ffc800;"><i>AURORA<i></h4>
 
-                             <td style="font-size: 20px; color:#ffc800; font-family: 'Open Sans', sans-serif; line-height: 12px; vertical-align: top;">
-                                AURORA CENTER.
-                              </td>
                             </tr>
-                            
-
-                           
-
                             <tr class="hiddenMobile">
                               <td height="20"></td>
                             </tr>
                             <tr>
-                              <td style="font-size: 19px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
-                                Liste des réservations
+                              <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                Lettre de Reclamation
                               </td>
                               
                             </tr>
                             <tr>
-                              <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 15px; vertical-align: top; text-align: left;">
-                           
-                                <small>MARCH 9TH 2023</small>
+                             <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                Nom et Prenom : {{reclamations.nom}}
+                              </td>
+                            </tr>
+                            <tr>
+                             <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                               Email: {{reclamations.emailreclamation}}
                               </td>
                             </tr>
                           </tbody>
@@ -70,6 +61,12 @@
                               <td height="10"></td>
                             </tr>
                             
+                            <tr>
+                              <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;">
+                                <p>ID de reclamtion : {{reclamations.id}}</p>
+                                <small>MARCH 4TH 2016</small>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </td>
@@ -84,7 +81,6 @@
     </table>
     <!-- /Header -->
     <!-- Order Details -->
-     
     <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
       <tbody>
         <tr>
@@ -97,25 +93,17 @@
                 </tr>
                 <tr>
                   <td>
-                    <table width="80%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                    <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
                       <tbody>
                         <tr>
-                         
-                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
-                            UserName
-                          </th>
-                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
-                            EMAIL
-                          </th>
-                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
-                            NumeroTel
-                          </th>
-                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="30%" align="left">
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="52%" align="left">
                             Type
                           </th>
-                         
+                          <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="left">
+                            <small>Status</small>
+                          </th>
                           <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
-                           Date Réservation
+                           Date Reclamation
                           </th>
                         </tr>
                         <tr>
@@ -124,26 +112,20 @@
                         <tr>
                           <td height="10" colspan="4"></td>
                         </tr>
-                        {% for reservation in reservations %}
                         <tr>
-                        
-                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
-                            {{reservation.userName}}
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; padding:10px 0;" class="article">
+                            {{reclamations.type}}
                           </td>
-                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top;" class="article">
-                            {{reservation.email}}
-                          </td>
-                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
-                            {{reservation.numeroTel}}
-                          </td>
-                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #85b62c;  line-height: 18px;  vertical-align: top; " class="article">
-                            {{reservation.service.titreS}}
-                          </td>
+                          {% if reclamations.status == 0 %}
+                                <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small>En cours</small></td>
+                                {% elseif reclamations.status ==1 %}
+                                <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small>Accepter</small></td>
+                                {% else %}
+                                <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small>Refuser</small></td>
+                              {% endif %}
                           
-                                
+                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">{{reclamations.datereclamation.format('Y-m-d H:i:s')}}</td>
                           
-                          <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">{{reservation.dateR.format('Y-m-d H:i:s')}}</td>
-                           {% endfor %}
                         </tr>                        
                         <tr>
 
@@ -159,7 +141,6 @@
         </tr>
       </tbody>
     </table>
-   
     <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
       <tbody>
         <tr>
@@ -190,12 +171,14 @@
                                 </tr>
                                 <tr>
                                   <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                    Adresse : AuroraCenter, Menzah 9<br>Pays : Tunisia<br> Région : Tunis<br> PostalZip: 1091
+                                    Adresse<br>Pays : Tunisia<br> Région : Tunis<br> PostalZip: 1091
                                   </td>
                                 </tr>
                               </tbody>
                             </table>
 
+
+                            
                           </td>
                         </tr>
                       </tbody>
@@ -237,7 +220,7 @@
           </table>
         </td>
       </tr>
-       
+      
     </table>
     
 </body>

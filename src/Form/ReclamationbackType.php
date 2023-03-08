@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,19 +34,13 @@ class ReclamationbackType extends AbstractType
                 'empty_data' => '',
                
             ])
-            ->add('status',ChoiceType::class,[
             
-                'choices'=>[
-                    ' '=>'',
-                    'accepter' => 'accepter',
-                    'refuser' => 'refuser',
-                ],
-                'empty_data' => '',
-            ])
-            
-            ->add('nom',TextareaType::class,[
+            ->add('nom',TextType::class,[
                 'empty_data' => '',
                 
+            ])
+            ->add('emailreclamation',TextType::class,[
+                'empty_data'=>'',
             ])
             ->add('save',SubmitType::class)
         ;

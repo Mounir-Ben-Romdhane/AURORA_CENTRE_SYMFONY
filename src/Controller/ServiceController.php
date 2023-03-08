@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 use App\Entity\Service;
-use App\dto\Pie;
 use App\Form\ServiceType;
 use App\Repository\ServiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,7 +18,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\SerializerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 
 class ServiceController extends AbstractController
 {
@@ -34,21 +32,14 @@ class ServiceController extends AbstractController
     }
 
     #[Route('/serviceAffichage', name: 'app_serviceAffichage')]
-    public function affichage(Request $request,ServiceRepository $serviceRepository,PaginatorInterface $paginator)
+    public function affichage(ServiceRepository $serviceRepository)
     {
-
         $service= $serviceRepository->findAll();
-        $query= $serviceRepository->findAll();
-        $pagination = $paginator->paginate(
-        $query, // query to paginate
-        $request->query->getInt('page', 1), // current page number
-        3// number of items per page
-    );
+     
 
-    return $this->render('service/affichage.html.twig', [
-        'tableauService' => $service,'pagination' => $pagination,
-    ]);
+        return $this->render('service/affichage.html.twig',array ('tableauService'=> $service));
     }
+
     
     
     #[Route('/serviceAffichageFront', name: 'app_serviceAffichageFront')]
@@ -275,37 +266,22 @@ public function deleteService(Service $service, $id, ManagerRegistry $doctrine)
         return $this->json($service, 201, [], ['groups' => 'service:read']);
     }
 
-  
-  
-
-    #[Route('/chart', name: 'app_chart', methods: ['GET'])]
-    public function barChartAction( ServiceRepository $serviceRepository  )
+    #[Route('/serviceTrier', name: 'app_trierservice')]
+    public function trierService(ServiceRepository $serviceRepository)
     {
-        $results= $serviceRepository->chartRepository();
-
-
-        $totalCount = array_reduce($results, function($carry, $result) {
-            return $carry + $result['nombre_reservation'];
-        }, 0);
-
-
-
-
-        foreach ($results as $result) {
-            $percentage = round(($result['nombre_reservation']  ));
-            $obj = new Pie();
-            $obj->value = $result['Service'];
-            $obj->valeur = $percentage ;
-            $resultArray[] = $obj;
-        }
-
-
-        return $this->render('service/chart.html.twig', array(
-            'results'  =>  $resultArray,
-
-
-        ));
+        $service=$serviceRepository->trierService();
+        return $this->render('service/affichage.html.twig',[
+            "tableauService"=>$service
+        ]);
     }
 
+    #[Route('/serviceTrier2', name: 'app_trierservice2')]
+    public function trierService2(ServiceRepository $serviceRepository)
+    {
+        $service=$serviceRepository->trierService();
+        return $this->render('service/affichage.html.twig',[
+            "tableauService"=>$service
+        ]);
+    }
    
 }

@@ -67,18 +67,19 @@ class ServiceRepository extends ServiceEntityRepository
 //    }
 
 
+public function trierService(){
+        $entityManager =$this->getEntityManager();
+        $query = $entityManager
+        ->createQuery('SELECT s FROM App\Entity\Service s ORDER BY s.titreS ASC');
+        return $query->getResult();
+    }   
 
-
-    public function chartRepository()
-    {
-        $queryBuilder = $this->createQueryBuilder('s')
-            ->select('s.titreS as Service, COUNT(r.id) as nombre_reservation')
-            ->leftJoin('s.reservations', 'r')
-            ->groupBy('s.id')
-            ->orderBy('nombre_reservation', 'DESC');
-    
-        return $queryBuilder->getQuery()->getResult();
-    }
+    public function trierService2(EntityManagerInterface $entityManager){
+        return $this->createQueryBuilder('s')
+        ->orderBy('s.dateS','ASC')
+        ->getQuery()
+        ->getResult();
+    } 
 
     
        
