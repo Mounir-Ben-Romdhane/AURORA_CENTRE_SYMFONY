@@ -6,7 +6,7 @@
 
 
 {% block body %}
-{% block body2 %}
+
 
 <style>
 table {
@@ -113,7 +113,7 @@ $(document).ready(function(){
                         <li class="dropdown" ><a  href="#">reclamation<i class="bi bi-chevron-down"></i></a>
                                     <ul>
                                     <li class="dropdownitem"><a href="{{path('ajouter_reclamation')}}">Envoyer une Reclamation</a></li>
-                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation')}}">Consulter mes Reclamation</a></li>
+                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation_byemail')}}">Consulter mes Reclamation</a></li>
                                     </ul>
                         </li>
                         </div>
@@ -200,7 +200,6 @@ $(document).ready(function(){
 </select>
 </a>
 </form>
-       {% block table %}
         <div class="row">
         
 
@@ -265,7 +264,6 @@ function closeForm() {
         {% endfor %}
     {% endfor %}
 
-    {% endblock %}
 
 </body>
 

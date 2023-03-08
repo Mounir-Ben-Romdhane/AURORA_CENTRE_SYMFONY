@@ -164,29 +164,7 @@ class Reclamation
         return $this;
     }
 
-    public function getEmailConnecte(): ?string
-    {
-        return $this->email_connecte;
-    }
-
-    public function setEmailConnecte(string $email_connecte): self
-    {
-        $this->email_connecte = $email_connecte;
-
-        return $this;
-    }
-
-    public function getEmailReclamation(): ?string
-    {
-        return $this->email_reclamation;
-    }
-
-    public function setEmailReclamation(string $email_reclamation): self
-    {
-        $this->email_reclamation = $email_reclamation;
-
-        return $this;
-    }
+   
 
     public function getStatus(): ?int
     {
