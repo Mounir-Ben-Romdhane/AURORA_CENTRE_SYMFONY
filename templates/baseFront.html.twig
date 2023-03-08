@@ -80,6 +80,10 @@ li.dropdownitem:hover {
 
     </head>
     {% block body %}
+    <script>
+
+    </script>
+    
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -87,8 +91,6 @@ li.dropdownitem:hover {
                 <div class="pt-1 pb-1">
                     <h4 class="card-title text-center pb-1 fs-2" style="color:#ffc800;"><i>AURORA<i></h4>
                   </div>
-
-                <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="dropdown" ><a href="{{path('app_serviceShow')}}">Services<i class="bi bi-chevron-down"></i></a>
                                     <ul>
@@ -104,7 +106,7 @@ li.dropdownitem:hover {
                         <li class="dropdown" ><a class="nav-link" href="#">reclamation<i class="bi bi-chevron-down"></i></a>
                                     <ul>
                                     <li class="dropdownitem"><a href="{{path('ajouter_reclamation')}}">Envoyer une Reclamation</a></li>
-                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation')}}">Consulter mes Reclamation</a></li>
+                                    <li class="dropdownitem"><a href="{{path('affiche_reclamation_byemail')}}">Consulter mes Reclamation</a></li>
                                     </ul>
 
                         </li>
