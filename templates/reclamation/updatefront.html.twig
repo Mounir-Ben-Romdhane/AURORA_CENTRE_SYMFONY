@@ -5,8 +5,6 @@
 
     {% block body %}
 
-    {% block body2 %}
-
     <style>
 .form-container {
         display: flex;
@@ -132,6 +130,11 @@
         {{ form_label(form.nom) }}
         {{ form_widget(form.nom) }}
         {{ form_errors(form.nom) }}
+    </div>
+    <div class="form-field">
+        <label>Email</label>
+        {{ form_widget(form.emailreclamation) }}
+        {{ form_errors(form.emailreclamation) }}
     </div>
     <div class="form-field">
         {{ form_label(form.description) }}

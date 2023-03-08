@@ -51,9 +51,6 @@ class ReponseController extends AbstractController
     {
         $responseexist=$reponseRepository->getidreclamation($id);
 
-        if(!$responseexist) {
-            return new response('you can t reply to this reponse until the admin confirmet');
-        }else{
             $recalamation=$doctrine->getRepository(Reclamation::class)->find($id);
         $reponse=new Reponse();
         $em=$doctrine->getManager();
@@ -61,21 +58,19 @@ class ReponseController extends AbstractController
         $currentDateTime = new \DateTime();
         $currentDateTime->format('Y-m-d H:i:s'); 
         $reponse->setReclamation($recalamation);
-        $status=$form->get('status')->getData();
-        $reponse->setStatus($status);
         $reponse->setDateReponse($currentDateTime);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($reponse);
             $em->flush();
             $this->flashBag->add('success', 'response added successfully');
-            return $this->redirectToRoute('affiche_reclamation');
+            return $this->redirectToRoute('affiche_reclamation_byemail');
         }
         return $this->render('reponse/add.html.twig', [
             'controller_name' => 'ReclamationController',
             'form'=>$form->createView(),
         ]);
-        }
+        
 
     }
     #[Route('/reponse/delete/{id}', name: 'delete_reponse')]
