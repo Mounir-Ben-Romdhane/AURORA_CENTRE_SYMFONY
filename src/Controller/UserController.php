@@ -141,7 +141,7 @@ class UserController extends AbstractController
             
             $this->addFlash(
                 'Success',
-                'Client added successfully! !'
+                'Client ajouter avec succès !!'
             );
 
         return $this->redirectToRoute('app_list_clients');
@@ -163,6 +163,60 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/trierParName', name: 'app_trier_name_client')]
+    public function triertitreev(): Response
+    {
+        $clients = $this->userRepository->trierName();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParEmail', name: 'app_trier_email_client')]
+    public function trierEmail(): Response
+    {
+        $clients = $this->userRepository->trierEmail();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParTel', name: 'app_trier_tel_client')]
+    public function trierTel(): Response
+    {
+        $clients = $this->userRepository->trierTel();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParAddress', name: 'app_trier_address_client')]
+    public function trierAddress(): Response
+    {
+        $clients = $this->userRepository->trierAddress();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParStatus', name: 'app_trier_status_client')]
+    public function trierStatus(): Response
+    {
+        $clients = $this->userRepository->trierStatus();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
+    #[Route('/trierParEtat', name: 'app_trier_etat_client')]
+    public function trierEtat(): Response
+    {
+        $clients = $this->userRepository->trierEtat();
+        return $this->render('listClients.html.twig', [
+            'clients' => $clients 
+        ]);
+    }
+
     #[Route('/bloqueClient/{id}', name: 'app_block_client')]
     public function bloqueClients($id)
     {
@@ -173,7 +227,7 @@ class UserController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
             'Success',
-            ''.$client->getUserName().' blocked successfully!'
+            ''.$client->getUserName().' bloqué avec succès !'
         );
         return $this->redirectToRoute('app_list_clients');
     }
@@ -188,7 +242,7 @@ class UserController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
             'Success',
-            ''.$client->getUserName().' deblocked successfully!'
+            ''.$client->getUserName().' débloqué avec succès !'
         );
         return $this->redirectToRoute('app_list_clients');
     }
@@ -211,7 +265,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'Success',
-            'Client edited successfully!'
+            'Client modifié avec succès!'
         );
 
         return $this->redirectToRoute('app_list_clients');
@@ -232,7 +286,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'Success',
-            'Client removed successfully!'
+            'Client supprimé avec succès!'
         );
 
         return $this->redirectToRoute('app_list_clients');
@@ -354,7 +408,7 @@ class UserController extends AbstractController
 
     //MOBILE
     #[Route('/addClientjson', name: 'app_add_client_json')]
-    public function addClientJSON(Request $request)
+    public function addClientJSON(Request $request,SendMailService $mail)
     {
         $user = new User();
 
@@ -370,7 +424,7 @@ class UserController extends AbstractController
         $user->setUsername($userName);
         $user->setEmail($email);
         $user->setNumTel($numTel);
-        $user->setIsVerified(true);
+        $user->setIsVerified(false);
         $user->setImage("images.png");
         $user->setRoles(['ROLE_USER']);
         //$user->setPassword($password);
@@ -381,6 +435,31 @@ class UserController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
+
+        // On génere le JWT de l'utilisateur 
+            // On crée le header
+            $header = [
+                'typ'=> 'JWT',
+                'alg' => 'HS256'
+            ];
+
+            // On crée le payload
+            $payload = [
+                'user_id' => $user->getId()
+            ];
+
+            // On génère le token 
+            $token = $this->jwt->generate($header, $payload , $this->getParameter('app.jwtsecret'));
+             
+
+            // On envoie un mail
+            $mail->send(
+                'no-reply@monsite.com',
+                $user->getEmail(),
+                'Activation de votre compte',
+                'register',
+                compact('user','token')
+            );
 
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($user);
@@ -497,7 +576,7 @@ class UserController extends AbstractController
 
 
     #[Route('/userJson/signUp', name: 'app_signup_client_json')]
-    public function SignUpUserJSON(Request $request)
+    public function SignUpUserJSON(Request $request,SendMailService $mail)
     {
         $user = new User();
 
@@ -519,7 +598,7 @@ class UserController extends AbstractController
         $user->setNumTel($numTel);
         $user->setRoles(['ROLE_USER']);
         $user->setImage("images.png");
-        $user->setIsVerified(true);
+        $user->setIsVerified(false);
         //$user->setPassword($password);
         $user->setFullAddress($address);
 
@@ -527,6 +606,31 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // On génere le JWT de l'utilisateur 
+            // On crée le header
+            $header = [
+                'typ'=> 'JWT',
+                'alg' => 'HS256'
+            ];
+
+            // On crée le payload
+            $payload = [
+                'user_id' => $user->getId()
+            ];
+
+            // On génère le token 
+            $token = $this->jwt->generate($header, $payload , $this->getParameter('app.jwtsecret'));
+             
+
+            // On envoie un mail
+            $mail->send(
+                'no-reply@monsite.com',
+                $user->getEmail(),
+                'Activation de votre compte',
+                'register',
+                compact('user','token')
+            );
 
             return new JsonResponse("Account is created!",200);//Repense OK
         }catch(Exception $ex){

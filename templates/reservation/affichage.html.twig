@@ -1,0 +1,86 @@
+{% extends "baseBack.html.twig" %} 
+
+
+{% block title %}Liste des réservations !{% endblock %}
+
+    {% block body %}
+
+<body>
+    <main id="main" class="main">
+
+<div>
+
+{% for message in app.flashes('Success') %}
+            <div class="alert alert-success" style="text-align:center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+<div class="pagetitle">
+          <h3 style="text-align:center;color:#012970;" >Liste des réservations</h3>
+        </div><!-- End Page Title -->
+    
+
+     <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Détails</h5>
+            <table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                      <tr>
+                         <th scope="col">ID</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">NumeroTel</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Service</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                  {% for i in tableau %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.numero}}</td>
+                        <td>{{i.userName}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.numeroTel}}</td>
+                        <td>{{i.dateR.format('Y-m-d-H:i')}}</td>
+                        <td>{{i.Service.titreS}}</td>
+
+
+
+                      <td>
+                        <a href="{{ path('app_updatereservation',{id:i.id}) }}"><button type="button" class="btn btn-outline-secondary btn-sm mr-2">Editer</button></a>
+                        <form method="post" action="{{ path('app_deletereservation', {'id': i.id}) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ i.id) }}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                    </form>
+
+                        </td>
+                    </tr>  
+                    {% endfor %}
+
+      </tbody>
+</table>
+    {# <div class="d-flex justify-content-center">
+  <a href="{{ path('app_addreservation') }}">
+    <button type="button" class="btn btn-outline-success" style="width:150px">Ajouter</button>
+</div>#}
+      </tbody>
+</table>
+</div>
+            </div>
+                </div>
+          </div>
+          </div>
+          </main>
+          </body>
+        {% endblock %}
+    

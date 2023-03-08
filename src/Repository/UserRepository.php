@@ -63,4 +63,50 @@ class UserRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function trierName(){
+    $queryBuilder = $this->createQueryBuilder('i')
+        ->orderBy('i.username', 'ASC')
+        ->getQuery()
+        ->getResult();
+    return $queryBuilder;}
+
+
+    public function trierEmail(){
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->orderBy('i.email', 'ASC')
+            ->getQuery()
+            ->getResult();
+        return $queryBuilder;}
+
+
+        public function trierTel(){
+            $queryBuilder = $this->createQueryBuilder('i')
+                ->orderBy('i.numTel', 'ASC')
+                ->getQuery()
+                ->getResult();
+            return $queryBuilder;}
+
+        public function trierAddress(){
+            $queryBuilder = $this->createQueryBuilder('i')
+                ->orderBy('i.fullAddress', 'ASC')
+                ->getQuery()
+                ->getResult();
+            return $queryBuilder;}
+        
+        
+        public function trierStatus(){
+                    $queryBuilder = $this->createQueryBuilder('i')
+                        ->orderBy('i.is_verified', 'DESC')
+                        ->getQuery()
+                        ->getResult();
+                    return $queryBuilder;}
+
+        public function trierEtat(){
+            $queryBuilder = $this->createQueryBuilder('i')
+                ->orderBy('i.etat', 'ASC')
+                ->getQuery()
+                ->getResult();
+            return $queryBuilder;}
+
 }

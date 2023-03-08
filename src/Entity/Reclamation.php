@@ -45,11 +45,13 @@ class Reclamation
     private ?string $email_connecte = null;
 
     #[ORM\Column(length: 255)]
+
     #[assert\Email()]
     private ?string $email_reclamation = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $status = null;
+
 
     public function __construct()
     {
@@ -135,6 +137,29 @@ class Reclamation
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+    public function getEmailConnecte(): ?string
+    {
+        return $this->email_connecte;
+    }
+
+    public function setEmailConnecte(string $email_connecte): self
+    {
+        $this->email_connecte = $email_connecte;
+
+        return $this;
+    }
+
+    public function getEmailReclamation(): ?string
+    {
+        return $this->email_reclamation;
+    }
+
+    public function setEmailReclamation(string $email_reclamation): self
+    {
+        $this->email_reclamation = $email_reclamation;
 
         return $this;
     }

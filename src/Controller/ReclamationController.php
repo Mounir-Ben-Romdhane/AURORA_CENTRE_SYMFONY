@@ -38,6 +38,7 @@ class ReclamationController extends AbstractController
         $currentDateTime = new \DateTime();
         $currentDateTime->format('Y-m-d H:i:s');
         $reclamation->setDateReclamation($currentDateTime);
+
         $user = $this->security->getUser();
         if(!$user){
             $reclamation->setEmailConnecte("");     
@@ -46,6 +47,7 @@ class ReclamationController extends AbstractController
             $reclamation->setEmailConnecte($useridentifier);
         }
         
+
         $em=$doctrine->getManager();
         $form->handleRequest($request);
         $description = $form->get('description')->getData();
@@ -105,6 +107,22 @@ class ReclamationController extends AbstractController
             $em->flush();
             $this->flashBag->add('success', 'claim deleted successfully');
             return $this->redirectToRoute('affiche_reclamation_byemail');    
+
+        } 
+    }
+    #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
+    public function deleteback(ManagerRegistry $doctrine,Request $request,$id)
+    {
+        $em=$doctrine->getManager();
+        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
+        if(!$reclamation){
+            return new Response("claim not found "); 
+        }else{
+            $em->remove($reclamation);
+            $em->flush();
+            $this->flashBag->add('success', 'claim deleted successfully');
+            return $this->redirectToRoute('afficheback_reclamation');    
+
         } 
     }
     #[Route('/reclamation/deleteback/{id}', name:"deleteback_reclamation")]
@@ -222,8 +240,10 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
     #[Route('/reclamation/afficheback',name:"afficheback_reclamation")]
     public function afficheback(Request $request,ManagerRegistry $doctrine,PaginatorInterface $paginator)
     {
+
         $reclamation=$doctrine->getRepository(Reclamation::class)->findAll();
         $query=$doctrine->getRepository(Reclamation::class)->findAll();
+
         if(!$reclamation){
             
         }else{
@@ -256,6 +276,33 @@ public function orderByDateDESC(Request $request, ReclamationRepository $reclama
             $em->flush();
             $this->flashBag->add('success', 'Form updated successfully');
             return $this->redirectToRoute('affiche_reclamation_byemail');
+
+            
+           }
+        }
+        return $this->render('reclamation/updatefront.html.twig',
+            ['form'=>$form->createView(),
+ 
+            ]);
+    }
+
+    #[Route('/reclamation/updateback/{id}',name:"updateback_reclamation")]
+    public function updateback(ManagerRegistry $doctrine,$id,Request $request){
+        $em=$doctrine->getManager();
+        $reclamation=$doctrine->getRepository(Reclamation::class)->find($id);
+        if(!$reclamation){
+            return new Response("no claim found with this id");
+        }else{
+           $form=$this->createForm(ReclamationbackType::class,$reclamation);
+           $form->handleRequest($request); 
+           $description = $form->get('status')->getData();
+           
+
+           if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+            $this->flashBag->add('success', 'Form updated successfully');
+            return $this->redirectToRoute('afficheback_reclamation');
+
             
            }
         }

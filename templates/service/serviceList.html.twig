@@ -1,46 +1,9 @@
-{% extends "baseFront.html.twig" %}
-{% block title %}Reclamation{% endblock %}
-    
-
+{% extends 'baseFront.html.twig' %}
+{% block title %}Welcome !{% endblock %}
+ 
     {% block body %}
-    <style>
-.form-container {
-        display: flex;
-        justify-content: center;
-    }
-
-    .form-field {
-        display: block;
-        margin: 10px auto;
-    }
-    .reclamation {
-  position: relative;
-  height: 560px;
-  width: 405px;
-  margin: 100px auto;
-  padding: 60px 60px;
-  background: #0000ffff  
-  background-size: cover;
-  box-shadow: 0px 30px 60px -5px #000;
-}
-.button.-regular {
-  color: #202129;
-  background-color: #f2f2f2;
-  
-  &:hover {
-    color: #202129;
-    background-color: #e1e2e2;
-    opacity: 1;
-  }
-  
-  &:active {
-    background-color: #d5d6d6;
-    opacity: 1;
-  }
-  
-}
-    </style>
-<body id="page-top">
+    
+    <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
@@ -50,7 +13,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="dropdown" ><a href="{{path('app_serviceShow')}}">Services<i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                    <li class="dropdownitem"><a href="{{path('app_reservationList')}}">Liste Réservations</a></li>
+                                    </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="{{path('app_evenementAffichageFront')}}">Evenements</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
@@ -100,58 +67,68 @@
                 </div>
             </div>
         </nav>
-          
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead" style="padding-top: 70px;">
-        
-            <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-        
-        </div>
-        <div class="row">
-        <div class="reclamation">
-    <div class="col-md-12">
-   
-        <h1> envoyer une reclamation </h1>
-
-      <div class="form-container">
-    {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-    <div class="form-field">
-        {{ form_label(form.type) }}
-        {{ form_widget(form.type) }}
-        {{ form_errors(form.type) }}
-    </div>
-    <div class="form-field">
-        {{ form_label(form.nom) }}
-        {{ form_widget(form.nom) }}
-        {{ form_errors(form.nom) }}
-    </div>
-    <div class="form-field">
-        <label>Email</label>
-        {{ form_widget(form.emailreclamation) }}
-        {{ form_errors(form.emailreclamation) }}
-    </div>
-    <div class="form-field">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-    </div>
-    
-    {{form_widget(form.save,{'attr': {'class': 'button -regular center'}})}}
-    {{ form_end(form) }}
-</div> 
-  
-          
-        </div>
-      </div>
-      </div>
-                </div>   
-
-        </header>
-        
-        
      
-    </body> 
-  {% endblock %}   
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+            <div align="center">
+                        {% for message in app.flashes('Success') %}
+                                        <div class="alert alert-success w-50">
+                                            {{ message }}
+                                        </div>
+                         {% endfor %}
+            </div>
+                <div class="masthead-subheading">SERVICES</div>
+                <div class="masthead-heading text-uppercase">Profitez chers clients !</div>
+            </div>
+        </header>
+<br>
+<br>
+
+<div class="container">
+
+  <div class="row text-center justify-content-center">
+    {% for i in tableauServiceFront %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+
+          <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"href="app_serviceDetails"></i></div>
+            </div>
+            <img src="{{asset('uploads/users/'~ i.image)}}" alt="photo">
+          </a>
+<br>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ i.titreS }}</h5>
+              <p class="card-text">{{ i.typeS }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+
+            </ul>
+            <div class="card-body">
+            <div class="portfolio-caption-subheading text-muted">{{ i.descriptionS}}</div><br>
+            
+          <form action="{{ path('app_addreservation',{'id':i.id}) }}">
+          {% if app.user %}
+           <button type="submit" class="btn btn-primary"  style="background-color:#ffc800;border-color:#ffc800" font-size=" 15px;" padding="10px 20px;">Réserver</button>
+           {% endif %}
+
+          </form>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+                        {% endblock %}
+
+
+
