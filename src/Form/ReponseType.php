@@ -18,6 +18,15 @@ class ReponseType extends AbstractType
             ->add('reponse',TextareaType::class,[
                 'empty_data' => '',
             ])
+            ->add('status',ChoiceType::class,[
+            
+                'choices'=>[
+                    ' '=>'',
+                    'accepter' => 'accepter',
+                    'refuser' => 'refuser',
+                ],
+                'empty_data' => '',
+            ])
             ->add('save',SubmitType::class)
         ;
     }

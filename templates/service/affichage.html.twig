@@ -115,7 +115,7 @@
         <table class="table table-striped">
 
 
-           <table class="table table-light table_hover table_bordered"> 
+           <table class="table table-striped"> 
                 <thead  class="thead-dark">
                       <tr>
                         <th scope="col">ID</th>
@@ -130,7 +130,7 @@
                     </tr>
                 </thead>
                  <tbody id="myTable">
-                 {% for i in tableauService %}
+                 {% for i in pagination %}
                     <tr>
                         <td >{{i.id}}</td>
                         <td>{{i.titreS}}</td>
@@ -161,14 +161,11 @@
   <a href="{{ path('app_addservice') }}">
     <button type="button" class="btn btn-outline-success" style="width:150px">Ajouter</button><br>
 </div><br>
-<div class="d-flex justify-content-center">
-  <a href="{{ path('app_trierservice') }}">
-    <button type="button" class="btn btn-success badge-pill" style="width:200px" background-color: red; color: white; >Trier avec le titre</button></a>
-</div><br>
+
    
-<div class="d-flex justify-content-center">
-  <a href="{{ path('app_trierservice2') }}">
-    <button type="button" class="btn btn-success badge-pill" style="width:200px" background-color: red; color: white; >Trier avec la date</button></a>
+   <div class="d-flex justify-content-center">
+  <a href="{{ path('app_chart') }}">
+    <button type="button" class="btn btn-outline-primary" style="width:200px"; >Voir statistiques.</button></a>
 </div>
    
 </div>
@@ -176,7 +173,10 @@
                 </div>
           </div>
   </div>
-         </main>
+         <div class="d-flex justify-content-center">
+        {% do pagination.SetPageRange(2) %}
+        {{ knp_pagination_render(pagination, "pagination.html.twig") }}
+    </div>
 
 
         {% endblock %}

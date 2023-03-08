@@ -24,6 +24,12 @@
                             {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
                             <br>
                             <div class="col-12">
+                            <label for="yourName" class="form-label">Status</label>
+                            {{ form_widget(form.status,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.status,{'attr':{'class':'text-danger'}}) }}
+                            <br>
+                            <div class="col-12">
                             <label for="yourEmail" class="form-label">reponse</label>
                             {{ form_widget(form.reponse,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
                             </div>

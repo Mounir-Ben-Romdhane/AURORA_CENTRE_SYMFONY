@@ -36,18 +36,19 @@
                             {{ form_errors(form.nom,{'attr':{'class':'text-danger'}}) }}
                             <br>
                             <div class="col-12">
-                            <label for="yourEmail" class="form-label">Email</label>
-                            {{ form_widget(form.emailreclamation,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
-                            </div>
-                            {{ form_errors(form.emailreclamation,{'attr':{'class':'text-danger'}}) }}
-                            
-                            <br>
-                            <div class="col-12">
                             <label for="yourEmail" class="form-label">Description</label>
                             {{ form_widget(form.description,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
                             </div>
                             {{ form_errors(form.description,{'attr':{'class':'text-danger'}}) }}
-                            <br>                           
+                            <br>
+                            <div class="col-12">
+                            <label for="yourEmail" class="form-label">Status</label>
+                            {{ form_widget(form.status,{'attr':{'class':'form-control', 'style':'width:100%;text-align:center;'}}) }}
+                            </div>
+                            {{ form_errors(form.status,{'attr':{'class':'text-danger'}}) }}
+                            
+                            <br>
+                            
                             {{form_widget(form.save,{'attr':{'class':'btn btn-primary w-100'}})}}
                             </div>
                         {{ form_end(form) }}
