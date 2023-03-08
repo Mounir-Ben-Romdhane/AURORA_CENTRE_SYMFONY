@@ -34,15 +34,6 @@ class ReclamationbackType extends AbstractType
                 'empty_data' => '',
                
             ])
-            ->add('status',ChoiceType::class,[
-            
-                'choices'=>[
-                    ' '=>'',
-                    'accepter' => 'accepter',
-                    'refuser' => 'refuser',
-                ],
-                'empty_data' => '',
-            ])
             
             ->add('nom',TextType::class,[
                 'empty_data' => '',

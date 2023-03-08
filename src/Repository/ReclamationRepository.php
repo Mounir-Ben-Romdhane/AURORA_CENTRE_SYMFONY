@@ -43,38 +43,50 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function orderByType()
+    public function orderByType($email)
     {
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
             ->orderBy('s.type', 'ASC')
             ->getQuery()->getResult();
     }
-    public function orderByTypeDESC()
+    public function orderByTypeDESC($email)
     {
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
             ->orderBy('s.type', 'DESC')
             ->getQuery()->getResult();
     }
-    public function orderByNom()
+    public function orderByNom($email)
     {
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()->getResult();
     }
-    public function orderByNomDESC()
+    public function orderByNomDESC($email)
     {
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
             ->orderBy('s.nom', 'DESC')
             ->getQuery()->getResult();
     }
-    public function orderBydate(){
+    public function orderBydate($email){
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
         ->orderBy('s.date_reclamation','ASC')
         ->getQuery()
         ->getResult();
     }
-    public function orderBydateDESC(){
+    public function orderBydateDESC($email){
         return $this->createQueryBuilder('s')
+        ->where('s.email_connecte = :email')
+        ->setParameter('email', $email)
         ->orderBy('s.date_reclamation','DESC')
         ->getQuery()
         ->getResult();
