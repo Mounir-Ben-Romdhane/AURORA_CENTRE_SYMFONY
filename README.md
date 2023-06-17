@@ -1,5 +1,4 @@
 # PIDEV_SYMFONY
-The web version of AURORA is developed using the Symfony PHP framework. Symfony offers a robust and modular architecture, providing features like routing, templating, form handling, and security for seamless web application development.
 
 Title: AURORA - Centre de Bien-Être Application
 
