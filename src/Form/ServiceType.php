@@ -6,11 +6,12 @@ use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraint\File;
+use Symfony\Component\Validator\Constraints\File as ConstraintsFile;
 
 class ServiceType extends AbstractType
 {
@@ -32,25 +33,37 @@ class ServiceType extends AbstractType
         ->add('typeS', ChoiceType::class, [
             'choices' => [
                 "" => "",
+                "Méditation"=>"Méditation",
                 "Médecine douce"  => "Médecine douce",
                 "Coaching"  => "Coaching",
-                "Consultation"  => "Consultation",
+                "Consultation psychologique"  => "Consultation psychologique",
             ],
-            'empty_data'=>''
+            'empty_data'=>'',
+            'data_class'=> null
         ])
+        
         ->add('image', FileType::class, [
-            "attr" => [
-                'label' => 'Image',
-                'required' => 'false',
-                'data_class'=> null
-            ] 
-        ])
+                    'label' => 'Image ( JPEG, PNG ou GIF)',
+                    'mapped' => false,
+                    'required' => false,
+                    'constraints' => [
+                        new ConstraintsFile([
+                            'maxSize' => '1024k',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier JPEG, PNG ou GIF valide',
+                        ])
+                    ]
+                ])
+            
+        
+      
         
         ->add('dateS', DateTimeType::class)
-
         
-
-     
 
         ;
     }

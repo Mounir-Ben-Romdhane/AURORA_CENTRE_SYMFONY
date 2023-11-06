@@ -1,6 +1,6 @@
 {% extends 'baseFront.html.twig' %}
 
-{% block title %}Register!{% endblock %}
+{% block title %}Créer un compte!{% endblock %}
 
 {% block body %}
 
@@ -8,74 +8,91 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/lall-logo-_1_ copy.svg" alt="..." /></a>
+                <div class="pt-1 pb-1">
+                    <h4 class="card-title text-center pb-1 fs-2" style="color:#ffc800;"><i>AURORA<i></h4>
+                  </div>
             </div>
         </nav>
         <!-- Masthead-->
         
         <header class="masthead">
                 <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
 
-                   
+                            <div class="containerr">
 
-                        <div class="pt-4 pb-2">
-                            <h5 class="card-title text-center pb-0 fs-4" style="color:yellow;"> Create an Account</h5>
-                            <p class="text-center small">Enter your personal details to create account</p>
+                                <div class="card-body">
+
+                                        <div class="pt-2 pb-1">
+                                            <h5 class="card-title text-center pb-2 fs-1" style="color:white;">Créer un compte</h5>
+                                            <p class="text-center small" style="color:white;">Entrez vos informations personnelles pour créer un compte</p>
+                                        </div>
+
+                                        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                                            <div class="col-12">
+                                            <label for="yourName" class="form-label" style="color:#ffc800;"><b>Votre nom</b></label>
+                                            {{ form_widget(form.username,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }}
+                                            </div>
+                                            {{ form_errors(form.username,{'attr':{'class':'text-danger'}}) }}
+                                            <br>
+                                            <div class="col-12">
+                                            <label for="yourEmail" class="form-label" style="color:#ffc800;"><b>Votre Email</b></label>
+                                            {{ form_widget(form.email,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }}
+                                            </div>
+                                            {{ form_errors(form.email,{'attr':{'class':'text-danger'}}) }}
+                                            <br>
+                                            <div class="col-12">
+                                                <label for="yourEmail" class="form-label" style="color:#ffc800;"><b>Votre numéro de téléphone</b></label>
+                                                <div>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text" id="inputGroupPrepend">+216</span>
+                                                        {{ form_widget(form.numTel,{'attr':{'class':'form-control' , 'style':'text-align:center;'}}) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{ form_errors(form.numTel,{'attr':{'class':'text-danger'}}) }}
+                                            <br>
+                                            <div class="col-12">
+                                            <label for="yourEmail" class="form-label" style="color:#ffc800;"><b>Votre adresse complète</b></label>
+                                            {{ form_widget(form.fullAddress,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }}
+                                            </div>
+                                            {{ form_errors(form.fullAddress,{'attr':{'class':'text-danger'}}) }}
+                                            <br>
+                                            <div class="col-12">
+                                            <label for="yourPassword" class="form-label" style="color:#ffc800;"><b>Mot de passe</b></label>
+                                            {{ form_widget(form.password.first,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }}
+                                            <div class="invalid-feedback">S'il vous plait entrez votre mot de passe !</div>
+                                            </div>
+                                            {{ form_errors(form.password.first,{'attr':{'class':'text-danger'}}) }}
+                                            <br>
+                                            <div class="col-12">
+                                            <label for="yourPassword" class="form-label" style="color:#ffc800;"><b>Confirmer le mot de passe</b></label>
+                                            {{ form_widget(form.password.second,{'attr':{'class':'form-control' , 'style':'width:600px;text-align:center;'}}) }} 
+                                            <br>
+                                            <div class="col-12" align="start" style="margin-left:20px;">
+                                                
+                                                <input class="form-check-input" name="terms" type="checkbox" value="#ffc800" id="acceptTerms" required="">
+                                                <label class="form-check-label" for="acceptTerms" style="color:#ffc800;"><b>Je suis d'accord et j'accepte les</b> <a href="#" style="color:white;"><b>termes et conditions</b></a></label>
+                                                <div class="invalid-feedback">Vous devez accepter avant de soumettre.</div>
+                                            </div>
+                                            <br>
+
+                                            <div class="col-12">
+                                            <button class="btn btn-warning w-50" type="submit" style="color:white;"><b>Create Account</b></button>
+                                            </div>
+                                            <br>
+                                            
+                                            <div class="col-12">
+                                            <p class="small mb-0" style="color:#ffc800;"><b>Vous avez déjà un compte ? </b><a href="{{path('app_login')}}" style="color:white;"><b>Connexion</b></a></p>
+                                            </div>
+                                        {{ form_end(form) }}
+
+                                </div>
                         </div>
-
-                        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
-                            <div class="col-12">
-                            <label for="yourName" class="form-label">Your Name</label>
-                            {{ form_widget(form.username,{'attr':{'class':'form-control'}}) }}
-                            </div>
-                            {{ form_errors(form.username,{'attr':{'class':'text-danger'}}) }}
-
-                            <div class="col-12">
-                            <label for="yourEmail" class="form-label">Your Email</label>
-                            {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
-                            </div>
-                            {{ form_errors(form.email,{'attr':{'class':'text-danger'}}) }}
-
-                            <div class="col-12">
-                            <label for="yourEmail" class="form-label">Your Phone Number</label>
-                            {{ form_widget(form.numTel,{'attr':{'class':'form-control'}}) }}
-                            </div>
-                            {{ form_errors(form.numTel,{'attr':{'class':'text-danger'}}) }}
-
-                            <div class="col-12">
-                            <label for="yourPassword" class="form-label">Password</label>
-                            {{ form_widget(form.password.first,{'attr':{'class':'form-control'}}) }}
-                            <div class="invalid-feedback">Please enter your password!</div>
-                            </div>
-                            {{ form_errors(form.password,{'attr':{'class':'text-danger'}}) }}
-
-                            <div class="col-12">
-                            <label for="yourPassword" class="form-label">Confirme Password</label>
-                            {{ form_widget(form.password.second,{'attr':{'class':'form-control'}}) }}
-                            <div class="invalid-feedback">Please confirme your password!</div>
-                            </div>
-
-                            <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required="">
-                                <label class="form-check-label" for="acceptTerms" >I agree and accept the <a href="#">terms and conditions</a></label>
-                                <div class="invalid-feedback">You must agree before submitting.</div>
-                            </div>
-                            </div>
-                            <div class="col-12">
-                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                            </div>
-                            <div class="col-12">
-                            <p class="small mb-0">Already have an account? <a href="{{path('app_login')}}">Log in</a></p>
-                            </div>
-                        {{ form_end(form) }}
-
-
-
-            </div>
+                    </div>
+                </div>
         </header>
         </body>
 

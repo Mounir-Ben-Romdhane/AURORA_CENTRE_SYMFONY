@@ -24,6 +24,7 @@ class Reservation
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[assert\NotBlank()]
+    #[assert\Range(min: 'now',)]
     private ?\DateTimeInterface $dateR = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
@@ -55,6 +56,9 @@ class Reservation
     #[Assert\NotBlank(message:"Le nom utilisateur ne peut pas être vide")]
 
     private ?string $userName = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email_connect = null;
 
     public function getId(): ?int
     {
@@ -129,6 +133,18 @@ class Reservation
     public function setUserName(string $userName): self
     {
         $this->userName = $userName;
+
+        return $this;
+    }
+
+    public function getEmailConnect(): ?string
+    {
+        return $this->email_connect;
+    }
+
+    public function setEmailConnect(string $email_connect): self
+    {
+        $this->email_connect = $email_connect;
 
         return $this;
     }

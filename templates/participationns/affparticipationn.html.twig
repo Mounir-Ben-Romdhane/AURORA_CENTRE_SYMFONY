@@ -1,0 +1,93 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}List participation !{% endblock %}
+{% block body %}
+<body>
+
+ 
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Liste des participationns :</a>
+</nav>
+
+    </br>
+      <div class= "container">
+       
+            <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">Détails</h5>
+            <table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">USERNAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">TELEPHONE</th>
+
+                        
+
+                        <th class="text-left">Actions</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                 {% for i in tableauParticipationns %}
+                    <tr>
+                        <td>{{i.descriptionPn}}</td>
+                        <td>{{i.usernameev}}</td>
+                        <td>{{i.emailev}}</td>
+                        <td>{{i.numtelev}}</td>
+                        
+                        
+                        <td>
+                        
+                      <a href="{{ path('app_updateParticipationnsBack',{id:i.id}) }}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="{{ path('app_deleteParticipationns',{id:i.id}) }}" class="btn btn-sm btn-danger" 
+                       >
+                            <i class="fa fa-trash"></i>
+                      </a>
+                         
+
+                        </td>
+                        
+                    </tr>   
+
+
+                    
+                    {% endfor %}
+
+
+<a class="btn btn-success mr-2" href="{{ path('generator_service') }}">PDF</a>
+                   
+
+      </tbody>
+</table>
+</div>
+            </div>
+                </div>
+          </div>
+    </div>
+    </body>
+
+
+  </main><!-- End #main -->
+
+
+</body>
+{% endblock %}

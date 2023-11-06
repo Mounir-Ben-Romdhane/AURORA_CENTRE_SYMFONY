@@ -19,6 +19,11 @@
     }
   }
 
+  // fichier tableau.js
+$(document).ready(function () {
+  $('#tab').DataTable();
+});
+
   /**
    * Easy event listener function
    */

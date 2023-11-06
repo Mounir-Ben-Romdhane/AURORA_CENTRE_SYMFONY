@@ -1,0 +1,101 @@
+
+ {% extends "baseBack.html.twig" %} 
+
+
+{% block body %}
+<body>
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+  
+<div class= "container">
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Ajouter un évènement :</a>
+</nav>
+<div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+
+
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+
+<table class="table table-striped">
+           {#{{form(studentSearch)}}#}
+
+          {#  <table class="table table-light table_hover table_bordered"> #}
+                <thead  class="thead-dark">
+                    <tr>
+
+
+<td>{{form_label(form.titreev,'TITRE')}}</td>
+<td>{{form_widget(form.titreev)}}</td>
+<td>{{form_errors(form.titreev)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.descriptionev,'DESCRIPTION')}}</td>
+<td>{{form_widget(form.descriptionev)}}</td>
+<td>{{form_errors(form.descriptionev)}}</td>
+</tr>
+<tr>
+<td>{{form_label(form.imageev,'IMAGE')}}</td>
+<td>{{form_widget(form.imageev)}}</td>
+<td>{{form_errors(form.imageev)}}</td>
+
+</tr>
+
+<tr>
+<td>{{form_label(form.dateev,'DATE')}}</td>
+<td>{{form_widget(form.dateev)}}</td>
+<td>{{form_errors(form.dateev)}}</td>
+
+</tr>
+
+<tr>
+<td>{{form_label(form.typeev,'TYPE')}}</td>
+<td>{{form_widget(form.typeev)}}</td>
+<td>{{form_errors(form.typeev)}}</td>
+
+</tr>
+
+
+</table>
+<div align=RIGHT>{{form_widget(form.save)}}</div>
+
+{{form_end(form)}}
+
+
+
+</div>
+
+          </div>
+          </div>
+    </div>
+
+</body>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
